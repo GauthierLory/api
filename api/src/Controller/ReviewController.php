@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Review;
+use App\Form\ReviewCommentType;
 use App\Form\ReviewType;
 use App\Repository\ReviewRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,10 +31,10 @@ class ReviewController extends AbstractController
     /**
      * @Route("/new", name="review_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function newComment(Request $request): Response
     {
         $review = new Review();
-        $form = $this->createForm(ReviewType::class, $review);
+        $form = $this->createForm(ReviewCommentType::class, $review);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
