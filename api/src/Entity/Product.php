@@ -31,11 +31,6 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="smallint")
-     */
-    private $rating;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="products")
      */
     private $user;
@@ -75,18 +70,6 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getRating(): ?int
-    {
-        return $this->rating;
-    }
-
-    public function setRating(int $rating): self
-    {
-        $this->rating = $rating;
 
         return $this;
     }

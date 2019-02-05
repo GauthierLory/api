@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Description</th>
+                <th>Rating</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ review.id }}</td>
                 <td>{{ review.description }}</td>
+                <td>{{ review.rating }}</td>
                 <td>
                     <a href="{{ path('review_show', {'id': review.id}) }}">show</a>
                     <a href="{{ path('review_edit', {'id': review.id}) }}">edit</a>
@@ -25,7 +27,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
