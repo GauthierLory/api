@@ -4,6 +4,119 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            <style>
+
+                /* Profile container */
+                .profile {
+                    margin: 20px 0;
+                }
+                /* Profile sidebar */
+                .profile-sidebar {
+                    padding: 20px 0 10px 0;
+                    background: #fff;
+                }
+                .profile-userpic img {
+                    float: none;
+                    display:block;
+                    margin:auto;
+                    width: 50%;
+                    height: 50%;
+                    -webkit-border-radius: 50% !important;
+                    -moz-border-radius: 50% !important;
+                    border-radius: 50% !important;
+                }
+
+                .profile-usertitle {
+                    text-align: center;
+                    margin-top: 20px;
+                }
+
+                .profile-usertitle-name {
+                    color: #5a7391;
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 7px;
+                }
+
+                .profile-usertitle-job {
+                    text-transform: uppercase;
+                    color: #5b9bd1;
+                    font-size: 12px;
+                    font-weight: 600;
+                    margin-bottom: 15px;
+                }
+
+                .profile-userbuttons {
+                    text-align: center;
+                    margin-top: 10px;
+                }
+
+                .profile-userbuttons .btn {
+                    text-transform: uppercase;
+                    font-size: 11px;
+                    font-weight: 600;
+                    padding: 6px 15px;
+                    margin-right: 5px;
+                }
+
+                .profile-userbuttons .btn:last-child {
+                    margin-right: 0px;
+                }
+
+                .profile-usermenu {
+                    margin-top: 30px;
+                }
+
+                .profile-usermenu ul li {
+                    border-bottom: 1px solid #f0f4f7;
+                }
+
+                .profile-usermenu ul li:last-child {
+                    border-bottom: none;
+                }
+
+                .profile-usermenu ul li a {
+                    color: #93a3b5;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+
+                .profile-usermenu ul li a i {
+                    margin-right: 8px;
+                    font-size: 14px;
+                }
+
+                .profile-usermenu ul li a:hover {
+                    background-color: #fafcfd;
+                    color: #5b9bd1;
+                }
+
+                .profile-usermenu ul li.active {
+                    border-bottom: none;
+                }
+
+                .profile-usermenu ul li.active a {
+                    color: #5b9bd1;
+                    background-color: #f6f9fb;
+                    border-left: 2px solid #5b9bd1;
+                    margin-left: -2px;
+                }
+
+                /* Profile Content */
+                .profile-content {
+                    padding: 20px;
+                    background: #fff;
+                    min-height: 460px;
+                }
+
+                .nav>li {
+                    position: relative;
+                    display: block;
+                }
+
+
+
+            </style>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
         {% endblock %}
@@ -21,18 +134,26 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('product_index') }}">Product</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="nav-link" href="{{ path('product_index') }}">Product</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="nav-link" href="{{ path('review_index') }}">Review</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="nav-link" href="{{ path('user_index') }}">User</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('review_index') }}">Review</a>
-                    </li>
+                    {% endif %}
                     <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ app.user.email }}
                             </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Something else here</a>
