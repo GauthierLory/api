@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
                 <th>User</th>
                 <td>{{ product.user.email }}</td>
             </tr>
@@ -35,26 +31,23 @@
     <h4>Reviews :</h4>
     {{ include('review/_form.html.twig') }}
     {% for review in product.reviews %}
-        <table class="table">
+        <div class="card px-3 mt-5">
+            <table class="table">
             <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ review.id }}</td>
-            </tr>
-            <tr>
-                <th>Rating</th>
-                <td>{{ review.rating }}</td>
-            </tr>
             <tr>
                 <th>Author</th>
                 <td>{{ review.author.email }}</td>
+                <th>Rating</th>
+                <td>{{ review.rating }}</td>
             </tr>
             <tr>
                 <th>comment</th>
                 <td>{{ review.description }}</td>
             </tr>
+            </br>
             </tbody>
         </table>
+        </div>
     {% endfor %}
 
 {% endblock %}

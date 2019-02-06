@@ -21,13 +21,24 @@ class AppFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
+        $admin = new User();
+        $admin->setPrenom("admin");
+        $admin->setNom("admin");
+        $admin->setEmail("admin@admin.com");
+        $admin->setAvatar($faker->imageUrl($width = 240, $height = 180));
+        $admin->setRoles(["ROLE_ADMIN"]);
+        $admin->setPassword($this->encoder->encodePassword($admin, 'password'));
+        $manager->persist($admin);
 //         gestion des users
         $users = [];
-        for ($i = 0; $i <= 10; $i ++){
+        for ($i = 0; $i <= 5; $i ++){
             $user = new User();
 
-            $user->setEmail($faker->email)
-                ->setPassword($this->encoder->encodePassword($user, 'password'));
+            $user->setEmail($faker->email);
+                $user->setPrenom($faker->name);
+                $user->setAvatar($faker->imageUrl($width = 240, $height = 180));
+            $user->setNom($faker->lastName);
+            $user->setPassword($this->encoder->encodePassword($user, 'password'));
 
             $manager->persist($user);
             $users[] = $user;
