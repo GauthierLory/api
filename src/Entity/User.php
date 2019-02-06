@@ -24,6 +24,16 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
     private $email;
 
     /**
@@ -61,6 +71,40 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+
+    /**
+     * @param mixed $nom
+     */
+    public function setNom($nom): void
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * @param mixed $prenom
+     */
+    public function setPrenom($prenom): void
+    {
+        $this->prenom = $prenom;
     }
 
     public function getEmail(): ?string
