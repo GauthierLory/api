@@ -38,6 +38,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $avatar;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="user")
      */
     private $products;
@@ -129,6 +134,22 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar($avatar): void
+    {
+        $this->avatar = $avatar;
     }
 
     /**
