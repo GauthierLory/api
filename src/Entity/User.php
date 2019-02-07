@@ -126,7 +126,11 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        $nom=$this->nom;
+        $prenom=$this->prenom;
+        $username=substr($prenom,0,1).".".strtoupper($nom);
+        return (string) $username;
+        //return (string) $this->email;
     }
 
     /**

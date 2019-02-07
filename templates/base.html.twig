@@ -114,6 +114,10 @@
                     display: block;
                 }
 
+                #searchform{
+                    position: absolute;
+                    right :15px;
+                }
 
 
             </style>
@@ -127,7 +131,7 @@
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <a class="navbar-brand" href="{{ path('home') }}"><img src={{ asset('/image/icons8-brutus-480.png') }} height="50px" width="50px"></a>
+            <a class="navbar-brand" href="{{ path('home') }}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -150,7 +154,8 @@
                     {% endif %}
                     <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ app.user.email }}
+                                <img src={{ app.user.avatar }} height="40px" width="40px">
+                                {{ app.user.username }}
                             </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
@@ -158,12 +163,16 @@
                             {#<div class="dropdown-divider"></div>#}
                         </div>
                     </li>
+                    <form id="searchform" class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </ul>
             </div>
         </nav>
     {% else %}
         <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-            <a class="navbar-brand" href="{{ path('home') }}"><img src={{ asset('/image/icons8-alien-480.png') }} height="50px" width="50px"></a>
+            <a class="navbar-brand" href="{{ path('home') }}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -175,6 +184,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_register') }}">Register</a>
                     </li>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </ul>
             </div>
         </nav>
