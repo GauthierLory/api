@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="product_index", methods={"GET"})
+     * @Route("", name="product_index", methods={"GET"})
      */
     public function index(ProductRepository $productRepository): Response
     {
@@ -63,12 +63,13 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $review->setAuthor($this->getUser());
-            $review->setProduct($product);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($review);
-            $entityManager->flush();
-
+            if($request->request->get('show')){
+                $review->setAuthor($this->getUser());
+                $review->setProduct($product);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($review);
+                $entityManager->flush();
+            }
         }
 
         return $this->render('product/show.html.twig', [
@@ -86,11 +87,13 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            if($request->request->get('edit')) {
+                $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('product_index', [
-                'id' => $product->getId(),
-            ]);
+                return $this->redirectToRoute('product_index', [
+                    'id' => $product->getId(),
+                ]);
+            }
         }
 
         return $this->render('product/edit.html.twig', [

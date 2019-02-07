@@ -21,8 +21,9 @@
                 <td>{{ product.title }}</td>
                 <td>{{ product.description }}</td>
                 <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                    <button name="show" type="submit" class="btn btn-success"><a href="{{ path('product_show', {'id': product.id}) }}">show</a></button>
+                    <button name="edit" type="submit" class="btn btn-warning"><a href="{{ path('product_edit', {'id': product.id}) }}">edit</a></button>
+
                 </td>
             </tr>
         {% else %}
