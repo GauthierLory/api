@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Upload;
 use App\Entity\User;
 use App\Form\ProfileType;
+use App\Form\UploadType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,18 +33,38 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/account/{id}", name="profile_account")
+     * @Route("/profile/account/", name="profile_account")
      */
-    public function account(User $user, Request $request, ObjectManager $manager)
+    public function account(Request $request, ObjectManager $manager)
     {
         $user = $this->getUser();
         $form =$this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
+
+        $upload = new Upload();
+        $formUpload = $this->createForm(UploadType::class, $upload);
+        $formUpload->handleRequest($request);
+
+        if ($formUpload->isSubmitted() && $formUpload->isValid()){
+            $upload->setCreatedAt(new \DateTime());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($upload);
+            $entityManager->flush();
+        }
+
         return $this->render('profile/account.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formUpload' => $formUpload->createView()
         ]);
     }
 }
