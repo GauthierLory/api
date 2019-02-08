@@ -53,7 +53,6 @@ class User implements UserInterface
      *
      * @Assert\NotBlank(message="Please, upload the photo.")
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
-
      */
     private $avatar;
 

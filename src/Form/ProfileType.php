@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProfileType extends AbstractType
 {
@@ -17,7 +18,7 @@ class ProfileType extends AbstractType
             ->add('email')
 //            ->add('roles')
 //            ->add('password')
-            ->add('avatar')
+            ->add('avatar', FileType::class, array('label' => 'Photo (png, jpeg)'))
         ;
     }
 
