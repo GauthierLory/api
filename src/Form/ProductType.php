@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Entity\ProductTag;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,6 +15,10 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('tag', EntityType::class, array(
+                'class' => ProductTag::class,
+                'choice_label' => 'name'
+            ))
             ->add('description')
         ;
     }

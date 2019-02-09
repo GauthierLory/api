@@ -40,6 +40,12 @@ class Product
      */
     private $reviews;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProductTag", inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $tag;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -113,6 +119,18 @@ class Product
                 $review->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTag(): ?ProductTag
+    {
+        return $this->tag;
+    }
+
+    public function setTag(?ProductTag $tag): self
+    {
+        $this->tag = $tag;
 
         return $this;
     }
