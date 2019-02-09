@@ -25,10 +25,6 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $file = $user->getAvatar();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('photos_directory'), $fileName);
-            $user->setAvatar("http://api.localhost/uploads/photos/".$fileName);
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,

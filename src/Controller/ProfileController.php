@@ -33,7 +33,7 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/account/", name="profile_account")
+     * @Route("/profile/account", name="profile_account")
      */
     public function account(Request $request, ObjectManager $manager)
     {

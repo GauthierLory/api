@@ -37,11 +37,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $user->getAvatar();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('photos_directory'), $fileName);
-            $user->setAvatar("http://api.localhost/uploads/photos/".$fileName);
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
