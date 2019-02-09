@@ -48,23 +48,25 @@ class ProfileController extends AbstractController
         }
 
 
-        $upload = new Upload();
-        $formUpload = $this->createForm(UploadType::class, $upload);
-        $formUpload->handleRequest($request);
-
-        if ($formUpload->isSubmitted() && $formUpload->isValid()){
-            $upload->setCreatedAt(new \DateTime());
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($upload);
-            $entityManager->flush();
-        }
+//        $upload = new Upload();
+//        $formUpload = $this->createForm(UploadType::class, $upload);
+//        $formUpload->handleRequest($request);
+//
+//        if ($formUpload->isSubmitted() && $formUpload->isValid()){
+//            $upload->setCreatedAt(new \DateTime());
+//            $upload->setUser($this->getUser());
+//
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->persist($upload);
+//            $entityManager->flush();
+//        }
 
         return $this->render('profile/account.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user,
+//            'upload' => $upload,
             'form' => $form->createView(),
-            'formUpload' => $formUpload->createView()
+//            'formUpload' => $formUpload->createView()
         ]);
     }
 }

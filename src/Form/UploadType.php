@@ -16,7 +16,7 @@ class UploadType extends AbstractType
         $builder
             ->add('imageFile', VichImageType::class)
 //            ->add('createdAt')
-        ->add('save', SubmitType::class)
+//        ->add('save', SubmitType::class)
         ;
     }
 

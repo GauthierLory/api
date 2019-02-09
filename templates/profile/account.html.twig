@@ -54,9 +54,13 @@
                             {{ form_end(form) }}
 
 
-                            {{ form_start(formUpload) }}
-                            {{ form_widget(formUpload) }}
-                            {{ form_end(formUpload) }}
+                            {#{{ form_start(formUpload) }}#}
+                            {#{{ form_widget(formUpload) }}#}
+                            {#{{ form_end(formUpload) }}#}
+
+                            {#{% for upload in user.uploads %}#}
+                            {#<img src="{{ vich_uploader_asset(upload, 'imageFile') }}" alt="{{ upload.imageFile }}">#}
+                            {#{% endfor %}#}
                         </div>
                     </div>
                 </div>

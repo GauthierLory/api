@@ -63,10 +63,22 @@ class User implements UserInterface
      */
     private $reviews;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Support", mappedBy="user")
+     */
+    private $supports;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Upload", mappedBy="user")
+     */
+    private $uploads;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->supports = new ArrayCollection();
+        $this->uploads = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -258,4 +270,67 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Support[]
+     */
+    public function getSupports(): Collection
+    {
+        return $this->supports;
+    }
+
+    public function addSupport(Support $support): self
+    {
+        if (!$this->supports->contains($support)) {
+            $this->supports[] = $support;
+            $support->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSupport(Support $support): self
+    {
+        if ($this->supports->contains($support)) {
+            $this->supports->removeElement($support);
+            // set the owning side to null (unless already changed)
+            if ($support->getUser() === $this) {
+                $support->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Upload[]
+     */
+    public function getUploads(): Collection
+    {
+        return $this->uploads;
+    }
+
+    public function addUpload(Upload $upload): self
+    {
+        if (!$this->uploads->contains($upload)) {
+            $this->uploads[] = $upload;
+            $upload->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUpload(Upload $upload): self
+    {
+        if ($this->uploads->contains($upload)) {
+            $this->uploads->removeElement($upload);
+            // set the owning side to null (unless already changed)
+            if ($upload->getUser() === $this) {
+                $upload->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

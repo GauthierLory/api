@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Upload;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,6 +19,10 @@ class ProfileType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
+            ->add('uploads', EntityType::class, array(
+                'class' => Upload::class,
+                'choice_label' => 'imageName'
+            ))
             ->add('save', SubmitType::class)
 //            ->add('roles')
 //            ->add('password')

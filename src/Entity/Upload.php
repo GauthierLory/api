@@ -44,10 +44,10 @@ class Upload
      */
     private $image;
 
-    public function __construct()
-    {
-        $this->image = new EmbeddedFile();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="uploads")
+     */
+    private $user;
 
     /**
      * @param File|UploadedFile $imageFile
@@ -85,6 +85,18 @@ class Upload
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
