@@ -63,13 +63,13 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($request->request->get('show')){
                 $review->setAuthor($this->getUser());
                 $review->setProduct($product);
+//                dump($form);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($review);
                 $entityManager->flush();
-            }
+
         }
 
         return $this->render('product/show.html.twig', [

@@ -1,4 +1,11 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="card">
+    <div class="card-body">
+        {{ form_widget(form) }}
+        <div class="row">
+            <div class="col"><button class="btn btn-primary">{{ button_label|default('Save') }}</button></div>
+            <div class="col-lg-offset"><a class="btn btn-primary" href="{{ path('product_index') }}">back to list</a></div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>

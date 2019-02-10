@@ -3,9 +3,12 @@
 {% block title %}New Review{% endblock %}
 
 {% block body %}
-    <h1>Create new Review</h1>
+    <div class="card">
+        <div class="card-header"><h1>Create new Review</h1></div>
+        <div class="card-body">
+            {{ include('review/_form.html.twig') }}
 
-    {{ include('review/_form.html.twig') }}
-
-    <a href="{{ path('review_index') }}">back to list</a>
+            <a href="{{ path('review_index') }}">back to list</a>
+        </div>
+    </div>
 {% endblock %}

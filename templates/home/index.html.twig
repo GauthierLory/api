@@ -4,13 +4,13 @@
 {% block body %}
 <div class="row">
     {% for product in products %}
-        <div class="col-sm">
+        <div class="col-sm" style="padding-top: 10px">
             <div class="card" style="width: 18rem;">
             <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ product.title }}</h5>
                 <small>{{ product.tag.name }}</small>
-                <p class="card-text">{{ product.description }}</p>
+                {#<p class="card-text">{{ product.description }}</p>#}
                 <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-primary">show</a>
             </div>
         </div>
