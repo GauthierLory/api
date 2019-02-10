@@ -46,6 +46,8 @@ class Product
      */
     private $tag;
 
+    private $moyenne;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -133,5 +135,17 @@ class Product
         $this->tag = $tag;
 
         return $this;
+    }
+
+    public function getMoyenne(){
+        $notes = 0;
+        $compteur = 0;
+        $reviews = $this->getReviews();
+        foreach ($reviews as $review){
+            $notes+=$review->getRating();
+            $compteur++;
+        }
+        $moyenne = $notes/$compteur;
+        return $moyenne;
     }
 }
