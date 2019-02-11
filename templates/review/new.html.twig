@@ -22,22 +22,25 @@
 </style>
 {% endblock %}
 {% block title %}New Review{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('PathDuFichier/tonFichier.js') }}"></script>
-{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+
+                <script src="/build/runtime.js"></script>
+                <script src="/build/review.js"></script>
+        {% endblock %}
 {% block body %}
     <div class="card">
         <div class="card-header"><h1>Create new Review</h1></div>
         <div class="card-body">
             {{ include('review/_form.html.twig') }}
             <div class="rating" id="rate">
-                <a id="star5" href="#5" title="Donner 5 étoiles" value ="5">☆</a>
-                <a id="star4" href="#4" title="Donner 4 étoiles" value ="4">☆</a>
-                <a id="star3" href="#3" title="Donner 3 étoiles" value ="3">☆</a>
-                <a id="star2" href="#2" title="Donner 2 étoiles" value ="2">☆</a>
-                <a id="star1" href="#1" title="Donner 1 étoile" value ="1">☆</a>
+                <a id="star5" href="#5" title="5">☆</a>
+                <a id="star4" href="#4" title="4">☆</a>
+                <a id="star3" href="#3" title="3">☆</a>
+                <a id="star2" href="#2" title="2">☆</a>
+                <a id="star1" href="#1" title="1">☆</a>
             </div>
-            <input type="hidden" id="ratingscore" value="">
+            <input type="hidden" id="ratingscore" value="abc">
             <a href="{{ path('review_index') }}">back to list</a>
         </div>
     </div>
