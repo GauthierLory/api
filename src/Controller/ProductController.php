@@ -8,6 +8,7 @@ use App\Form\ProductType;
 use App\Form\ReviewType;
 use App\Repository\ProductRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -80,6 +81,7 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_USER') and user == product.getUser()", message="This product is not yours")
      */
     public function edit(Request $request, Product $product): Response
     {
