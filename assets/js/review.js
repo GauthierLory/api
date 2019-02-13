@@ -4,6 +4,8 @@ var $ = require('jquery');
  // import the function from greet.js (the .js extension is optional)
 var greet = require('./greet');
 
+var ratingValue;
+var saveReview = $("#saveReview");
  $(document).ready(function(){
 
      /* 1. Visualizing things on Hover - See next part for action on click */
@@ -41,7 +43,7 @@ var greet = require('./greet');
          }
 
          // JUST RESPONSE (Not needed)
-         var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+         ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
          var msg = "";
          if (ratingValue > 1) {
              msg = "Thanks! You rated this " + ratingValue + " stars.";
@@ -61,17 +63,17 @@ var greet = require('./greet');
      $('.success-box').fadeIn(200);
      $('.success-box div.text-message').html("<span>" + msg + "</span>");
  }
-/*var ratingscore = $("#ratingscore");
-ratingscore.on("change", function () {
-    if ($client.val() != "") {
-        $.ajax({"type": "GET",
-            "url": "",
-            "data": "ratingscore="+ratingscore,
+
+saveReview.on("click", function () {
+alert("ohohoh");
+    /*if ($client.val() != "") {
+        $.ajax({
+            "type": "GET",
+            "url": "http://api.localhost/review/new",
+            "data": "ratingValue="+ratingValue,
             "success": function (res) {
-                    alert(res);
-                    xxx.append(html);
-                });
+                alert(res);
             } // success
-        }); // ajax
-    } // if
-});*/
+        }); // ajax}
+    }*/
+});

@@ -33,6 +33,7 @@ class ReviewController extends AbstractController
      */
     public function newComment(Request $request): Response
     {
+        //$ratingValue = $_GET["ratingValue"];
         $review = new Review();
         $form = $this->createForm(ReviewCommentType::class, $review);
         $form->handleRequest($request);
