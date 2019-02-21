@@ -20,6 +20,12 @@
         "/build/runtime.js",
         "/build/nav.js"
       ]
+    },
+    "admin": {
+      "js": [
+        "/build/runtime.js",
+        "/build/admin.js"
+      ]
     }
   }
 }
