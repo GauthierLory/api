@@ -57,7 +57,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/{id}", name="product_show", methods={"GET","POST"})
      */
-    public function show(Product $product, Request $request): Response
+    public function show(ProductRepository $category, Product $product, Request $request): Response
     {
         $review = new Review();
         $form = $this->createForm(ReviewType::class, $review);

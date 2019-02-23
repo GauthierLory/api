@@ -72,7 +72,7 @@ class AppFixtures extends Fixture
                     $review->setAuthor($user)
                         ->setDescription($faker->paragraph(5))
                         ->setProduct($product)
-                        ->setRating(mt_rand(4, 10));
+                        ->setRating(mt_rand(0, 5));
                     $manager->persist($review);
                 }
             }
