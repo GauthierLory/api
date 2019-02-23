@@ -1,4 +1,13 @@
 {
+    "api-platform/admin-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "488ebfb0cddd283c16f4d072c6675ae7d7d52eb4"
+        }
+    },
     "api-platform/api-pack": {
         "version": "v1.2.0"
     },
@@ -91,6 +100,15 @@
     },
     "doctrine/reflection": {
         "version": "v1.0.0"
+    },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
+        }
     },
     "fzaninotto/faker": {
         "version": "v1.8.0"

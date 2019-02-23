@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\ProductTag;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +20,11 @@ class ProductType extends AbstractType
                 'class' => ProductTag::class,
                 'choice_label' => 'name'
             ))
-            ->add('description')
+            ->add('description', CKEditorType::class, array(
+                'config' => array(
+                    'toolbar' => 'standard'
+                )
+            ))
         ;
     }
 
