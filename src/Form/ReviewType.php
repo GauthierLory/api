@@ -15,7 +15,11 @@ class ReviewType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description')
+            ->add('description', CKEditorType::class, array(
+                'config' => array(
+                    'toolbar' => 'basic'
+                )
+            ))
             ->add('rating', \Symfony\Component\Form\Extension\Core\Type\IntegerType::class, $this->getConfiguration("Note sur 5",
                 "Veuillez indiquer votre note de 0 à 5", [
                     'attr' => [
