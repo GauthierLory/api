@@ -59,7 +59,8 @@ class AppFixtures extends Fixture
 
                 $user = $users[mt_rand(0, count($users) - 1)];
 
-                $product->setTitle($faker->sentence(8))
+                $title = $faker->sentence();
+                $product->setTitle($title)
                     ->setUser($user)
                     ->setTag($tag)
                     ->setDescription($faker->paragraph(5));
