@@ -48,19 +48,55 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
-                        <div class="profile-content">
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
-                            {{ form_end(form) }}
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#info">Informations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#password">Password</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane container active" id="info">
+                                <div class="profile-content">
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+                                    {{ form_end(form) }}
 
 
-                            {#{{ form_start(formUpload) }}#}
-                            {#{{ form_widget(formUpload) }}#}
-                            {#{{ form_end(formUpload) }}#}
+                                    {#{{ form_start(formUpload) }}#}
+                                    {#{{ form_widget(formUpload) }}#}
+                                    {#{{ form_end(formUpload) }}#}
 
-                            {#{% for upload in user.uploads %}#}
-                            {#<img src="{{ vich_uploader_asset(upload, 'imageFile') }}" alt="{{ upload.imageFile }}">#}
-                            {#{% endfor %}#}
+                                    {#{% for upload in user.uploads %}#}
+                                    {#<img src="{{ vich_uploader_asset(upload, 'imageFile') }}" alt="{{ upload.imageFile }}">#}
+                                    {#{% endfor %}#}
+                                    {{ form_start(formPassword) }}
+                                    {{ form_widget(formPassword) }}
+                                    <button class="btn btn-primary" type="submit" >Save</button>
+                                    {{ form_end(formPassword) }}
+                                </div>
+                            </div>
+                            <div class="tab-pane container fade" id="password">
+                                <div class="profile-content">
+                                    {{ form_start(formPassword) }}
+                                    {{ form_widget(formPassword) }}
+                                    <button type="submit">Save</button>
+                                    {{ form_end(formPassword) }}
+
+
+                                    {#{{ form_start(formUpload) }}#}
+                                    {#{{ form_widget(formUpload) }}#}
+                                    {#{{ form_end(formUpload) }}#}
+
+                                    {#{% for upload in user.uploads %}#}
+                                    {#<img src="{{ vich_uploader_asset(upload, 'imageFile') }}" alt="{{ upload.imageFile }}">#}
+                                    {#{% endfor %}#}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
