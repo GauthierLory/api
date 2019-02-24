@@ -71,6 +71,18 @@ class Product
         }
     }
 
+    /**
+     * @param User $user
+     * @return mixed|null
+     * recupér le comment d'un auteur par rapport a son annonce
+     */
+    public function getCommentFromAuthor(User $user){
+        foreach ($this->reviews as $review){
+            if ($review->getAuthor() == $user) return $review;
+        }
+        return null;
+    }
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();

@@ -8,15 +8,6 @@
             <div class="card" style="width: 18rem;">
             <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
             <div class="card-body">
-                <span class="rating">
-                {% for i in 1..5 %}
-                    {% if i <= product.moyenne %}
-                        <i class="fas fa-star"></i>
-                    {% else %}
-                        <i class="far fa-star"></i>
-                    {% endif %}
-                {% endfor %}
-                </span>
                 <h5 class="card-title">{{ product.title }}</h5>
                 <small>{{ product.tag.name }}</small>
                 {#<p class="card-text">{{ product.description }}</p>#}
