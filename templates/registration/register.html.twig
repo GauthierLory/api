@@ -11,7 +11,7 @@
         <div class="card-body">
             <h1>Register</h1>
 
-            {{ form_start(registrationForm) }}
+            {{ form_start(registrationForm, { attr: {novalidate: 'novalidate'} }) }}
             <div class="row">
                 <div class="col">{{ form_row(registrationForm.nom) }}</div>
                 <div class="col">{{ form_row(registrationForm.prenom) }}</div>
@@ -25,6 +25,7 @@
 
             <button id="btnregister" class="btn btn-lg btn-primary btn-block text-uppercase">Register</button>
             {{ form_end(registrationForm) }}
+            <a href={{ path("connect_google") }}>SIGN IN GOOGLE</a>
         </div>
     </div>
 </div>

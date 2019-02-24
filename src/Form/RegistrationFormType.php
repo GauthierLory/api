@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -20,7 +21,10 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('avatar')
+            ->add('avatar', FileType::class, [
+                'label' => 'Avatar (png, jpeg)',
+                'attr' => array('placeholder' => 'Choisir avatar')
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 // instead of being set onto the object directly,

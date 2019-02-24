@@ -50,6 +50,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
+     *
      */
     private $avatar;
 
@@ -72,6 +74,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Upload", mappedBy="user")
      */
     private $uploads;
+
 
     public function __construct()
     {
@@ -331,6 +334,18 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getAvatarurl(): string{
+        $avatar = $this->avatar;
+        $icon_path ="http://192.168.1.83/api/assets/image/icons";
+        if(substr($avatar,0,42) == $icon_path){
+            $avatar_url = $avatar;
+            return (string) $avatar_url;
+        }else{
+            $avatar_url = "http://192.168.1.83/api/public/images/uploads/".$avatar;
+        }
+        return (string) $avatar_url;
     }
 
 }

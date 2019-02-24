@@ -32,6 +32,16 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            if(!empty($user->getAvatar())){
+                $file = $user->getAvatar();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('photos_directory'), $fileName);
+                $user->setAvatar($fileName);
+            }
+            else{
+                $alea = rand(0,23);
+                $user->setAvatar("http://192.168.1.83/api/assets/image/icons".$alea.".png");
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
