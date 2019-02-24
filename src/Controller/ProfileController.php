@@ -38,7 +38,7 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/account", name="profile_account")
      */
-    public function account(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function account(Request $request)
     {
         $user = $this->getUser();
         $form =$this->createForm(ProfileType::class, $user);
@@ -50,6 +50,19 @@ class ProfileController extends AbstractController
             $entityManager->flush();
         }
 
+        return $this->render('profile/account.html.twig', [
+            'controller_name' => 'ProfileController',
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/profile/password-update", name="profile_password")
+     */
+    public function passwordUpdate(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
+
+        $user = $this->getUser();
         $passwordUpdate = new  PasswordUpdate();
         $formPassword = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
         $formPassword->handleRequest($request);
@@ -71,10 +84,8 @@ class ProfileController extends AbstractController
             }
         }
 
-        return $this->render('profile/account.html.twig', [
-            'controller_name' => 'ProfileController',
+        return $this->render('profile/passwordUpdate.html.twig',[
             'user' => $user,
-            'form' => $form->createView(),
             'formPassword' => $formPassword->createView(),
         ]);
     }
