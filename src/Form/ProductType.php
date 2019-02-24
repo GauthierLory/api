@@ -21,11 +21,11 @@ class ProductType extends AbstractType
                 'class' => ProductTag::class,
                 'choice_label' => 'name'
             ))
-            ->add('images', CollectionType::class, array(
-                'entry_type' => ImageProductType::class,
-                'allow_add' => true,
-                'label' => "Image(s)"
-            ))
+//            ->add('images', CollectionType::class, array(
+//                'entry_type' => ImageProductType::class,
+//                'allow_add' => true,
+//                'label' => "Image(s)"
+//            ))
             ->add('description', CKEditorType::class, array(
                 'config' => array(
                     'toolbar' => 'standard'

@@ -44,6 +44,10 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            foreach ($product->getImages() as $image){
+//                $image->setProduct($product);
+//                $manager->persist($image);
+//            }
             $product->setUser($this->getUser());
             $manager->persist($product);
             $manager->flush();
@@ -51,19 +55,9 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('product_index');
         }
 
-        $image = new Image();
-        $formImage = $this->createForm(ImageProductType::class, $image);
-        $formImage->handleRequest($request);
-
-        if ($formImage->isSubmitted() && $formImage->isValid()){
-            $manager->persist($image);
-            $manager->flush();
-        }
-
         return $this->render('product/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
-            'formImage' => $formImage->createView(),
             'images' => $imageRepository->findAll()
         ]);
     }

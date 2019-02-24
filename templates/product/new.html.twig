@@ -32,8 +32,13 @@
 
 {% block _product_images_entry_widget %}
     <div class="form-group" id="block_{{ id }}">
-        <div class="">
-            {{ form_widget(form.imageFile) }}
+        <div class="row">
+            <div class="col-10">
+                {{ form_widget(form.imageFile) }}
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">X</button>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -44,6 +49,18 @@
         const index = $('#product_image div.form-group').length;
         const tmpl = $('#product_images').data('prototype').replace(/__name__/g, index);
         $('#product_images').append(tmpl);
-    })
+
+        handleDeleteButton();
+    });
+
+    function handleDeleteButton() {
+        $('button[data-action="delete"]').click(function () {
+            const target = this.dataset.target;
+            // console.log(target);
+            $(target).remove();
+        })
+    }
+
+    handleDeleteButton();
 </script>
 {% endblock %}
