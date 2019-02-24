@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Entity\Review;
+use App\Form\ImageProductType;
 use App\Form\ProductType;
 use App\Form\ReviewType;
+use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,7 +37,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ObjectManager $manager, ImageRepository $imageRepository): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -41,16 +45,26 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $product->setUser($this->getUser());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $manager->persist($product);
+            $manager->flush();
 
             return $this->redirectToRoute('product_index');
         }
 
+//        $image = new Image();
+//        $formImage = $this->createForm(ImageProductType::class, $image);
+//        $formImage->handleRequest($request);
+//
+//        if ($formImage->isSubmitted() && $formImage->isValid()){
+//            $manager->persist($image);
+//            $manager->flush();
+//        }
+
         return $this->render('product/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
+//            'formImage' => $formImage->createView(),
+//            'images' => $imageRepository->findAll()
         ]);
     }
 
