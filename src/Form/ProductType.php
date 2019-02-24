@@ -7,6 +7,7 @@ use App\Entity\ProductTag;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +20,11 @@ class ProductType extends AbstractType
             ->add('tag', EntityType::class, array(
                 'class' => ProductTag::class,
                 'choice_label' => 'name'
+            ))
+            ->add('images', CollectionType::class, array(
+                'entry_type' => ImageProductType::class,
+                'allow_add' => true,
+                'label' => "Image(s)"
             ))
             ->add('description', CKEditorType::class, array(
                 'config' => array(
