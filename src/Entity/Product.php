@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Product
 {
@@ -48,9 +50,43 @@ class Product
 
     private $moyenne;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product")
+     */
+    private $images;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function initializeSlug(){
+        if(empty($this->slug)){
+            $slugify =  new Slugify();
+            $this->slug = $slugify->slugify($this->title);
+        }
+    }
+
+    /**
+     * @param User $user
+     * @return mixed|null
+     * recupér le comment d'un auteur par rapport a son annonce
+     */
+    public function getCommentFromAuthor(User $user){
+        foreach ($this->reviews as $review){
+            if ($review->getAuthor() == $user) return $review;
+        }
+        return null;
+    }
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,5 +183,48 @@ class Product
         }
         $moyenne = $notes/$compteur;
         return $moyenne;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -8,23 +8,37 @@
         <div class="card my-3">
             <div class="card-header">
                 <h5> Product n°{{ product.id }}</h5>
-                <span class="rating">Moyenne :
-                {% for i in 1..5 %}
-                    {% if i <= product.moyenne %}
-                        <i class="fas fa-star"></i>
-                    {% else %}
-                        <i class="far fa-star"></i>
+                <span class="rating">Moyenne :  </span>
+                {% if product.reviews|length >0 %}
+                    {% if product.moyenne > 0 %}
+                        {% set rating = product.moyenne %}
+                        {% include 'product/rating.html.twig' %}
                     {% endif %}
-                {% endfor %}
-                </span>
+                {% else %}
+                    <p>pas de note</p>
+                {% endif %}
+
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4">
                         <p class="card-text">User : {{ product.user.email }}<hr>Title : {{ product.title }}<hr>
-                                            Tag : {{ product.tag.name }}<hr>Description :{{ product.description }}</p>
+                                            Tag : {{ product.tag.name }}<hr>Description :{{ product.description | raw }}</p>
                     </div>
                     <div class="col-lg-8">
+                        {#<!-- 1. Link to jQuery (1.8 or later), -->#}
+                        {#<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->#}
+
+                        {#<!-- fotorama.css & fotorama.js. -->#}
+                        {#<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->#}
+                        {#<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->#}
+
+                        {#<!-- 2. Add images to <div class="fotorama"></div>. -->#}
+                        {#{% for image in product.images %}#}
+                        {#<div class="fotorama">#}
+                            {#<img src="{{ vich_uploader_asset(image, 'imageFile') }}">#}
+                            {#{% endfor %}#}
+                        {#</div>#}
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -63,18 +77,11 @@
                         <div class="card my-3">
                             <div class="card-header p-3 mb-2 bg-primary text-white">
                                 <strong>{{ review.author.email }}</strong>
-                                <span class="rating">
-                                    {% for i in 1..5 %}
-                                        {% if i <= review.rating %}
-                                        <i class="fas fa-star"></i>
-                                        {% else %}
-                                            <i class="far fa-star"></i>
-                                        {% endif %}
-                                    {% endfor %}
-                                </span>
+                                {% set rating = review.rating %}
+                                {% include 'product/rating.html.twig' %}
                             </div>
                             <div class="card-body">
-                                <p>{{ review.description }}</p>
+                                <p>{{ review.description|raw}}</p>
                             </div>
                         </div>
                     </div>
@@ -82,12 +89,26 @@
             </div>
 
             <div class="card">
-                {#<div class="card-header">#}
-                    {#<h5>Reviews :</h5>#}
-                {#</div>#}
-                <div class="card-body">
-                    {{ include('review/_form.html.twig') }}
-                </div>
+                {% set review = product.commentFromAuthor(app.user) %}
+                {% if review is not null %}
+                    <div class="row">
+                        <div class="col">
+                            <blockquote>
+                                {{ review.description | raw }}
+                            </blockquote>
+                            <strong>Note : </strong>{% include 'product/rating.html.twig' with{'rating': review.rating} %}
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-success btn-sm"href="{{ path('review_edit', {'id': review.id}) }}">edit</a>
+                        </div>
+                    </div>
+
+
+                {% else %}
+                    <div class="card-body">
+                        {{ include('review/_form.html.twig') }}
+                    </div>
+                {% endif %}
             </div>
     </div>
 {% endblock %}

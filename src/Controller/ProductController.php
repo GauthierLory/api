@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Entity\Review;
+use App\Form\ImageProductType;
 use App\Form\ProductType;
 use App\Form\ReviewType;
+use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,17 +37,20 @@ class ProductController extends AbstractController
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ObjectManager $manager, ImageRepository $imageRepository): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            foreach ($product->getImages() as $image){
+//                $image->setProduct($product);
+//                $manager->persist($image);
+//            }
             $product->setUser($this->getUser());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $manager->persist($product);
+            $manager->flush();
 
             return $this->redirectToRoute('product_index');
         }
@@ -51,14 +58,17 @@ class ProductController extends AbstractController
         return $this->render('product/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
+            'images' => $imageRepository->findAll()
         ]);
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET","POST"})
+     * @Route("/{slug}/{id}", name="product_show", methods={"GET","POST"})
      */
-    public function show(ProductRepository $category, Product $product, Request $request): Response
+    public function show($slug,ProductRepository $repo, Request $request): Response
     {
+        $product = $repo->findOneBySlug($slug);
+
         $review = new Review();
         $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);

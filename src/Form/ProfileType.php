@@ -19,10 +19,10 @@ class ProfileType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('uploads', EntityType::class, array(
-                'class' => Upload::class,
-                'choice_label' => 'imageName'
-            ))
+//            ->add('uploads', EntityType::class, array(
+//                'class' => Upload::class,
+//                'choice_label' => 'imageName'
+//            ))
             ->add('save', SubmitType::class)
 //            ->add('roles')
 //            ->add('password')

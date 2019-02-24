@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\PasswordUpdate;
 use App\Entity\Upload;
 use App\Entity\User;
+use App\Form\PasswordUpdateType;
 use App\Form\ProfileType;
 use App\Form\UploadType;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -12,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ProfileController
@@ -35,7 +38,7 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/account", name="profile_account")
      */
-    public function account(Request $request, ObjectManager $manager)
+    public function account(Request $request)
     {
         $user = $this->getUser();
         $form =$this->createForm(ProfileType::class, $user);
@@ -47,26 +50,44 @@ class ProfileController extends AbstractController
             $entityManager->flush();
         }
 
-
-//        $upload = new Upload();
-//        $formUpload = $this->createForm(UploadType::class, $upload);
-//        $formUpload->handleRequest($request);
-//
-//        if ($formUpload->isSubmitted() && $formUpload->isValid()){
-//            $upload->setCreatedAt(new \DateTime());
-//            $upload->setUser($this->getUser());
-//
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->persist($upload);
-//            $entityManager->flush();
-//        }
-
         return $this->render('profile/account.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user,
-//            'upload' => $upload,
             'form' => $form->createView(),
-//            'formUpload' => $formUpload->createView()
         ]);
     }
+
+    /**
+     * @Route("/profile/password-update", name="profile_password")
+     */
+    public function passwordUpdate(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder){
+
+        $user = $this->getUser();
+        $passwordUpdate = new  PasswordUpdate();
+        $formPassword = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+        $formPassword->handleRequest($request);
+
+        if ($formPassword->isSubmitted() && $formPassword->isValid()){
+            if (!password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
+                // erreur
+            }else{
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $encoder->encodePassword($user, $newPassword);
+
+                $user->setPassword($hash);
+                $manager->persist($user);
+                $manager->flush();
+                $this->addFlash(
+                    'success',"Votre mdp est été modifié"
+                );
+                return $this->redirectToRoute('profile_account');
+            }
+        }
+
+        return $this->render('profile/passwordUpdate.html.twig',[
+            'user' => $user,
+            'formPassword' => $formPassword->createView(),
+        ]);
+    }
+
 }
