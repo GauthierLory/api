@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use App\Traits\CaptureIpTrait;
 
 class RegistrationController extends AbstractController
 {
@@ -32,6 +33,13 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            // GET IP ADDRESS
+            $ipAddress = new CaptureIpTrait();
+            if($user->getAddressip()==null OR $user->getAddressip()==""){
+                $user->setAddressip($ipAddress->getClientIp());
+
+            }
+            //Attach Avatar to User
             if(!empty($user->getAvatar())){
                 $file = $user->getAvatar();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -40,7 +48,7 @@ class RegistrationController extends AbstractController
             }
             else{
                 $alea = rand(0,23);
-                $user->setAvatar("http://192.168.1.83/api/assets/image/icons".$alea.".png");
+                $user->setAvatar("http://192.168.1.63/api/assets/image/icons".$alea.".png");
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

@@ -75,6 +75,10 @@ class User implements UserInterface
      */
     private $uploads;
 
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $addressip;
 
     public function __construct()
     {
@@ -338,14 +342,27 @@ class User implements UserInterface
 
     public function getAvatarurl(): string{
         $avatar = $this->avatar;
-        $icon_path ="http://192.168.1.83/api/assets/image/icons";
+        $icon_path ="http://192.168.1.63/api/assets/image/icons";
         if(substr($avatar,0,42) == $icon_path){
             $avatar_url = $avatar;
             return (string) $avatar_url;
         }else{
-            $avatar_url = "http://192.168.1.83/api/public/images/uploads/".$avatar;
+            $avatar_url = "http://192.168.1.63/api/public/images/uploads/".$avatar;
         }
         return (string) $avatar_url;
     }
+
+
+    public function getAddressip()
+    {
+        return $this->addressip;
+    }
+
+    public function setAddressip(String $addressip): self
+    {
+        $this->addressip = $addressip;
+        return $this;
+    }
+
 
 }

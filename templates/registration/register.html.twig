@@ -25,7 +25,8 @@
 
             <button id="btnregister" class="btn btn-lg btn-primary btn-block text-uppercase">Register</button>
             {{ form_end(registrationForm) }}
-            <a href={{ path("connect_google") }}>SIGN IN GOOGLE</a>
+            <a class="btn btn-danger" href={{ path("connect_google") }}>SIGN IN GOOGLE</a>
+            {#<a class="btn btn-primar" href={{ path("connect_facebook") }}>SIGN IN FACEBOOK</a>#}
         </div>
     </div>
 </div>

@@ -128,17 +128,53 @@
             #main {
                 padding-top:70px;
             }
+            header {
+                height: 70px;
+                background: #ccc;
+            }
+            .navbar {
+                border-radius: 0;
+                -webkit-transition: all 0.3s ease-out;
+                -moz-transition: all 0.3s ease-out;
+                -o-transition: all 0.3s ease-out;
+                transition: all 0.3s ease-out;
+            }
 
+            /* fixed to top styles */
+            .affix.navbar {
+                background-color: #333;
+            }
+            .affix.navbar .nav-item>a,
+            .affix.navbar .navbar-brand {
+                color: #fff;
+            }
+
+
+            /* navbar collapsing */
+            @media(max-width:34em) {
+                .navbar .navbar-nav>.nav-item {
+                    float: none;
+                    margin-left: .1rem;
+                }
+                .navbar .navbar-nav {
+                    float:none !important;
+                }
+                .navbar .collapse.in, .navbar .collapsing  {
+                    clear:both;
+                }
+            }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     {% endblock %}
 </head>
 {#{% block body %}#}
+<header>
 
+</header>
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     {#<nav class="navbar navbar-dark bg-primary navbar-expand-lg">#}
-    <nav class="navbar navbar-light bg-primary navbar-expand-lg" data-toggle="affix">
+    <nav class="navbar navbar-dark sticky-top bg-primary navbar-expand-lg" id="navogp">
         <a class="navbar-brand" href="{{ path('home') }}">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -181,7 +217,7 @@
         </div>
     </nav>
 {% else %}
-    <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <nav class="navbar navbar-dark sticky-top bg-primary navbar-expand-lg" id="navogp">
         <a class="navbar-brand" href="{{ path('home') }}">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -210,11 +246,10 @@
 </div>
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('nav') }}
 
     <script src="/build/runtime.js"></script>
     <script src="/build/nav.js"></script>
-    <script src="/build/admin.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
