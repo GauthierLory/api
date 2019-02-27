@@ -8,7 +8,7 @@
         <h1>Product index</h1>
     </div>
     <div class="card-body">
-        <a class="btn btn-primary btn-sm" href="{{ path('product_new') }}" style="float:right;">Create new</a>
+        <a class="btn btn-primary btn-sm" href="{{ path('product_new') }}">Create new</a>
         <table class="table table-hover">
 
             <thead>
@@ -28,8 +28,8 @@
                     <td>{{ product.tag.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>
-                        <a class="btn btn-success btn-sm"href="{{ path('product_show', {'slug': product.slug, 'id': product.id}) }}">show</a>
-                        <a class="btn btn-warning btn-sm"href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                        <a class="btn btn-success btn-sm" href="{{ path('product_show', {'slug': product.slug, 'id': product.id}) }}">show</a>
+                        <a class="btn btn-warning btn-sm" href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
 
                     </td>
                 </tr>

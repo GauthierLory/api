@@ -132,37 +132,7 @@
                 height: 70px;
                 background: #ccc;
             }
-            .navbar {
-                border-radius: 0;
-                -webkit-transition: all 0.3s ease-out;
-                -moz-transition: all 0.3s ease-out;
-                -o-transition: all 0.3s ease-out;
-                transition: all 0.3s ease-out;
-            }
 
-            /* fixed to top styles */
-            .affix.navbar {
-                background-color: #333;
-            }
-            .affix.navbar .nav-item>a,
-            .affix.navbar .navbar-brand {
-                color: #fff;
-            }
-
-
-            /* navbar collapsing */
-            @media(max-width:34em) {
-                .navbar .navbar-nav>.nav-item {
-                    float: none;
-                    margin-left: .1rem;
-                }
-                .navbar .navbar-nav {
-                    float:none !important;
-                }
-                .navbar .collapse.in, .navbar .collapsing  {
-                    clear:both;
-                }
-            }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -188,13 +158,23 @@
                             Admin
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="nav-link" href="{{ path('product_index') }}">Product</a>
+                            <a class="dropdown-item" href="{{ path('product_index') }}">Product</a>
                             <div class="dropdown-divider"></div>
-                            <a class="nav-link" href="{{ path('review_index') }}">Review</a>
+                            <a class="dropdown-item" href="{{ path('review_index') }}">Review</a>
                             <div class="dropdown-divider"></div>
-                            <a class="nav-link" href="{{ path('user_index') }}">User</a>
+                            <a class="dropdown-item" href="{{ path('user_index') }}">User</a>
                             <div class="dropdown-divider"></div>
-                            <a class="nav-link" href="{{ path('product_tag_index') }}">Tag</a>
+                            <a class="dropdown-item" href="{{ path('product_tag_index') }}">Tag</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('adminsettings') }}">All</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('infoph') }}">Php Info</a>
                         </div>
                     </li>
                 {% endif %}
