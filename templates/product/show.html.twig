@@ -7,9 +7,9 @@
     <div class="">
         <div class="card my-3">
             <div class="card-header">
-                <h5> Product n°{{ product.id }}</h5>
+                <h5> Product n°{{ product.id | default ('id null')}}</h5>
                 <span class="rating">Moyenne :  </span>
-                {% if product.reviews|length >0 %}
+                {% if product.reviews|length >0%}
                     {% if product.moyenne > 0 %}
                         {% set rating = product.moyenne %}
                         {% include 'product/rating.html.twig' %}

@@ -68,11 +68,21 @@ class ReviewController extends AbstractController
      */
     public function edit(Request $request, Review $review): Response
     {
+        //HISTORIQUE MODIF//
+        $old_review = "old";
+        //FIN HISTORIQUE MODIF//
+
         $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            //GESTION HISTORIQUE MODIF
+            $new_review = "new";
+            $modif = new HistoriqueController();
+            $manager =$this->getDoctrine()->getManager();
+            $historique = $modif->new_historique($manager,$this->getUser());
+            $modif->new_review($manager, $table="review", $champ="atta", $old_review, $new_review, $historique);
 
             return $this->redirectToRoute('review_index', [
                 'id' => $review->getId(),

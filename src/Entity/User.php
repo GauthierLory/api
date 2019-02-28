@@ -80,12 +80,18 @@ class User implements UserInterface
      */
     private $addressip;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Historique", mappedBy="user")
+     */
+    private $historiques;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->supports = new ArrayCollection();
         $this->uploads = new ArrayCollection();
+        $this->historiques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -361,6 +367,37 @@ class User implements UserInterface
     public function setAddressip(String $addressip): self
     {
         $this->addressip = $addressip;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Historique[]
+     */
+    public function getHistoriques(): Collection
+    {
+        return $this->historiques;
+    }
+
+    public function addHistorique(Historique $historique): self
+    {
+        if (!$this->historiques->contains($historique)) {
+            $this->historiques[] = $historique;
+            $historique->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistorique(Historique $historique): self
+    {
+        if ($this->historiques->contains($historique)) {
+            $this->historiques->removeElement($historique);
+            // set the owning side to null (unless already changed)
+            if ($historique->getUser() === $this) {
+                $historique->setUser(null);
+            }
+        }
+
         return $this;
     }
 
