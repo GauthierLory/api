@@ -54,8 +54,6 @@ var saveReview = $("#saveReview");
          responseMessage(msg);
 
      });
-
-
  });
 
 
@@ -77,3 +75,15 @@ alert("ohohoh");
         }); // ajax}
     }*/
 });
+
+ //Read Review Element //
+ var cke_1_contents = $("#cke_1_contents");
+ cke_1_contents.on("change", function(){
+     alert(cke_1_contents.val());
+ });
+
+ var review_rating = $("#review_rating");
+ review_rating.on("change", function(){
+     alert(review_rating.val());
+ });
+ // END READ //
