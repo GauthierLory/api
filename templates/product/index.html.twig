@@ -29,7 +29,7 @@
                     <td>{{ product.description }}</td>
                     <td>
                         <a class="btn btn-success btn-sm" href="{{ path('product_show', {'slug': product.slug, 'id': product.id}) }}">show</a>
-                        <a class="btn btn-warning btn-sm" href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                        <a class="btn btn-warning btn-sm" href="{{ path('product_edit', {'slug': product.slug,'id': product.id}) }}">edit</a>
 
                     </td>
                 </tr>
