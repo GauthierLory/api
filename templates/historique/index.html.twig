@@ -3,18 +3,47 @@
 {% block title %}Hello HistoriqueController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/api/src/Controller/HistoriqueController.php'|file_link(0) }}">src/Controller/HistoriqueController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/api/templates/historique/index.html.twig'|file_link(0) }}">templates/historique/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-sm table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="2" scope="colgroup">Historique</th>
+                        <th colspan="2" scope="colgroup">User</th>
+                        <th colspan="6" scope="colgroup">Ancien </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">id historique</th>
+                        <th scope="col">modified date</th>
+                        <th scope="col">user id</th>
+                        <th scope="col">user mail</th>
+                        <th scope="col">historique id</th>
+                        <th scope="col">tableModif </th>
+                        <th scope="col">champModif </th>
+                        <th scope="col">oldValue </th>
+                        <th scope="col">newValue </th>
+                        <th scope="col">recordId </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for historique in historiques %}
+                        <tr>
+                            <td>{{ historique.id }}</td>
+                            <td>{{ historique.modifiedDate|date("m/d/Y") }}</td>
+                            <td>{{ historique.user.id }}</td>
+                            <td>{{ historique.user.email }}</td>
+                            <td>{{ historique.historiqueModif.id }}</td>
+                            <td>{{ historique.historiqueModif.tableModif }}</td>
+                            <td>{{ historique.historiqueModif.champModif }}</td>
+                            <td>{{ historique.historiqueModif.oldValue }}</td>
+                            <td>{{ historique.historiqueModif.newValue }}</td>
+                            <td><a href="{{ path('review_show', {'id': historique.historiqueModif.recordId}) }}" >link {{ historique.historiqueModif.recordId }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}
