@@ -9,21 +9,18 @@
                     color : goldenrod;
                 }
                 footer {
-                    /*position:fixed;*/
-                    /*left:0px;*/
-                    /*bottom:0px;*/
-                    /*width:100%;*/
+                    margin-top: auto;
+                    color: white;
                 }
-
-                /*body {*/
-                    /*background: #9CECFB;*/
-                    /*!* fallback for old browsers *!*/
-                    /*background: -webkit-linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);*/
-                    /*!* Chrome 10-25, Safari 5.1-6 *!*/
-                    /*background: linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);*/
-                    /*!* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-                /*}*/
-
+                body {
+                    display: flex;
+                    flex-direction: column;
+                }
+                html, body {
+                    height: 100%;
+                    padding: 0;
+                    margin: 0;
+                }
                 /* Profile container */
                 .profile {
                     margin: 20px 0;
@@ -139,6 +136,7 @@
 
 
             </style>
+            <link rel="stylesheet" href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         {% endblock %}
@@ -235,7 +233,170 @@
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script>
+                $(document).ready( function () {
+                    $('#tableAdmin').DataTable();
+                } );
+            </script>
+            <script>
+                $(document).ready( function () {
+                    $('table.display').DataTable();
+                } );
+            </script>
         {% endblock %}
-    {% include 'footer.html.twig' %}
     </body>
+<footer>
+
+
+
+    <footer class="page-footer font-small bg-primary stylish-color-dark pt-4">
+
+        {#<!-- Footer Links -->#}
+        {#<div class="container text-center text-md-left">#}
+        {#<!-- Grid row -->#}
+        {#<div class="row">#}
+
+        {#<!-- Grid column -->#}
+        {#<div class="col-md-4 mx-auto">#}
+
+        {#<!-- Content -->#}
+        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>#}
+        {#<p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur#}
+        {#adipisicing elit.</p>#}
+
+        {#</div>#}
+        {#<!-- Grid column -->#}
+
+        {#<hr class="clearfix w-100 d-md-none">#}
+
+        {#<!-- Grid column -->#}
+        {#<div class="col-md-2 mx-auto">#}
+
+        {#<!-- Links -->#}
+        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>#}
+
+        {#<ul class="list-unstyled">#}
+        {#<li>#}
+        {#<a href="#!">Link 1</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 2</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 3</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 4</a>#}
+        {#</li>#}
+        {#</ul>#}
+
+        {#</div>#}
+        {#<!-- Grid column -->#}
+
+        {#<hr class="clearfix w-100 d-md-none">#}
+
+        {#<!-- Grid column -->#}
+        {#<div class="col-md-2 mx-auto">#}
+
+        {#<!-- Links -->#}
+        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>#}
+
+        {#<ul class="list-unstyled">#}
+        {#<li>#}
+        {#<a href="#!">Link 1</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 2</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 3</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 4</a>#}
+        {#</li>#}
+        {#</ul>#}
+
+        {#</div>#}
+        {#<!-- Grid column -->#}
+
+        {#<hr class="clearfix w-100 d-md-none">#}
+
+        {#<!-- Grid column -->#}
+        {#<div class="col-md-2 mx-auto">#}
+
+        {#<!-- Links -->#}
+        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>#}
+
+        {#<ul class="list-unstyled">#}
+        {#<li>#}
+        {#<a href="#!">Link 1</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 2</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 3</a>#}
+        {#</li>#}
+        {#<li>#}
+        {#<a href="#!">Link 4</a>#}
+        {#</li>#}
+        {#</ul>#}
+
+        {#</div>#}
+        {#<!-- Grid column -->#}
+
+        {#</div>#}
+        {#<!-- Grid row -->#}
+        {#</div>#}
+        {#<!-- Footer Links -->#}
+        {#<hr>#}
+        {#<!-- Call to action -->#}
+        {#<ul class="list-unstyled list-inline text-center py-2">#}
+        {#<li class="list-inline-item">#}
+        {#<h5 class="mb-1">Register for free</h5>#}
+        {#</li>#}
+        {#<li class="list-inline-item">#}
+        {#<a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>#}
+        {#</li>#}
+        {#</ul>#}
+        {#<!-- Call to action -->#}
+        {#<hr>#}
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-google-plus-g"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1">
+                    <i class="fab fa-dribbble"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="#" style="color: white"> Yeah Bitch</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer></footer>
 </html>

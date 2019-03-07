@@ -22,7 +22,7 @@ class HomeController extends AbstractController
         $pages = ceil($total / $limit);
 
         return $this->render('home/index.html.twig', [
-            'products' => $productRepository->findBy([],[],$limit,$start),
+            'products' => $productRepository->findBy([],['id'=>'DESC'],$limit,$start),
             'pages' => $pages,
             'page' => $page
         ]);

@@ -7,6 +7,9 @@
     <div class="">
         <div class="card my-3">
             <div class="card-header">
+                {% if is_granted('ROLE_USER') and app.user == product.getUser() %}
+                <a class="btn btn-warning btn-sm" href="{{ path('product_edit', {'slug': product.slug,'id': product.id}) }}">edit</a>
+                {% endif %}
                 <h5><a class="btn btn-primary" href="{{ path('product_index') }}"><i class="fas fa-arrow-alt-circle-left"></i></a> Product n°{{ product.id | default ('id null')}}</h5>
                 <span class="rating">Moyenne :  </span>
                 {% if product.reviews|length >0%}
@@ -22,8 +25,13 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4">
-                        <p class="card-text">User : {{ product.user.email }}<hr>Title : {{ product.title }}<hr>
-                                            Tag : {{ product.tag.name }}<hr>Description :{{ product.description | raw }}</p>
+                        <p class="card-text">
+                            User : {{ product.user.email }}
+                        <hr>Title : {{ product.title }}
+                        <hr>Tag : {{ product.tag.name }}
+                        <hr>Le : {{ product.createdAt|date('d/m/Y') }}
+                        <hr>Description :{{ product.description | raw }}
+                        </p>
                     </div>
                     <div class="col-lg-8">
                         <div class="row">{{ product.content }}</div>
@@ -70,7 +78,7 @@
                                         <strong>{{ review.author.username }}</strong>
                                     </div>
                                     <div class="col-md-2">
-                                        <strong>{{ review.createdAt|date('d/m/Y') }}</strong>
+                                        <strong>le {{ review.createdAt|date('d/m/Y') }} à {{ review.createdAt|date('H:m') }}</strong>
                                     </div>
                                     <div class="col-md-2">
                                         {#<strong>{{ review.author.username }}</strong>#}
@@ -90,22 +98,21 @@
                 {% endfor %}
             {#</div>#}
 
-            <div class="card mb-3">
+            <div class="card-body mb-3">
                 {% set review = product.commentFromAuthor(app.user) %}
                 {% if review is not null %}
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-3">
+                            <div class="row"><small>le {{ review.createdAt|date('d/m/Y') }} à {{ review.createdAt|date('H:m') }}</small></div>
+                            <div class="row"> <strong>Note : </strong>{% include 'product/rating.html.twig' with{'rating': review.rating} %}</div>
+                            <div class="row"><a class="btn btn-warning btn-sm" href="{{ path('review_edit', {'id': review.id}) }}">edit</a></div>
+                        </div>
+                        <div class="col-md-9">
                             <blockquote>
                                 {{ review.description | raw }}
                             </blockquote>
-                            <strong>Note : </strong>{% include 'product/rating.html.twig' with{'rating': review.rating} %}
-                        </div>
-                        <div class="col">
-                            <a class="btn btn-warning btn-sm" href="{{ path('review_edit', {'id': review.id}) }}">edit</a>
                         </div>
                     </div>
-
-
                 {% else %}
                     <div class="card-body">
                         {{ include('review/_form.html.twig') }}
