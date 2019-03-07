@@ -25,6 +25,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setIsActivate(false);
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -48,7 +49,7 @@ class RegistrationController extends AbstractController
             }
             else{
                 $alea = rand(0,23);
-                $user->setAvatar("http://192.168.1.63/api/assets/image/icons".$alea.".png");
+                $user->setAvatar("http://192.168.0.16/api/assets/image/icons".$alea.".png");
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

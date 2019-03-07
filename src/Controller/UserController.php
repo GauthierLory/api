@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserFromAdminType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\HistoriqueHelper;
@@ -65,22 +66,15 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user, HistoriqueHelper $historiquehelper): Response
+    public function edit(Request $request,User $user, HistoriqueHelper $historiquehelper): Response
     {
 
         $old_user = "old user";
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserFromAdminType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
 
             $this->getDoctrine()->getManager()->flush();
 

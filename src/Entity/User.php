@@ -49,7 +49,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
      *
      */
@@ -76,7 +76,7 @@ class User implements UserInterface
     private $uploads;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true, nullable=true)
      */
     private $addressip;
 
@@ -84,6 +84,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Historique", mappedBy="user")
      */
     private $historiques;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isActivate;
 
     public function __construct()
     {
@@ -397,6 +402,18 @@ class User implements UserInterface
                 $historique->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsActivate(): ?bool
+    {
+        return $this->isActivate;
+    }
+
+    public function setIsActivate(?bool $isActivate): self
+    {
+        $this->isActivate = $isActivate;
 
         return $this;
     }

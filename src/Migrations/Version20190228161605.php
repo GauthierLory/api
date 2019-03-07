@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190307112109 extends AbstractMigration
+final class Version20190228161605 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,6 @@ final class Version20190307112109 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-
-//        $this->addSql('ALTER TABLE historique_modif ADD record_id INT NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +29,7 @@ final class Version20190307112109 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE historique_modif DROP record_id');
-
+        $this->addSql('DROP INDEX UNIQ_8D93D6495A766BA0 ON user');
+        $this->addSql('ALTER TABLE user DROP addressip');
     }
 }

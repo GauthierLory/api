@@ -69,7 +69,10 @@ class ProfileController extends AbstractController
 
         if ($formPassword->isSubmitted() && $formPassword->isValid()){
             if (!password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
-                // erreur
+//                echo 'no !';
+                $this->addFlash(
+                    'error',"No !"
+                );
             }else{
                 $newPassword = $passwordUpdate->getNewPassword();
                 $hash = $encoder->encodePassword($user, $newPassword);
@@ -80,7 +83,7 @@ class ProfileController extends AbstractController
                 $this->addFlash(
                     'success',"Votre mdp est été modifié"
                 );
-                return $this->redirectToRoute('profile_account');
+                return $this->redirectToRoute('profile_password');
             }
         }
 
