@@ -18,7 +18,6 @@ class HistoriqueRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Historique::class);
     }
-
     // /**
     //  * @return Historique[] Returns an array of Historique objects
     //  */

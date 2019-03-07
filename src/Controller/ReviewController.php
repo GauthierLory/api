@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\HistoriqueModif;
 use App\Entity\Review;
 use App\Form\ReviewCommentType;
 use App\Form\ReviewType;
+use App\Repository\HistoriqueModifRepository;
+use App\Repository\HistoriqueRepository;
 use App\Repository\ReviewRepository;
+use App\Service\HistoriqueHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,23 +70,21 @@ class ReviewController extends AbstractController
     /**
      * @Route("/{id}/edit", name="review_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Review $review): Response
+    public function edit(Request $request, Review $review, HistoriqueHelper $historiquehelper): Response
     {
-        //HISTORIQUE MODIF//
-        $old_review = "old";
-        //FIN HISTORIQUE MODIF//
+
+        $old_review = "old review";
 
         $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            //GESTION HISTORIQUE MODIF
-            $new_review = "new";
-            $modif = new HistoriqueController();
-            $manager =$this->getDoctrine()->getManager();
-            $historique = $modif->new_historique($manager,$this->getUser());
-            $modif->new_review($manager, $table="review", $champ="atta", $old_review, $new_review, $historique);
+
+
+            $new_review = "new review";
+            $historique = $historiquehelper->new_historique($this->getUser());
+            $historiquehelper->new_modif($table="review", $champ="atta", $old_review, $new_review, $historique, $review->getId());
 
             return $this->redirectToRoute('review_index', [
                 'id' => $review->getId(),

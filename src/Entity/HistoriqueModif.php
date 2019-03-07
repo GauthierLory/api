@@ -44,6 +44,11 @@ class HistoriqueModif
      */
     private $historique;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $record_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +112,22 @@ class HistoriqueModif
         $this->historique = $historique;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecordId()
+    {
+        return $this->record_id;
+    }
+
+    /**
+     * @param mixed $record_id
+     */
+    public function setRecordId($record_id): void
+    {
+        $this->record_id = $record_id;
     }
 
 }

@@ -8,12 +8,9 @@
         {% endblock %}
 {% block body %}
     <div class="card">
-        <div class="card-header"><h1>Edit Review</h1></div>
+        <div class="card-header"><h1><a class="btn btn-primary" href="{{ path('review_index') }}"><i class="fas fa-arrow-alt-circle-left"></i></a> Edit Review</h1></div>
         <div class="card-body">
             {{ include('review/_form.html.twig', {'button_label': 'Update'}) }}
-
-            <a class="btn btn-primary" href="{{ path('review_index') }}">back to list</a>
-
         </div>
         {{ include('review/_delete_form.html.twig') }}
 

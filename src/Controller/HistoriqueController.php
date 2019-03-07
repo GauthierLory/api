@@ -29,38 +29,4 @@ class HistoriqueController extends AbstractController
             'controller_name' => 'HistoriqueController',
         ]);
     }
-
-
-    public function new_historique(ObjectManager $manager, $user){
-        $historique = new Historique();
-        $historique->setUser($user);
-        $historique->setModifiedDate(new  \DateTime());
-        $manager->persist($historique);
-        $manager->flush();
-
-        return $historique;
-    }
-
-    public function new_review(ObjectManager $manager, $table, $champ, $old, $new, $historique){
-        $historique_modif = new HistoriqueModif();
-        $historique_modif->setTableModif($table);
-        $historique_modif->setChampModif($champ);
-        $historique_modif->setOldValue($old);
-        $historique_modif->setNewValue($new);
-        $historique_modif->setHistorique($historique);
-        $manager->persist($historique_modif);
-        $manager->flush();
-    }
-
-    public function new_product(){
-
-    }
-
-    //element : Review Product etc..
-    public function new_modif(ObjectManager $manager, $historique_id, $element,$table){
-        $modif = new HistoriqueModif();
-        $modif->setTableModif($table);
-        $manager->persist($modif);
-        $manager->flush();
-    }
 }

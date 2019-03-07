@@ -10,6 +10,7 @@ use App\Form\ProductType;
 use App\Form\ReviewType;
 use App\Repository\ImageRepository;
 use App\Repository\ProductRepository;
+use App\Service\HistoriqueHelper;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -93,14 +94,21 @@ class ProductController extends AbstractController
      * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
      * @Security("is_granted('ROLE_USER') and user == product.getUser()", message="This product is not yours")
      */
-    public function edit(Request $request, Product $product): Response
+    public function edit(Request $request, Product $product, HistoriqueHelper $historiquehelper): Response
     {
+
+        $old_product = "old product";
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if($request->request->get('edit')) {
                 $this->getDoctrine()->getManager()->flush();
+
+                $new_product = "new roduct";
+                $historique = $historiquehelper->new_historique($this->getUser());
+                $historiquehelper->new_modif($table="user", $champ="atta", $old_product, $new_product, $historique, $product->getId());
 
                 return $this->redirectToRoute('product_index', [
                     'id' => $product->getId(),
