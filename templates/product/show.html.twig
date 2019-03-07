@@ -72,24 +72,38 @@
         </div>
 
             <hr>
-            <div class="row">
+            {#<div class="row">#}
                 {% for review in product.reviews %}
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="row">
+                    {#<div class="col-lg-3 col-md-6 col-sm-12">#}
                         <div class="card my-3">
                             <div class="card-header p-3 mb-2 bg-primary text-white">
-                                <strong>{{ review.author.email }}</strong>
-                                {% set rating = review.rating %}
-                                {% include 'product/rating.html.twig' %}
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <strong>{{ review.author.username }}</strong>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <strong>{{ review.createdAt|date('d/m/Y') }}</strong>
+                                    </div>
+                                    <div class="col-md-2">
+                                        {#<strong>{{ review.author.username }}</strong>#}
+                                        {% set rating = review.rating %}
+                                        {% include 'product/rating.html.twig' %}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <p>{{ review.description|raw}}</p>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <p>{{ review.description|raw}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <hr>
                 {% endfor %}
-            </div>
+            {#</div>#}
 
-            <div class="card">
+            <div class="card mb-3">
                 {% set review = product.commentFromAuthor(app.user) %}
                 {% if review is not null %}
                     <div class="row">

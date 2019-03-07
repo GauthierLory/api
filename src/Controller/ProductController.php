@@ -45,6 +45,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $product->setCreatedAt(new \DateTime());
 //            foreach ($product->getImages() as $image){
 //                $image->setProduct($product);
 //                $manager->persist($image);

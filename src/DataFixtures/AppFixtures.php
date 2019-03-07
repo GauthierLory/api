@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i <= 3; $i ++) {
             $tag = new ProductTag();
             $tag->setName($faker->sentence);
-            $tag->setDescription($faker->paragraph(2));
+            $tag->setDescription($faker->word(2));
 
             $manager->persist($tag);
 
@@ -63,6 +63,7 @@ class AppFixtures extends Fixture
                 $product->setTitle($title)
                     ->setUser($user)
                     ->setTag($tag)
+                    ->setCreatedAt(new \DateTime())
                     ->setDescription($faker->paragraph(5));
 
                 $manager->persist($product);
@@ -73,6 +74,7 @@ class AppFixtures extends Fixture
                     $review->setAuthor($user)
                         ->setDescription($faker->paragraph(5))
                         ->setProduct($product)
+                        ->setCreatedAt(new \DateTime())
                         ->setRating(mt_rand(0, 5));
                     $manager->persist($review);
                 }

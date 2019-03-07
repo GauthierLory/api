@@ -8,15 +8,21 @@
                 span.rating i {
                     color : goldenrod;
                 }
-
-                body {
-                    background: #9CECFB;
-                    /* fallback for old browsers */
-                    background: -webkit-linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);
-                    /* Chrome 10-25, Safari 5.1-6 */
-                    background: linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);
-                    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                footer {
+                    /*position:fixed;*/
+                    /*left:0px;*/
+                    /*bottom:0px;*/
+                    /*width:100%;*/
                 }
+
+                /*body {*/
+                    /*background: #9CECFB;*/
+                    /*!* fallback for old browsers *!*/
+                    /*background: -webkit-linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);*/
+                    /*!* Chrome 10-25, Safari 5.1-6 *!*/
+                    /*background: linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);*/
+                    /*!* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+                /*}*/
 
                 /* Profile container */
                 .profile {
@@ -135,16 +141,17 @@
             </style>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
         {% endblock %}
     </head>
     {#{% block body %}#}
 
 <body>
 
+
+
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {#<nav class="navbar navbar-dark bg-primary navbar-expand-lg">#}
-        <nav class="navbar navbar-light bg-primary navbar-expand-lg">
+        <nav class="navbar navbar-dark sticky-top bg-primary navbar-expand-lg" id="navogp">
             <a class="navbar-brand" href="{{ path('home') }}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -153,20 +160,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Admin
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="nav-link" href="{{ path('product_index') }}">Product</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="nav-link" href="{{ path('review_index') }}">Review</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="nav-link" href="{{ path('user_index') }}">User</a>
-                            <div class="dropdown-divider"></div>
-                            {#<a class="nav-link" href="{{ path('product_tag_index') }}">Tag</a>#}
-                        </div>
-                    </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ path('product_index') }}">Product</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('review_index') }}">Review</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('user_index') }}">User</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('product_tag_index') }}">Tag</a>
+                            </div>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-cog"></i>
@@ -179,10 +186,10 @@
                         </li>
                     {% endif %}
                     <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src={{ app.user.avatarurl }} height="40px" width="40px">
-                                {{ app.user.username }}
-                            </a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src={{ app.user.avatarurl }} height="40px" width="40px">
+                            {{ app.user.username }}
+                        </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
@@ -190,14 +197,14 @@
                         </div>
                     </li>
                     {#<form id="searchform" class="form-inline">#}
-                        {#<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-                        {#<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+                    {#<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+                    {#<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
                     {#</form>#}
                 </ul>
             </div>
         </nav>
     {% else %}
-        <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+        <nav class="navbar navbar-dark sticky-top bg-primary navbar-expand-lg" id="navogp">
             <a class="navbar-brand" href="{{ path('home') }}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -211,8 +218,8 @@
                         <a class="nav-link" href="{{ path('app_register') }}">Register</a>
                     </li>
                     {#<form id="searchform" class="form-inline">#}
-                        {#<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-                        {#<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+                    {#<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+                    {#<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
                     {#</form>#}
                 </ul>
             </div>
@@ -222,7 +229,6 @@
         <div class="container">
             {% block body %}
             {% endblock %}
-
         </div>
 
         {% block javascripts %}

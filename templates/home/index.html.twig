@@ -1,16 +1,17 @@
-{% extends 'navindex_html.twig' %}
+{% extends 'base.html.twig' %}
 
 
 {% block body %}
-
 <div class="row justify-content-center my-3">
     {% for product in products %}
         <div class="col-sm" style="padding-top: 10px">
             <div class="card" style="width: 18rem;">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+            {#<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">#}
             <div class="card-body">
                 <h5 class="card-title">{{ product.title }}</h5>
-                <small>{{ product.tag.name }}</small>
+                <small>{{ product.createdAt|date('d/m/Y') }}</small>
+                <span class="badge badge-pill badge-success">{{ product.tag.name }}</span>
+                <p>{{ product.description|raw }}</p>
                 {#<p class="card-text">{{ product.description }}</p>#}
                 <a href="{{ path('product_show', {'slug': product.slug, 'id': product.id} ) }}" class="btn btn-primary">show</a>
             </div>
