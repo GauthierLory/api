@@ -91,12 +91,13 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
+     * @Route("/{slug}/{id}/edit", name="product_edit", methods={"GET","POST"})
      * @Security("is_granted('ROLE_USER') and user == product.getUser()", message="This product is not yours")
      */
-    public function edit(Request $request, Product $product, HistoriqueHelper $historiquehelper): Response
+    public function edit(Request $request, Product $product, ObjectManager $manager, $slug, ProductRepository $repo, HistoriqueHelper $historiqueHelper): Response
     {
 
+        $product = $repo->findOneBySlug($slug);
         $old_product = "old product";
 
         $form = $this->createForm(ProductType::class, $product);
@@ -107,13 +108,15 @@ class ProductController extends AbstractController
                 $this->getDoctrine()->getManager()->flush();
 
                 $new_product = "new roduct";
-                $historique = $historiquehelper->new_historique($this->getUser());
-                $historiquehelper->new_modif($table="user", $champ="atta", $old_product, $new_product, $historique, $product->getId());
+                $historique = $historiqueHelper->new_historique($this->getUser());
+                $historiqueHelper->new_modif($table="user", $champ="atta", $old_product, $new_product, $historique, $product->getId());
 
                 return $this->redirectToRoute('product_index', [
                     'id' => $product->getId(),
                 ]);
             }
+            $manager->persist($product);
+            $manager->flush();
         }
 
         return $this->render('product/edit.html.twig', [

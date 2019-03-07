@@ -25,7 +25,7 @@ class HistoriqueController extends AbstractController
     public function index(HistoriqueRepository $repo)
     {
         return $this->render('historique/index.html.twig', [
-            'historique' =>  $repo->findAll(),
+            'historiques' =>  $repo->findAll(),
             'controller_name' => 'HistoriqueController',
         ]);
     }
