@@ -146,88 +146,68 @@
 <body>
 
 
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-primary fixed">
+    <a class="navbar-brand" href="{{ path('home') }}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('product_index') }}">Product</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('review_index') }}">Review</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('user_index') }}">User</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('product_tag_index') }}">Tag</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('adminsettings') }}">All</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('infoph') }}">Php Info</a>
+                    </div>
+                </li>
+            {% endif %}
+        </ul>
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {#<nav class="navbar navbar-dark bg-primary navbar-expand-lg">#}
-        <nav class="navbar navbar-dark sticky-top bg-primary navbar-expand-lg" id="navogp">
-            <a class="navbar-brand" href="{{ path('home') }}">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <ul class="navbar-nav ml-auto">
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ path('product_index') }}">Product</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('review_index') }}">Review</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('user_index') }}">User</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('product_tag_index') }}">Tag</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ path('adminsettings') }}">All</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('infoph') }}">Php Info</a>
-                            </div>
-                        </li>
-                    {% endif %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src={{ app.user.avatarurl }} height="40px" width="40px">
-                            {{ app.user.username }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
-                            <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-                            {#<div class="dropdown-divider"></div>#}
-                        </div>
-                    </li>
-                    {#<form id="searchform" class="form-inline">#}
-                    {#<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-                    {#<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-                    {#</form>#}
-                </ul>
-            </div>
-        </nav>
-    {% else %}
-        <nav class="navbar navbar-dark sticky-top bg-primary navbar-expand-lg" id="navogp">
-            <a class="navbar-brand" href="{{ path('home') }}">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}">Register</a>
-                    </li>
-                    {#<form id="searchform" class="form-inline">#}
-                    {#<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
-                    {#<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
-                    {#</form>#}
-                </ul>
-            </div>
-        </nav>
-    {% endif %}
+            <li class="nav-item">
+                <img src={{ app.user.avatarurl }} height="40px" width="40px">
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ app.user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('profile') }}">Profile</a>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endif %}
 
-        <div class="container">
-            {% block body %}
-            {% endblock %}
-        </div>
+
+
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
 
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -247,156 +227,5 @@
             </script>
         {% endblock %}
     </body>
-<footer>
-
-
-
-    <footer class="page-footer font-small bg-primary stylish-color-dark pt-4">
-
-        {#<!-- Footer Links -->#}
-        {#<div class="container text-center text-md-left">#}
-        {#<!-- Grid row -->#}
-        {#<div class="row">#}
-
-        {#<!-- Grid column -->#}
-        {#<div class="col-md-4 mx-auto">#}
-
-        {#<!-- Content -->#}
-        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>#}
-        {#<p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur#}
-        {#adipisicing elit.</p>#}
-
-        {#</div>#}
-        {#<!-- Grid column -->#}
-
-        {#<hr class="clearfix w-100 d-md-none">#}
-
-        {#<!-- Grid column -->#}
-        {#<div class="col-md-2 mx-auto">#}
-
-        {#<!-- Links -->#}
-        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>#}
-
-        {#<ul class="list-unstyled">#}
-        {#<li>#}
-        {#<a href="#!">Link 1</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 2</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 3</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 4</a>#}
-        {#</li>#}
-        {#</ul>#}
-
-        {#</div>#}
-        {#<!-- Grid column -->#}
-
-        {#<hr class="clearfix w-100 d-md-none">#}
-
-        {#<!-- Grid column -->#}
-        {#<div class="col-md-2 mx-auto">#}
-
-        {#<!-- Links -->#}
-        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>#}
-
-        {#<ul class="list-unstyled">#}
-        {#<li>#}
-        {#<a href="#!">Link 1</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 2</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 3</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 4</a>#}
-        {#</li>#}
-        {#</ul>#}
-
-        {#</div>#}
-        {#<!-- Grid column -->#}
-
-        {#<hr class="clearfix w-100 d-md-none">#}
-
-        {#<!-- Grid column -->#}
-        {#<div class="col-md-2 mx-auto">#}
-
-        {#<!-- Links -->#}
-        {#<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>#}
-
-        {#<ul class="list-unstyled">#}
-        {#<li>#}
-        {#<a href="#!">Link 1</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 2</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 3</a>#}
-        {#</li>#}
-        {#<li>#}
-        {#<a href="#!">Link 4</a>#}
-        {#</li>#}
-        {#</ul>#}
-
-        {#</div>#}
-        {#<!-- Grid column -->#}
-
-        {#</div>#}
-        {#<!-- Grid row -->#}
-        {#</div>#}
-        {#<!-- Footer Links -->#}
-        {#<hr>#}
-        {#<!-- Call to action -->#}
-        {#<ul class="list-unstyled list-inline text-center py-2">#}
-        {#<li class="list-inline-item">#}
-        {#<h5 class="mb-1">Register for free</h5>#}
-        {#</li>#}
-        {#<li class="list-inline-item">#}
-        {#<a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>#}
-        {#</li>#}
-        {#</ul>#}
-        {#<!-- Call to action -->#}
-        {#<hr>#}
-        <!-- Social buttons -->
-        <ul class="list-unstyled list-inline text-center">
-            <li class="list-inline-item">
-                <a class="btn-floating btn-fb mx-1">
-                    <i class="fab fa-facebook-f"> </i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating btn-tw mx-1">
-                    <i class="fab fa-twitter"> </i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating btn-gplus mx-1">
-                    <i class="fab fa-google-plus-g"> </i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating btn-li mx-1">
-                    <i class="fab fa-linkedin-in"> </i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating btn-dribbble mx-1">
-                    <i class="fab fa-dribbble"> </i>
-                </a>
-            </li>
-        </ul>
-        <!-- Social buttons -->
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Copyright:
-            <a href="#" style="color: white"> Yeah Bitch</a>
-        </div>
-        <!-- Copyright -->
-
-    </footer></footer>
+{% include('footer.html.twig') %}
 </html>
