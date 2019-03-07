@@ -26,6 +26,7 @@ class AppFixtures extends Fixture
         $admin->setPrenom("admin");
         $admin->setNom("admin");
         $admin->setEmail("admin@admin.com");
+        $admin->setIsActivate(true);
         $admin->setAvatar($faker->imageUrl($width = 240, $height = 180));
         $admin->setRoles(["ROLE_ADMIN"]);
         $admin->setPassword($this->encoder->encodePassword($admin, 'password'));
@@ -37,6 +38,7 @@ class AppFixtures extends Fixture
 
             $user->setEmail($faker->email);
             $user->setPrenom($faker->name);
+            $user->setIsActivate(true);
             $user->setAvatar($faker->imageUrl($width = 240, $height = 180));
             $user->setNom($faker->lastName);
             $user->setPassword($this->encoder->encodePassword($user, 'password'));
@@ -63,8 +65,9 @@ class AppFixtures extends Fixture
                 $product->setTitle($title)
                     ->setUser($user)
                     ->setTag($tag)
+                    ->setContent($faker->paragraph(200))
                     ->setCreatedAt(new \DateTime())
-                    ->setDescription($faker->paragraph(5));
+                    ->setDescription($faker->paragraph(3));
 
                 $manager->persist($product);
                 // création de commentaire par produit

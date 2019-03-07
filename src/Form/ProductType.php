@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\ProductTag;
+use Doctrine\DBAL\Types\TextType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,7 +28,8 @@ class ProductType extends AbstractType
 //                'allow_add' => true,
 //                'label' => "Image(s)"
 //            ))
-            ->add('description', CKEditorType::class, array(
+            ->add('description', TextareaType::class)
+            ->add('content', CKEditorType::class, array(
                 'config' => array(
                     'toolbar' => 'standard'
                 )

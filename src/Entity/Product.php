@@ -66,6 +66,11 @@ class Product
     private $createdAt;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+
+    /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
@@ -241,6 +246,18 @@ class Product
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }
