@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="card">
-        <div class="card-header"><h1>ProductTag</h1></div>
+        <div class="card-header"><h1><a href="{{ path('product_tag_index') }}"><i class="fas fa-arrow-alt-circle-left"></i></a> ProductTag</h1></div>
         <div class="card-body">
             <table class="table">
                 <tbody>
@@ -22,10 +22,7 @@
                 </tr>
                 </tbody>
             </table>
-
-            <a href="{{ path('product_tag_index') }}">back to list</a>
-
-            <a href="{{ path('product_tag_edit', {'id': product_tag.id}) }}">edit</a>
+            <a class="btn btn-warning btn-sm" href="{{ path('product_tag_edit', {'id': product_tag.id}) }}">edit</a>
 
             {{ include('product_tag/_delete_form.html.twig') }}
         </div>
