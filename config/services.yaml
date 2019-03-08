@@ -30,8 +30,13 @@ services:
     app.menu_builder:
         class: App\Service\MenuBuilder
         arguments: ["@knp_menu.factory"]
+
+    app.main_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@app.menu_builder", createBreadcrumbMenu]
+        arguments: ["@request_stack"]
         tags:
-        - { name: knp_menu.menu_builder, method: createBreadcrumbMenu, alias: breadcrumb } # The alias is what is used to retrieve the menu
+            - { name: knp_menu.menu, method: createBreadcrumbMenu, alias: breadcrumb }
 
 
     # add more service definitions when explicit configuration is needed

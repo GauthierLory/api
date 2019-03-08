@@ -10,6 +10,7 @@ namespace App\Service;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class MenuBuilder
 {
@@ -23,7 +24,7 @@ class MenuBuilder
         $this->factory = $factory;
     }
 
-    public function createBreadcrumbMenu(array $options)
+    public function createBreadcrumbMenu(RequestStack $requestStack)
     {
         $menu = $this->factory->createItem('root');
         // cet item sera toujours affiché
