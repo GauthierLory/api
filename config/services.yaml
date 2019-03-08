@@ -27,6 +27,7 @@ services:
     App\Service\HistoriqueHelper:
         arguments: ["@doctrine.orm.default_entity_manager"]
 
+    #BREADCRUMB
     app.menu_builder:
         class: App\Service\MenuBuilder
         arguments: ["@knp_menu.factory"]
@@ -37,7 +38,16 @@ services:
         arguments: ["@request_stack"]
         tags:
             - { name: knp_menu.menu, method: createBreadcrumbMenu, alias: breadcrumb }
+    #END BREADCRUMB
 
+    #LISTENER DOCTRINE#
+    app.listener.doctrineevent:
+        class: App\EventListener\DoctrineEvent
+        tags:
+        - { name: doctrine.event_listener, event: prePersist, lazy: true }
+        - { name: doctrine.event_listener, event: preUpdate, lazy: true }
+        - { name: doctrine.event_listener, event: postPersist, lazy: true }
+        - { name: doctrine.event_listener, event: postUpdate, lazy: true }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
