@@ -207,6 +207,7 @@
     <div class="container">
         {% block body %}
         {% endblock %}
+        {{ knp_menu_render('breadcrumb', {'currentAsLink':false}) }}
     </div>
 
         {% block javascripts %}

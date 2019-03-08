@@ -12,6 +12,8 @@
         "doctrine/doctrine-migrations-bundle": "^2.0",
         "friendsofsymfony/ckeditor-bundle": "^2.0",
         "fzaninotto/faker": "^1.8",
+        "knplabs/knp-menu": "^2.3",
+        "knplabs/knp-menu-bundle": "^2.0",
         "knpuniversity/oauth2-client-bundle": "^1.27",
         "league/oauth2-google": "^3.0",
         "sensio/framework-extra-bundle": "^5.2",

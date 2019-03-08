@@ -26,5 +26,13 @@ services:
 
     App\Service\HistoriqueHelper:
         arguments: ["@doctrine.orm.default_entity_manager"]
+
+    app.menu_builder:
+        class: App\Service\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+        - { name: knp_menu.menu_builder, method: createBreadcrumbMenu, alias: breadcrumb } # The alias is what is used to retrieve the menu
+
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
