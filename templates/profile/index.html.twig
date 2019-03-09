@@ -59,6 +59,7 @@
                             </ul>
                         <div class="tab-content">
                                 <div class="tab-pane container active" id="home">
+                                    {% if user.products|length > 0 %}
                                         <table id="" class="display">
                                             <thead>
                                             <th>Title</th>
@@ -78,10 +79,14 @@
                                                     </td>
                                                 </tr>
                                             {% endfor %}
+                                            {% else %}
+                                                <td> Aucune donnée </td>
                                             </tbody>
                                         </table>
+                                    {% endif %}
                                 </div>
                                 <div class="tab-pane container fade" id="menu1">
+                                    {% if user.reviews|length > 0 %}
                                         <table id="" class="display">
                                             <thead>
                                             <th>Rating</th>
@@ -96,8 +101,11 @@
                                                 <td><a class="btn btn-success btn-sm" href="{{ path('review_show', {'id': review.id}) }}">See</a></td>
                                             </tr>
                                             {% endfor %}
+                                            {% else %}
+                                                <td> Aucune donnée </td>
                                             </tbody>
                                         </table>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
