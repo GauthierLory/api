@@ -90,6 +90,11 @@ class User implements UserInterface
      */
     private $isActivate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductLike", mappedBy="user")
+     */
+    private $productLikes;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -97,6 +102,7 @@ class User implements UserInterface
         $this->supports = new ArrayCollection();
         $this->uploads = new ArrayCollection();
         $this->historiques = new ArrayCollection();
+        $this->productLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -414,6 +420,37 @@ class User implements UserInterface
     public function setIsActivate(?bool $isActivate): self
     {
         $this->isActivate = $isActivate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductLike[]
+     */
+    public function getProductLikes(): Collection
+    {
+        return $this->productLikes;
+    }
+
+    public function addProductLike(ProductLike $productLike): self
+    {
+        if (!$this->productLikes->contains($productLike)) {
+            $this->productLikes[] = $productLike;
+            $productLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductLike(ProductLike $productLike): self
+    {
+        if ($this->productLikes->contains($productLike)) {
+            $this->productLikes->removeElement($productLike);
+            // set the owning side to null (unless already changed)
+            if ($productLike->getUser() === $this) {
+                $productLike->setUser(null);
+            }
+        }
 
         return $this;
     }

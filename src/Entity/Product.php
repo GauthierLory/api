@@ -71,6 +71,11 @@ class Product
     private $content;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductLike", mappedBy="product")
+     */
+    private $productLikes;
+
+    /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
@@ -97,6 +102,7 @@ class Product
     {
         $this->reviews = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->productLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -258,6 +264,37 @@ class Product
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductLike[]
+     */
+    public function getProductLikes(): Collection
+    {
+        return $this->productLikes;
+    }
+
+    public function addProductLike(ProductLike $productLike): self
+    {
+        if (!$this->productLikes->contains($productLike)) {
+            $this->productLikes[] = $productLike;
+            $productLike->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductLike(ProductLike $productLike): self
+    {
+        if ($this->productLikes->contains($productLike)) {
+            $this->productLikes->removeElement($productLike);
+            // set the owning side to null (unless already changed)
+            if ($productLike->getProduct() === $this) {
+                $productLike->setProduct(null);
+            }
+        }
 
         return $this;
     }

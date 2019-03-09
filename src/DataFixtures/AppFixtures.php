@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
+use App\Entity\ProductLike;
 use App\Entity\ProductTag;
 use App\Entity\Review;
 use App\Entity\User;
@@ -70,6 +71,13 @@ class AppFixtures extends Fixture
                     ->setDescription($faker->paragraph(3));
 
                 $manager->persist($product);
+                for ($l = 0; $l < mt_rand(0,10); $l ++){
+                    $like = new ProductLike();
+                    $like->setProduct($product)
+                            ->setUser($faker->randomElement($users));
+                    $manager->persist($like);
+                }
+
                 // création de commentaire par produit
                 for ($k = 1; $k <= mt_rand(4, 10); $k++) {
                     $review = new Review();
