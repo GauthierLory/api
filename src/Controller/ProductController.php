@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Product;
+use App\Entity\ProductLike;
 use App\Entity\Review;
 use App\Form\ImageProductType;
 use App\Form\ProductType;
 use App\Form\ReviewType;
 use App\Repository\ImageRepository;
+use App\Repository\ProductLikeRepository;
 use App\Repository\ProductRepository;
 use App\Service\HistoriqueHelper;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -138,5 +140,50 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('product_index');
+    }
+
+    /**
+     *
+     * @Route("/like/{id}/product", name="product_like")
+     * @param Product $product
+     * @param ObjectManager $manager
+     * @param ProductLikeRepository $likeRepo
+     * @return Response
+     */
+    public function like(Product $product, ObjectManager $manager,ProductLikeRepository $likeRepo): Response {
+        $user = $this->getUser();
+
+        if (!$user) return $this->json([
+            'code' => 403,
+            'message' => "Unauthorized"
+        ], 403);
+
+        if ($product->isLikedByUser($user)){
+            $like = $likeRepo->findOneBy([
+                'product' => $product,
+                'user' => $user,
+            ]);
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'like bien supprimé',
+                'likes' => $likeRepo->count(['product' => $product])
+            ], 200);
+        }
+
+        $like = new ProductLike();
+        $like->setProduct($product)
+            ->setUser($user);
+
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'Ca marche bien',
+            'likes' => $likeRepo->count(['product' => $product])
+        ], 200);
     }
 }

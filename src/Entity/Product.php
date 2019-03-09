@@ -298,4 +298,11 @@ class Product
 
         return $this;
     }
+
+    public function isLikedByUser(User $user): bool {
+        foreach ( $this->productLikes as $like) {
+            if ($like->getUser() === $user) return true;
+        }
+        return false;
+    }
 }
