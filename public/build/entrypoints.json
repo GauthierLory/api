@@ -21,6 +21,12 @@
         "/build/nav.js"
       ]
     },
+    "accueil": {
+      "js": [
+        "/build/runtime.js",
+        "/build/accueil.js"
+      ]
+    },
     "admin": {
       "js": [
         "/build/runtime.js",

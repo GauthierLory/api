@@ -166,11 +166,12 @@ class ProductController extends AbstractController
             $manager->remove($like);
             $manager->flush();
 
-            return $this->json([
+            /*return $this->json([
                 'code' => 200,
                 'message' => 'like bien supprimé',
                 'likes' => $likeRepo->count(['product' => $product])
-            ], 200);
+            ], 200);*/
+            return $this->redirectToRoute('home');
         }
 
         $like = new ProductLike();
@@ -180,10 +181,12 @@ class ProductController extends AbstractController
         $manager->persist($like);
         $manager->flush();
 
-        return $this->json([
+        /*return $this->json([
             'code' => 200,
             'message' => 'Ca marche bien',
             'likes' => $likeRepo->count(['product' => $product])
-        ], 200);
+        ], 200);*/
+
+        return $this->redirectToRoute('home');
     }
 }
