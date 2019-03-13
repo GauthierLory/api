@@ -50,7 +50,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
+     * @Assert\File(maxSize="5M", mimeTypes={ "image/png", "image/jpeg" }, groups = {"create"})
      *
      */
     private $avatar;
