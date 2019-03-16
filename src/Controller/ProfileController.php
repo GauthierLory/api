@@ -24,12 +24,24 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/profile/products", name="profile_product")
      */
     public function index()
     {
         $user = $this->getUser();
         return $this->render('profile/index.html.twig', [
+            'controller_name' => 'ProfileController',
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/profile/reviews", name="profile_review")
+     */
+    public function reviews()
+    {
+        $user = $this->getUser();
+        return $this->render('profile/reviews.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user
         ]);
