@@ -22,8 +22,8 @@ final class Version20190205191405 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product DROP rating');
-        $this->addSql('ALTER TABLE review ADD rating SMALLINT NOT NULL');
+        $this->addSql('ALTER TABLE article DROP rating');
+        $this->addSql('ALTER TABLE comment ADD rating SMALLINT NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +31,7 @@ final class Version20190205191405 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product ADD rating SMALLINT NOT NULL');
-        $this->addSql('ALTER TABLE review DROP rating');
+        $this->addSql('ALTER TABLE article ADD rating SMALLINT NOT NULL');
+        $this->addSql('ALTER TABLE comment DROP rating');
     }
 }

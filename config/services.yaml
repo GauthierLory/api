@@ -41,13 +41,13 @@ services:
     #END BREADCRUMB
 
     #LISTENER DOCTRINE#
-    app.listener.doctrineevent:
-        class: App\EventListener\DoctrineEvent
-        tags:
-        - { name: doctrine.event_listener, event: prePersist, lazy: true }
-        - { name: doctrine.event_listener, event: preUpdate, lazy: true }
-        - { name: doctrine.event_listener, event: postPersist, lazy: true }
-        - { name: doctrine.event_listener, event: postUpdate, lazy: true }
+    #app.listener.doctrineevent:
+        #class: App\EventListener\DoctrineEvent
+        #tags:
+        #- { name: doctrine.event_listener, event: prePersist, lazy: true }
+        #- { name: doctrine.event_listener, event: preUpdate, lazy: true }
+        #- { name: doctrine.event_listener, event: postPersist, lazy: true }
+        #- { name: doctrine.event_listener, event: postUpdate, lazy: true }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

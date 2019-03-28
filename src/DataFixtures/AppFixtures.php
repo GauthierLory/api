@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Product;
-use App\Entity\ProductLike;
-use App\Entity\ProductTag;
-use App\Entity\Review;
+use App\Entity\Article;
+use App\Entity\ArticleLike;
+use App\Entity\ArticleTag;
+use App\Entity\Comment;
 use App\Entity\User;
-use App\Repository\ProductRepository;
+use App\Repository\ArticleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
 
         //3/4 catégories
         for ($i = 0; $i <= 3; $i ++) {
-            $tag = new ProductTag();
+            $tag = new ArticleTag();
             $tag->setName($faker->sentence);
             $tag->setDescription($faker->word(2));
 
@@ -58,7 +58,7 @@ class AppFixtures extends Fixture
 
             // créer 12 articles
             for ($j = 0; $j <= 12; $j++) {
-                $product = new Product();
+                $product = new Article();
 
                 $user = $users[mt_rand(0, count($users) - 1)];
 
@@ -72,7 +72,7 @@ class AppFixtures extends Fixture
 
                 $manager->persist($product);
                 for ($l = 0; $l < mt_rand(0,10); $l ++){
-                    $like = new ProductLike();
+                    $like = new ArticleLike();
                     $like->setProduct($product)
                             ->setUser($faker->randomElement($users));
                     $manager->persist($like);
@@ -80,7 +80,7 @@ class AppFixtures extends Fixture
 
                 // création de commentaire par produit
                 for ($k = 1; $k <= mt_rand(4, 10); $k++) {
-                    $review = new Review();
+                    $review = new Comment();
                     $user = $users[mt_rand(0, count($users) - 1)];
                     $review->setAuthor($user)
                         ->setDescription($faker->paragraph(5))

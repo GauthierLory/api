@@ -22,7 +22,7 @@ final class Version20190209112932 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product_tag ADD description LONGTEXT NOT NULL');
+        $this->addSql('ALTER TABLE article_tag ADD description LONGTEXT NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20190209112932 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product_tag DROP description');
+        $this->addSql('ALTER TABLE article_tag DROP description');
     }
 }

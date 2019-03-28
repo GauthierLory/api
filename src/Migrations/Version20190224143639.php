@@ -23,7 +23,7 @@ final class Version20190224143639 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE image ADD product_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045F4584665A FOREIGN KEY (product_id) REFERENCES product (id)');
+        $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045F4584665A FOREIGN KEY (product_id) REFERENCES article (id)');
         $this->addSql('CREATE INDEX IDX_C53D045F4584665A ON image (product_id)');
     }
 
