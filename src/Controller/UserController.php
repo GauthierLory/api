@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\EventListener\DoctrineEvent;
 use App\Form\UserFromAdminType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Service\HistoriqueHelper;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +68,7 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request,User $user, HistoriqueHelper $historiquehelper): Response
+    public function edit(Request $request,User $user): Response
     {
 
         $old_user = "old user";
@@ -77,10 +79,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->getDoctrine()->getManager()->flush();
-
             $new_user = "new user";
-            $historique = $historiquehelper->new_historique($this->getUser());
-            $historiquehelper->new_modif($table="user", $champ="atta", $old_user, $new_user, $historique, $user->getId());
+
 
             return $this->redirectToRoute('user_index', [
                 'id' => $user->getId(),

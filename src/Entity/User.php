@@ -56,12 +56,12 @@ class User implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="user")
      */
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
      */
     private $reviews;
 
@@ -91,7 +91,7 @@ class User implements UserInterface
     private $isActivate;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductLike", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="ArticleLike", mappedBy="user")
      */
     private $productLikes;
 
@@ -234,14 +234,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection|Article[]
      */
     public function getProducts(): Collection
     {
         return $this->products;
     }
 
-    public function addProduct(Product $product): self
+    public function addProduct(Article $product): self
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
@@ -251,7 +251,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeProduct(Product $product): self
+    public function removeProduct(Article $product): self
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
@@ -265,14 +265,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Review[]
+     * @return Collection|Comment[]
      */
     public function getReviews(): Collection
     {
         return $this->reviews;
     }
 
-    public function addReview(Review $review): self
+    public function addReview(Comment $review): self
     {
         if (!$this->reviews->contains($review)) {
             $this->reviews[] = $review;
@@ -282,7 +282,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeReview(Review $review): self
+    public function removeReview(Comment $review): self
     {
         if ($this->reviews->contains($review)) {
             $this->reviews->removeElement($review);
@@ -425,14 +425,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|ProductLike[]
+     * @return Collection|ArticleLike[]
      */
     public function getProductLikes(): Collection
     {
         return $this->productLikes;
     }
 
-    public function addProductLike(ProductLike $productLike): self
+    public function addProductLike(ArticleLike $productLike): self
     {
         if (!$this->productLikes->contains($productLike)) {
             $this->productLikes[] = $productLike;
@@ -442,7 +442,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeProductLike(ProductLike $productLike): self
+    public function removeProductLike(ArticleLike $productLike): self
     {
         if ($this->productLikes->contains($productLike)) {
             $this->productLikes->removeElement($productLike);

@@ -43,11 +43,11 @@ class MenuBuilder
             case "home":
                 break;
             case "product_index":
-                $menu->addChild('Product', array('route' => $route));
+                $menu->addChild('Article', array('route' => $route));
                 break;
             case "product_new":
-                $menu->addChild('Product', array('route' => $route));
-                $menu->addChild('New Product', array('route' => $route));
+                $menu->addChild('Article', array('route' => $route));
+                $menu->addChild('New Article', array('route' => $route));
                 break;
             case "product_show":
                 $url = $request->getUri();
@@ -58,7 +58,7 @@ class MenuBuilder
                 $menu->addChild('Product_tag', array('route' => $route));
                 break;
             case "product_tag_new":
-                $menu->addChild('New Product Tag', array('route' => $route));
+                $menu->addChild('New Article Tag', array('route' => $route));
                 break;
             case "product_tag_show":
                 $url = $request->getUri();
@@ -74,10 +74,10 @@ class MenuBuilder
             case "profile_password":
                 break;
             case "review_index":
-                $menu->addChild('Review', array('route' => $route));
+                $menu->addChild('Comment', array('route' => $route));
                 break;
             case "review_new":
-                $menu->addChild('New Review', array('route' => $route));
+                $menu->addChild('New Comment', array('route' => $route));
                 break;
             case "review_show":
                 $url = $request->getUri();

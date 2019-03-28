@@ -10,10 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Product
+class Article
 {
     /**
      * @ORM\Id()
@@ -33,17 +33,17 @@ class Product
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articles")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
      */
-    private $reviews;
+    private $comments;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProductTag", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="ArticleTag", inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tag;
@@ -56,7 +56,7 @@ class Product
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="article")
      */
     private $images;
 
@@ -71,9 +71,9 @@ class Product
     private $content;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductLike", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="ArticleLike", mappedBy="article")
      */
-    private $productLikes;
+    private $articleLikes;
 
     /**
      * @ORM\PrePersist
@@ -92,17 +92,17 @@ class Product
      * recupér le comment d'un auteur par rapport a son annonce
      */
     public function getCommentFromAuthor(User $user){
-        foreach ($this->reviews as $review){
-            if ($review->getAuthor() == $user) return $review;
+        foreach ($this->comments as $comment){
+            if ($comment->getAuthor() == $user) return $comment;
         }
         return null;
     }
 
     public function __construct()
     {
-        $this->reviews = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
-        $this->productLikes = new ArrayCollection();
+        $this->articleLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,42 +147,42 @@ class Product
     }
 
     /**
-     * @return Collection|Review[]
+     * @return Collection|Comment[]
      */
-    public function getReviews(): Collection
+    public function getComments(): Collection
     {
-        return $this->reviews;
+        return $this->comments;
     }
 
-    public function addReview(Review $review): self
+    public function addComment(Comment $comment): self
     {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews[] = $review;
-            $review->setProduct($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setArticle($this);
         }
 
         return $this;
     }
 
-    public function removeReview(Review $review): self
+    public function removeComment(Comment $comment): self
     {
-        if ($this->reviews->contains($review)) {
-            $this->reviews->removeElement($review);
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
             // set the owning side to null (unless already changed)
-            if ($review->getProduct() === $this) {
-                $review->setProduct(null);
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
             }
         }
 
         return $this;
     }
 
-    public function getTag(): ?ProductTag
+    public function getTag(): ?ArticleTag
     {
         return $this->tag;
     }
 
-    public function setTag(?ProductTag $tag): self
+    public function setTag(?ArticleTag $tag): self
     {
         $this->tag = $tag;
 
@@ -192,9 +192,9 @@ class Product
     public function getMoyenne(){
         $notes = 0;
         $compteur = 0;
-        $reviews = $this->getReviews();
-        foreach ($reviews as $review){
-            $notes+=$review->getRating();
+        $comments = $this->getComments();
+        foreach ($comments as $comment){
+            $notes+=$comment->getRating();
             $compteur++;
         }
         $moyenne = $notes/$compteur;
@@ -225,7 +225,7 @@ class Product
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
-            $image->setProduct($this);
+            $image->setArticle($this);
         }
 
         return $this;
@@ -236,8 +236,8 @@ class Product
         if ($this->images->contains($image)) {
             $this->images->removeElement($image);
             // set the owning side to null (unless already changed)
-            if ($image->getProduct() === $this) {
-                $image->setProduct(null);
+            if ($image->getArticle() === $this) {
+                $image->setArticle(null);
             }
         }
 
@@ -269,30 +269,30 @@ class Product
     }
 
     /**
-     * @return Collection|ProductLike[]
+     * @return Collection|ArticleLike[]
      */
-    public function getProductLikes(): Collection
+    public function getArticleLikes(): Collection
     {
-        return $this->productLikes;
+        return $this->articleLikes;
     }
 
-    public function addProductLike(ProductLike $productLike): self
+    public function addArticleLike(ArticleLike $articleLike): self
     {
-        if (!$this->productLikes->contains($productLike)) {
-            $this->productLikes[] = $productLike;
-            $productLike->setProduct($this);
+        if (!$this->articleLikes->contains($articleLike)) {
+            $this->articleLikes[] = $articleLike;
+            $articleLike->setArticle($this);
         }
 
         return $this;
     }
 
-    public function removeProductLike(ProductLike $productLike): self
+    public function removeArticleLike(ArticleLike $articleLike): self
     {
-        if ($this->productLikes->contains($productLike)) {
-            $this->productLikes->removeElement($productLike);
+        if ($this->articleLikes->contains($articleLike)) {
+            $this->articleLikes->removeElement($articleLike);
             // set the owning side to null (unless already changed)
-            if ($productLike->getProduct() === $this) {
-                $productLike->setProduct(null);
+            if ($articleLike->getArticle() === $this) {
+                $articleLike->setArticle(null);
             }
         }
 
@@ -300,7 +300,7 @@ class Product
     }
 
     public function isLikedByUser(User $user): bool {
-        foreach ( $this->productLikes as $like) {
+        foreach ( $this->articleLikes as $like) {
             if ($like->getUser() === $user) return true;
         }
         return false;

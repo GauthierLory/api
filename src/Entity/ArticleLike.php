@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProductLikeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleLikeRepository")
  */
-class ProductLike
+class ArticleLike
 {
     /**
      * @ORM\Id()
@@ -17,12 +17,12 @@ class ProductLike
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="productLikes")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="articleLikes")
      */
-    private $product;
+    private $article;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="productLikes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="articleLikes")
      */
     private $user;
 
@@ -31,14 +31,14 @@ class ProductLike
         return $this->id;
     }
 
-    public function getProduct(): ?Product
+    public function getArticle(): ?Article
     {
-        return $this->product;
+        return $this->article;
     }
 
-    public function setProduct(?Product $product): self
+    public function setArticle(?Article $article): self
     {
-        $this->product = $product;
+        $this->article = $article;
 
         return $this;
     }

@@ -57,7 +57,7 @@ class Image
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Article", inversedBy="images")
      */
     private $product;
 
@@ -106,12 +106,12 @@ class Image
         return $this->imageSize;
     }
 
-    public function getProduct(): ?Product
+    public function getProduct(): ?Article
     {
         return $this->product;
     }
 
-    public function setProduct(?Product $product): self
+    public function setProduct(?Article $product): self
     {
         $this->product = $product;
 
