@@ -1,0 +1,37 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
+      ]
+    },
+    "comment": {
+      "js": [
+        "/build/runtime.js",
+        "/build/comment.js"
+      ]
+    },
+    "nav": {
+      "js": [
+        "/build/runtime.js",
+        "/build/nav.js"
+      ]
+    },
+    "accueil": {
+      "js": [
+        "/build/runtime.js",
+        "/build/accueil.js"
+      ]
+    },
+    "admin": {
+      "js": [
+        "/build/runtime.js",
+        "/build/admin.js"
+      ]
+    }
+  }
+}
