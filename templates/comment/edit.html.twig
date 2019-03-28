@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Comment{% endblock %}
+{#{% block javascripts %}
+            {{ encore_entry_script_tags('comment') }}
+            <script src="/build/runtime.js"></script>
+            <script src="/build/comment.js"></script>
+        {% endblock %}#}
+{% block body %}
+    <div class="card">
+        <div class="card-header"><h1><a class="btn btn-primary" href="{{ path('comment_index') }}"><i class="fas fa-arrow-alt-circle-left"></i></a> Edit Comment</h1></div>
+
+            {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+        {{ include('comment/_delete_form.html.twig') }}
+
+    </div>
+{% endblock %}

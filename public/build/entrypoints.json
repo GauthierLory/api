@@ -9,10 +9,10 @@
         "/build/app.css"
       ]
     },
-    "review": {
+    "comment": {
       "js": [
         "/build/runtime.js",
-        "/build/review.js"
+        "/build/comment.js"
       ]
     },
     "nav": {

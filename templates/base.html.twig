@@ -161,13 +161,13 @@
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('product_index') }}">Product</a>
+                        <a class="dropdown-item" href="{{ path('article_index') }}">Article</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('review_index') }}">Review</a>
+                        <a class="dropdown-item" href="{{ path('comment_index') }}">comment</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path('user_index') }}">User</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('product_tag_index') }}">Tag</a>
+                        <a class="dropdown-item" href="{{ path('article_tag_index') }}">Tag</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -192,7 +192,7 @@
                     {{ app.user.username }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('profile_product') }}">Profile</a>
+                    <a class="dropdown-item" href="{{ path('profile_article') }}">Profile</a>
                     <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                     <div class="dropdown-divider"></div>
                 </div>
@@ -210,7 +210,7 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_register') }}">Login</a>
+                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
             </li>
 
             <li class="nav-item">

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comment index{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header"><h1>Comment index</h1></div>
+        <div class="card-body">
+            <a class="btn btn-primary btn-sm" href="{{ path('comment_new') }}">Create new</a>
+            <table id="tableAdmin" class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <th scope="row">{{ comment.id }}</th>
+                        <td>{{ comment.description }}</td>
+                        <td>{{ comment.rating }}</td>
+                        <td>
+                            <a class="btn btn-success btn-sm"href="{{ path('comment_show', {'id': comment.id}) }}">show</a>
+                            <a class="btn btn-warning btn-sm"href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

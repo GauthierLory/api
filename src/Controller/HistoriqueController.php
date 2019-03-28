@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Review;
+use App\Entity\Comment;
 use App\Entity\Historique;
 use App\Entity\HistoriqueModif;
 use App\Repository\HistoriqueRepository;

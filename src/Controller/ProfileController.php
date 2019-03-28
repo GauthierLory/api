@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile/products", name="profile_product")
+     * @Route("/profile/articles", name="profile_article")
      */
     public function index()
     {
@@ -36,12 +36,12 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/reviews", name="profile_review")
+     * @Route("/profile/comments", name="profile_comment")
      */
-    public function reviews()
+    public function comments()
     {
         $user = $this->getUser();
-        return $this->render('profile/reviews.html.twig', [
+        return $this->render('profile/comments.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user
         ]);

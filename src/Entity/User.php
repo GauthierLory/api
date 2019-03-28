@@ -58,12 +58,12 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="user")
      */
-    private $products;
+    private $articles;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
      */
-    private $reviews;
+    private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Support", mappedBy="user")
@@ -93,16 +93,16 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="ArticleLike", mappedBy="user")
      */
-    private $productLikes;
+    private $articleLikes;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
+        $this->artiles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->supports = new ArrayCollection();
         $this->uploads = new ArrayCollection();
         $this->historiques = new ArrayCollection();
-        $this->productLikes = new ArrayCollection();
+        $this->articleLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -236,28 +236,28 @@ class User implements UserInterface
     /**
      * @return Collection|Article[]
      */
-    public function getProducts(): Collection
+    public function getArticles(): Collection
     {
-        return $this->products;
+        return $this->articles;
     }
 
-    public function addProduct(Article $product): self
+    public function addArticle(Article $article): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setUser($this);
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Article $product): self
+    public function removeArticle(Article $article): self
     {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
             // set the owning side to null (unless already changed)
-            if ($product->getUser() === $this) {
-                $product->setUser(null);
+            if ($article->getUser() === $this) {
+                $article->setUser(null);
             }
         }
 
@@ -267,28 +267,28 @@ class User implements UserInterface
     /**
      * @return Collection|Comment[]
      */
-    public function getReviews(): Collection
+    public function getComments(): Collection
     {
-        return $this->reviews;
+        return $this->comments;
     }
 
-    public function addReview(Comment $review): self
+    public function addComment(Comment $comment): self
     {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews[] = $review;
-            $review->setAuthor($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeReview(Comment $review): self
+    public function removeComment(Comment $comment): self
     {
-        if ($this->reviews->contains($review)) {
-            $this->reviews->removeElement($review);
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
             // set the owning side to null (unless already changed)
-            if ($review->getAuthor() === $this) {
-                $review->setAuthor(null);
+            if ($comment->getAuthor() === $this) {
+                $comment->setAuthor(null);
             }
         }
 
@@ -427,28 +427,28 @@ class User implements UserInterface
     /**
      * @return Collection|ArticleLike[]
      */
-    public function getProductLikes(): Collection
+    public function getArticleLikes(): Collection
     {
-        return $this->productLikes;
+        return $this->articleLikes;
     }
 
-    public function addProductLike(ArticleLike $productLike): self
+    public function addArticleLike(ArticleLike $articleLike): self
     {
-        if (!$this->productLikes->contains($productLike)) {
-            $this->productLikes[] = $productLike;
-            $productLike->setUser($this);
+        if (!$this->articleLikes->contains($articleLike)) {
+            $this->articleLikes[] = $articleLike;
+            $articleLike->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeProductLike(ArticleLike $productLike): self
+    public function removeArticleLike(ArticleLike $articleLike): self
     {
-        if ($this->productLikes->contains($productLike)) {
-            $this->productLikes->removeElement($productLike);
+        if ($this->articleLikes->contains($articleLike)) {
+            $this->articleLikes->removeElement($articleLike);
             // set the owning side to null (unless already changed)
-            if ($productLike->getUser() === $this) {
-                $productLike->setUser(null);
+            if ($articleLike->getUser() === $this) {
+                $articleLike->setUser(null);
             }
         }
 

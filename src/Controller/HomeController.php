@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\ProductRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,18 +11,18 @@ class HomeController extends AbstractController
     /**
      * @Route("/{page<\d>?1}", name="home")
      */
-    public function index(ProductRepository $productRepository, $page)
+    public function index(ArticleRepository $articleRepository, $page)
     {
         $limit = 9;
 
         $start = $page * $limit -$limit;
 
-        $total = count($productRepository->findAll());
+        $total = count($articleRepository->findAll());
 
         $pages = ceil($total / $limit);
 
         return $this->render('home/index.html.twig', [
-            'products' => $productRepository->findBy([],['id'=>'DESC'],$limit,$start),
+            'articles' => $articleRepository->findBy([],['id'=>'DESC'],$limit,$start),
             'pages' => $pages,
             'page' => $page
         ]);

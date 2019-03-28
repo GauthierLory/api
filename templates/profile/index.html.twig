@@ -14,15 +14,15 @@
                         <div class="profile-content">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#home">Products</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#home">Articles</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('profile_review') }}">Reviews</a>
+                                    <a class="nav-link" href="{{ path('profile_comment') }}">Comments</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane container active" id="home">
-                                    {% if user.products|length > 0 %}
+                                    {% if user.articles|length > 0 %}
                                         <table id="" class="display">
                                             <thead>
                                             <th>Title</th>
@@ -31,14 +31,14 @@
                                             <th>Actions</th>
                                             </thead>
                                             <tbody>
-                                            {% for product in user.products %}
+                                            {% for article in user.articles %}
                                                 <tr>
-                                                    <td>{{ product.title }}</td>
-                                                    <td>{{ product.tag.name }}</td>
-                                                    <td>{{ product.description|raw }}</td>
+                                                    <td>{{ article.title }}</td>
+                                                    <td>{{ article.tag.name }}</td>
+                                                    <td>{{ article.description|raw }}</td>
                                                     <td>
-                                                        <a class="btn btn-success btn-sm" href="{{ path('product_show', {'slug': product.slug, 'id': product.id } ) }}">See</a>
-                                                        <a class="btn btn-warning btn-sm" href="{{ path('product_edit', {'slug': product.slug,'id': product.id}) }}">edit</a>
+                                                        <a class="btn btn-success btn-sm" href="{{ path('article_show', {'slug': article.slug, 'id': article.id } ) }}">See</a>
+                                                        <a class="btn btn-warning btn-sm" href="{{ path('article_edit', {'slug': article.slug,'id': article.id}) }}">edit</a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}

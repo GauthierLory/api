@@ -3,25 +3,25 @@
 
 {% block body %}
 <div class="row justify-content-center my-3">
-    {% for product in products %}
+    {% for article in articles %}
         <div class="col-sm" style="padding-top: 10px">
             <div class="card" style="width: 18rem;">
             {#<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">#}
             <div class="card-body">
-                <h5 class="card-title">{{ product.title }}</h5>
-                <small>{{ product.createdAt|date('d/m/Y') }}</small>
-                <span class="badge badge-pill badge-success">{{ product.tag.name }}</span>
-                <p>{{ product.description|raw }}</p>
-                {#<p class="card-text">{{ product.description }}</p>#}
-                <a href="{{ path('product_show', {'slug': product.slug, 'id': product.id} ) }}" class="btn btn-primary">show</a>
-                <a href="{{ path('product_like', {'id': product.id} ) }}" class="btn js-like">
-                    {%  if app.user and product.isLikedByUser(app.user) %}
+                <h5 class="card-title">{{ article.title }}</h5>
+                <small>{{ article.createdAt|date('d/m/Y') }}</small>
+                <span class="badge badge-pill badge-success">{{ article.tag.name }}</span>
+                <p>{{ article.description|raw }}</p>
+                {#<p class="card-text">{{ article.description }}</p>#}
+                <a href="{{ path('article_show', {'slug': article.slug, 'id': article.id} ) }}" class="btn btn-primary">show</a>
+                <a href="{{ path('article_like', {'id': article.id} ) }}" class="btn js-like">
+                    {%  if app.user and article.isLikedByUser(app.user) %}
                         <i class="fas fa-thumbs-up"></i>
                     {% else %}
                         <i class="far fa-thumbs-up"></i>
                     {% endif %}
 
-                    <span class="js-likes">{{ product.productLikes | length }}</span>
+                    <span class="js-likes">{{ article.articleLikes | length }}</span>
                     <span class="js-label">#j'aime</span>
                     {#<span class="js-label">#poceblo</span>#}
                 </a>
