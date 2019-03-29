@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ArticleTag index{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header"><h1>ArticleTag index</h1></div>
+        <div class="card-body">
+            <a class="btn btn-primary" href="{{ path('article_tag_new') }}">Create new</a>
+            <table id="tableAdmin" class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article_tag in article_tags %}
+                    <tr>
+                        <td>{{ article_tag.id }}</td>
+                        <td>{{ article_tag.name }}</td>
+                        <td>{{ article_tag.description }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{ path('article_tag_show', {'id': article_tag.id}) }}">show</a>
+                            <a class="btn btn-warning" href="{{ path('article_tag_edit', {'id': article_tag.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body  %}
+    <div class="container content">
+        <div class="row profile">
+            <div class="col-md-3" style="float:left;">
+                {{ include('profile/profile_sidebar.html.twig') }}
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#info">Informations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('profile_password') }}">Password</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane container active" id="info">
+                                <div class="profile-content">
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
