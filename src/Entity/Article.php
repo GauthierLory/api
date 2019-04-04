@@ -44,7 +44,7 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="ArticleTag", inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=false)
      */
     private $tag;
 
@@ -56,7 +56,7 @@ class Article
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="article")
      */
     private $images;
 

@@ -29,7 +29,7 @@ class Image
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
      */
@@ -58,8 +58,9 @@ class Image
 
     /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="images")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id", nullable=false)
      */
-    private $product;
+    private $article;
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -106,14 +107,14 @@ class Image
         return $this->imageSize;
     }
 
-    public function getProduct(): ?Article
+    public function getArticle(): ?Article
     {
-        return $this->product;
+        return $this->article;
     }
 
-    public function setProduct(?Article $product): self
+    public function setArticle(?Article $article): self
     {
-        $this->product = $product;
+        $this->article = $article;
 
         return $this;
     }

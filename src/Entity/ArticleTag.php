@@ -28,7 +28,7 @@ class ArticleTag
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="tag")
      */
-    private $products;
+    private $articles;
 
     /**
      * @ORM\Column(type="text")
@@ -37,7 +37,7 @@ class ArticleTag
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,7 +62,7 @@ class ArticleTag
      */
     public function getArticles(): Collection
     {
-        return $this->products;
+        return $this->articles;
     }
 
     public function addArticle(Article $article): self
@@ -75,7 +75,7 @@ class ArticleTag
         return $this;
     }
 
-    public function removeProduct(Article $article): self
+    public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
