@@ -22,14 +22,14 @@ final class Version20190329105236 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE article RENAME INDEX idx_d34a04ada76ed395 TO IDX_23A0E66A76ED395');
-        $this->addSql('ALTER TABLE article RENAME INDEX idx_d34a04adbad26311 TO IDX_23A0E66BAD26311');
-        $this->addSql('ALTER TABLE article_like RENAME INDEX idx_218b62124584665a TO IDX_1C21C7B27294869C');
-        $this->addSql('ALTER TABLE article_like RENAME INDEX idx_218b6212a76ed395 TO IDX_1C21C7B2A76ED395');
-        $this->addSql('ALTER TABLE comment RENAME INDEX idx_794381c6f675f31b TO IDX_9474526CF675F31B');
-        $this->addSql('ALTER TABLE comment RENAME INDEX idx_794381c64584665a TO IDX_9474526C7294869C');
-        $this->addSql('ALTER TABLE user DROP uniqid');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D6495A766BA0 ON user (addressip)');
+//        $this->addSql('ALTER TABLE article RENAME INDEX idx_d34a04ada76ed395 TO IDX_23A0E66A76ED395');
+//        $this->addSql('ALTER TABLE article RENAME INDEX idx_d34a04adbad26311 TO IDX_23A0E66BAD26311');
+//        $this->addSql('ALTER TABLE article_like RENAME INDEX idx_218b62124584665a TO IDX_1C21C7B27294869C');
+//        $this->addSql('ALTER TABLE article_like RENAME INDEX idx_218b6212a76ed395 TO IDX_1C21C7B2A76ED395');
+//        $this->addSql('ALTER TABLE comment RENAME INDEX idx_794381c6f675f31b TO IDX_9474526CF675F31B');
+//        $this->addSql('ALTER TABLE comment RENAME INDEX idx_794381c64584665a TO IDX_9474526C7294869C');
+//        $this->addSql('ALTER TABLE user DROP uniqid');
+//        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D6495A766BA0 ON user (addressip)');
     }
 
     public function down(Schema $schema) : void

@@ -58,22 +58,22 @@ class AppFixtures extends Fixture
 
             // créer 12 articles
             for ($j = 0; $j <= 12; $j++) {
-                $product = new Article();
+                $article = new Article();
 
                 $user = $users[mt_rand(0, count($users) - 1)];
 
                 $title = $faker->sentence();
-                $product->setTitle($title)
+                $article->setTitle($title)
                     ->setUser($user)
                     ->setTag($tag)
                     ->setContent($faker->paragraph(200))
                     ->setCreatedAt(new \DateTime())
                     ->setDescription($faker->paragraph(3));
 
-                $manager->persist($product);
+                $manager->persist($article);
                 for ($l = 0; $l < mt_rand(0,10); $l ++){
                     $like = new ArticleLike();
-                    $like->setProduct($product)
+                    $like->setArticle($article)
                             ->setUser($faker->randomElement($users));
                     $manager->persist($like);
                 }
@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
                     $user = $users[mt_rand(0, count($users) - 1)];
                     $review->setAuthor($user)
                         ->setDescription($faker->paragraph(5))
-                        ->setProduct($product)
+                        ->setArticle($article)
                         ->setCreatedAt(new \DateTime())
                         ->setRating(mt_rand(0, 5));
                     $manager->persist($review);
