@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <!--APP-->
+            <trans-unit id="_app.login">
+                <source>app.login</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="_app.logout">
+                <source>app.logout</source>
+                <target>Déconnexion</target>
+            </trans-unit>
+            <trans-unit id="_app.register">
+                <source>app.register</source>
+                <target>inscription</target>
+            </trans-unit>
+
+            <!--Settings-->
+            <trans-unit id="_nav.settings_all">
+                <source>nav.settings_all</source>
+                <target>all settings</target>
+            </trans-unit>
+            <trans-unit id="_nav.settings_php">
+                <source>nav.settings_all</source>
+                <target>Php info</target>
+            </trans-unit>
+
+            <!--NAV-->
+            <trans-unit id="_nav.home">
+                <source>nav.home</source>
+                <target>Home</target>
+            </trans-unit>
+            <trans-unit id="_nav.profile">
+                <source>nav.profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="_nav.article">
+                <source>nav.article</source>
+                <target>Article</target>
+            </trans-unit>
+            <trans-unit id="_nav.tag">
+                <source>nav.tag</source>
+                <target>Categorie</target>
+            </trans-unit>
+            <trans-unit id="_nav.comment">
+                <source>nav.comment</source>
+                <target>Commentaires</target>
+            </trans-unit>
+            <trans-unit id="_nav.user">
+                <source>nav.user</source>
+                <target>Utilisateurs</target>
+            </trans-unit>
+
+            <!--|| LOCALE ||-->
+            <trans-unit id="_locale.english">
+                <source>locale.english</source>
+                <target>Anglais</target>
+            </trans-unit>
+            <trans-unit id="_locale.french">
+                <source>locale.french</source>
+                <target>Français</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
