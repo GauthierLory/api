@@ -13,11 +13,11 @@
     </div>
     <div class="profile-usermenu sidebar-sticky">
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a href="{{ path('profile_article') }}" class="nav-link active">
+            <li {% if app.request.get('_route') == 'profile_article' %} class="active"{% else %} class="nav-item"{% endif %}>
+                <a href="{{ path('profile_article') }}" class="nav-link">
                     <i class="fa fa-home"></i>Overview </a>
             </li>
-            <li class=" active nav-item">
+            <li {% if app.request.get('_route') == 'profile_account' %} class="active"{% else %} class="nav-item"{% endif %}>
                 <a class="nav-link" href="{{ path('profile_account', {'id':user.id}) }}">
                     <i class="fa fa-user"></i>Account Settings </a>
             </li>

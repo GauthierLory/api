@@ -19,10 +19,10 @@
             <!--Settings-->
             <trans-unit id="_nav.settings_all">
                 <source>nav.settings_all</source>
-                <target>all settings</target>
+                <target>all routes</target>
             </trans-unit>
             <trans-unit id="_nav.settings_php">
-                <source>nav.settings_all</source>
+                <source>nav.settings_php</source>
                 <target>Php info</target>
             </trans-unit>
 
@@ -30,6 +30,10 @@
             <trans-unit id="_nav.home">
                 <source>nav.home</source>
                 <target>Home</target>
+            </trans-unit>
+            <trans-unit id="_nav.admin">
+                <source>nav.admin</source>
+                <target>Admin</target>
             </trans-unit>
             <trans-unit id="_nav.profile">
                 <source>nav.profile</source>

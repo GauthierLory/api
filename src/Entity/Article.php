@@ -76,6 +76,11 @@ class Article
     private $articleLikes;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
+
+    /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
@@ -304,5 +309,17 @@ class Article
             if ($like->getUser() === $user) return true;
         }
         return false;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
     }
 }

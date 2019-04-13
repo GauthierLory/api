@@ -90,6 +90,7 @@ class ArticleController extends AbstractController
 
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'articles' => $repo->findBy([],[],4),
             'form' => $form->createView(),
         ]);
     }

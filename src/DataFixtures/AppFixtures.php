@@ -64,9 +64,10 @@ class AppFixtures extends Fixture
 
                 $title = $faker->sentence();
                 $article->setTitle($title)
+                    ->setPrice(mt_rand(13, 140))
                     ->setUser($user)
                     ->setTag($tag)
-                    ->setContent($faker->paragraph(200))
+                    ->setContent($faker->paragraph(3))
                     ->setCreatedAt(new \DateTime())
                     ->setDescription($faker->paragraph(3));
 
