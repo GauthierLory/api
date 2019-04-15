@@ -19,10 +19,11 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    .addEntry('review', './assets/js/review.js')
+    .addEntry('comment', './assets/js/comment.js')
     .addEntry('nav', './assets/js/nav.js')
     .addEntry('tabs', './assets/js/tabs.js')
     .addEntry('accueil', './assets/js/accueil.js')
+    .addEntry('article_show', './assets/js/article_show.js')
     //.addEntry('page2', './assets/js/page2.js')
     //.addEntry('page3', './assets/js/page3.js')
     //.addEntry('page4', './assets/js/page4.js')

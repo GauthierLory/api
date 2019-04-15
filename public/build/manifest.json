@@ -3,7 +3,9 @@
   "build/admin.js": "/build/admin.js",
   "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
-  "build/nav.js": "/build/nav.js",
+  "build/article_show.js": "/build/article_show.js",
   "build/comment.js": "/build/comment.js",
-  "build/runtime.js": "/build/runtime.js"
+  "build/nav.js": "/build/nav.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/tabs.js": "/build/tabs.js"
 }

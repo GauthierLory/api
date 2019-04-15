@@ -123,22 +123,44 @@
         </div>
         <div id="Reviews" class="tabcontent">
             {% for comment in article.comments %}
-                <div class="row">
-                    {#<div class="col-lg-3 col-md-6 col-sm-12">#}
-                    <div class=" my-3">
-                        <div class="p-3 mb-2 bg-primary text-white">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <strong>{{ comment.author.username }}</strong>
-                                </div>
-                                <div class="col-md-2">
-                                    <strong>le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</strong>
-                                </div>
-                                <div class="col-md-2">
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header p-1 mb-2 bg-primary" style="text-decoration:none;" id="headingOne">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ comment.id }}" aria-expanded="true" aria-controls="collapseOne">
+                                <div style="float:left;margin-left:15px;"><img src="{{ comment.author.avatarurl }}" style="width:50px;height:50px;"></div>
+                                <div style="float:left;margin-left:15px;">
+                                    <strong style="color:white;">{{ comment.author.username }}</strong><br>
                                     {#<strong>{{ comment.author.username }}</strong>#}
                                     {% set rating = comment.rating %}
                                     {% include 'article/rating.html.twig' %}
                                 </div>
+                                <div style="color:black;font-size:12px;">le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</div>
+                            </button>
+                    </div>
+
+                    <div id="collapse{{ comment.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="col-md-8">
+                                <div class="">
+                                    <p>{{ comment.description|raw}}</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+           {# {% for comment in article.comments %}
+                <div class="row">
+                    <div class="">
+                        <div class="p-1 mb-2 bg-primary text-white">
+                            <div class="row">
+                                <div style="margin-left:15px;"><img src="{{ comment.author.avatarurl }}" style="width:50px;height:50px;"></div>
+                                <div style="margin-left:15px;">
+                                    <strong>{{ comment.author.username }}</strong><br>
+                                    {% set rating = comment.rating %}
+                                    {% include 'article/rating.html.twig' %}
+                                </div>
+                                <div style="color:black;font-size:12px;">le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</div>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -149,13 +171,13 @@
                     </div>
                 </div>
                 <hr>
-            {% endfor %}
+            {% endfor %}#}
             {% set comment = article.commentFromAuthor(app.user) %}
             {% if comment is not null %}
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="row"><small>le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</small></div>
                         <div class="row"> <strong>Note : </strong>{% include 'article/rating.html.twig' with{'rating': comment.rating} %}</div>
+                        <div class="row" style="right:0;"><small>le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</small></div>
                         <div class="row"><a class="btn btn-warning btn-sm" href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a></div>
                     </div>
                     <div class="col-md-9">
@@ -186,7 +208,9 @@
                         <h5 class="card-title">{{ article.title }}</h5>
                         <small>{{ article.createdAt|date('d/m/Y') }}</small>
                         <span class="badge badge-pill badge-success">{{ article.tag.name }}</span>
-                        <p>{{ article.description|raw }}</p>
+                        <p>{{ article.firstpartdescription|raw }}</p>
+                        <p class="fulltext">{{ article.secondpartdescription|raw }}</p>
+                        <a id="readmore{{ article.id }}" class="readmore">Read more...</a>
                         {#<p class="card-text">{{ article.description }}</p>#}
                         <a href="{{ path('article_show', {'slug': article.slug, 'id': article.id} ) }}" class="btn btn-primary">show</a>
                         <a href="{{ path('article_like', {'id': article.id} ) }}" class="btn js-like">
@@ -205,25 +229,26 @@
         {% endfor %}
         </div>
 
-
-
-        <script>
-            function openCity(evt, cityName) {
-                var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
+            <script>
+                function openCity(evt, cityName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
                 }
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                document.getElementById(cityName).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
 
-            document.getElementById("defaultOpen").click();
-        </script>
+                document.getElementById("defaultOpen").click();
+
+            </script>
+        {{ parent() }}
+        {{ encore_entry_script_tags('article_show') }}
             {#<hr>#}
             {#<div class="row">#}
                 {#{% for comment in article.comments %}#}

@@ -16,6 +16,7 @@
         "@babel/preset-react": "^7.0.0",
         "jquery": "^3.3.1",
         "react": "^16.8.3",
-        "react-dom": "^16.8.3"
+        "react-dom": "^16.8.3",
+        "readmore-js": "^2.2.1"
     }
 }

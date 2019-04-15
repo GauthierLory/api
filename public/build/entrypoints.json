@@ -21,10 +21,22 @@
         "/build/nav.js"
       ]
     },
+    "tabs": {
+      "js": [
+        "/build/runtime.js",
+        "/build/tabs.js"
+      ]
+    },
     "accueil": {
       "js": [
         "/build/runtime.js",
         "/build/accueil.js"
+      ]
+    },
+    "article_show": {
+      "js": [
+        "/build/runtime.js",
+        "/build/article_show.js"
       ]
     },
     "admin": {

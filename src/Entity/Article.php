@@ -139,6 +139,20 @@ class Article
         return $this;
     }
 
+    public function getFirstPartDescription(): ?string
+    {
+        $shortDescript = $this->description;
+        $shortDescript = substr($shortDescript,0,100);
+        return (string) $shortDescript;
+    }
+
+    public function getSecondPartDescription(): ?string
+    {
+        $longDescript = $this->description;
+        $longDescript = substr($longDescript,100);
+        return (string) $longDescript;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
