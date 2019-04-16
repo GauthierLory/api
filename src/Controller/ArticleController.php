@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
+use App\Entity\ArticlePicture;
 use App\Entity\Article;
 use App\Entity\ArticleLike;
 use App\Entity\Comment;
 use App\EventListener\DoctrineEvent;
-use App\Form\ImagearticleType;
+use App\Form\ArticlePictureType;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\ImageRepository;
 use App\Repository\ArticleLikeRepository;
 use App\Repository\ArticleRepository;
 use App\Service\HistoriqueHelper;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -57,7 +59,11 @@ class ArticleController extends AbstractController
             $manager->persist($article);
             $manager->flush();
 
-            return $this->redirectToRoute('article_index');
+//            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('article_picture_new',array(
+                'slug' => $article->getSlug(),
+                'id' => $article->getId()
+            ));
         }
 
         return $this->render('article/new.html.twig', [
@@ -65,6 +71,47 @@ class ArticleController extends AbstractController
             'form' => $form->createView(),
             'images' => $imageRepository->findAll()
         ]);
+    }
+
+    /**
+     *@Route("/{slug}/{id}/picture",name="article_picture_new", methods={"GET","POST"})
+     */
+    public function newPicture($slug, Article $article,Request $request,ArticleRepository $repo, ObjectManager $manager){
+        $article = $repo->findOneBySlug($slug);
+        $picture = new ArticlePicture;
+        $formP = $this->createForm(ArticlePictureType::class, $picture);
+        $formP->handleRequest($request);
+
+        if ($formP->isSubmitted() && $formP->isValid()) {
+            $picture->setArticle($article);
+//            $file = $picture->getPicture();
+
+            $file = $formP->get('file')->getData();
+            $path = $file;
+
+            $fileName = $file.'.'.$file->getClientOriginalName();
+
+            try {
+                $file->move(
+                    $this->getParameter('pictures_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                $this->addFlash( 'danger' , $e->getMessage());
+            }
+
+            $picture->getPicture($fileName);
+//            $picture->setPath($file);
+//            $picture->setPath($file);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($picture);
+            $entityManager->flush();
+        }
+
+        return $this->render('article/picture.html.twig', array(
+            'formP' => $formP->createView()
+        ));
     }
 
     /**
@@ -87,6 +134,8 @@ class ArticleController extends AbstractController
                 $entityManager->flush();
 
         }
+
+
 
         return $this->render('article/show.html.twig', [
             'article' => $article,

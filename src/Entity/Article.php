@@ -81,6 +81,11 @@ class Article
     private $price;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ArticlePicture", mappedBy="article")
+     */
+    private $articlePictures;
+
+    /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
@@ -108,6 +113,7 @@ class Article
         $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->articleLikes = new ArrayCollection();
+        $this->articlePictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -333,6 +339,37 @@ class Article
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ArticlePicture[]
+     */
+    public function getArticlePictures(): Collection
+    {
+        return $this->articlePictures;
+    }
+
+    public function addArticlePicture(ArticlePicture $articlePicture): self
+    {
+        if (!$this->articlePictures->contains($articlePicture)) {
+            $this->articlePictures[] = $articlePicture;
+            $articlePicture->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticlePicture(ArticlePicture $articlePicture): self
+    {
+        if ($this->articlePictures->contains($articlePicture)) {
+            $this->articlePictures->removeElement($articlePicture);
+            // set the owning side to null (unless already changed)
+            if ($articlePicture->getArticle() === $this) {
+                $articlePicture->setArticle(null);
+            }
+        }
 
         return $this;
     }
