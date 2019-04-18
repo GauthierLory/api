@@ -7,6 +7,7 @@ use App\Entity\ArticleLike;
 use App\Entity\ArticleTag;
 use App\Entity\Comment;
 use App\Entity\User;
+use App\Helper\Constante;
 use App\Repository\ArticleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -28,7 +29,7 @@ class AppFixtures extends Fixture
         $admin->setNom("admin");
         $admin->setEmail("admin@admin.com");
         $admin->setIsActivate(true);
-        $admin->setAvatar($faker->imageUrl($width = 240, $height = 180));
+        $admin->setAvatar("http://".Constante::IP_ADDRESS."/api/assets/image/icons1.png");
         $admin->setRoles(["ROLE_ADMIN"]);
         $admin->setPassword($this->encoder->encodePassword($admin, 'password'));
         $manager->persist($admin);
@@ -36,11 +37,11 @@ class AppFixtures extends Fixture
         $users = [];
         for ($i = 0; $i <= 5; $i ++){
             $user = new User();
-
+            $nb = mt_rand(0,23);
             $user->setEmail($faker->email);
             $user->setPrenom($faker->name);
             $user->setIsActivate(true);
-            $user->setAvatar($faker->imageUrl($width = 240, $height = 180));
+            $user->setAvatar("http://".Constante::IP_ADDRESS."/api/assets/image/icons".$nb.".png");
             $user->setNom($faker->lastName);
             $user->setPassword($this->encoder->encodePassword($user, 'password'));
 
