@@ -11,6 +11,7 @@ class LocaleSwitchController extends AbstractController
      * @Route("/switchenglish", name="switch_language_english")
      */
     public function switchLanguageEnglishAction() {
+        $this->get('session')->set('language', 'en');
         return $this->switchLanguage('en');
     }
 
@@ -18,6 +19,7 @@ class LocaleSwitchController extends AbstractController
      * @Route("/switchfrench", name="switch_language_french")
      */
     public function switchLanguageFrenchAction() {
+        $this->get('session')->set('language', 'fr');
         return $this->switchLanguage('fr');
     }
 

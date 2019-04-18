@@ -175,7 +175,8 @@
     <p>Si page d'accueil sticky on scroll</p>
 {% endif %}#}
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <nav id="nav" class="navbar sticky-top navbar-expand-md navbar-dark bg-primary fixed">
+    <nav id="nav" class="navbar navbar-expand-md navbar-dark bg-primary fixed">
+        <input type="hidden" id="language_sess" value = "{{ app.session.get('language') }}">
         <a class="navbar-brand" href="{{ path('home') }}">{{ 'nav.home'|trans }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -207,12 +208,16 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-cog"></i>
+                            <img id="nav_lang" width="25px" height="25px" src="http://192.168.1.20/api/assets/image/icone-kit">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('switch_language_english') }}">EN</a>
+                        <div id="flag_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a id="en" class="dropdown-item" href="{{ path('switch_language_english') }}">
+                                <img id="flag_en" width="25px" height="25px" src="http://192.168.1.20/api/assets/image/icone-en">
+                            </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('switch_language_french') }}">FR</a>
+                            <a id="fr" class="dropdown-item" href="{{ path('switch_language_french') }}">
+                                <img id="flag_fr"  width="25px" height="25px" src="http://192.168.1.20/api/assets/image/icone-fr">
+                            </a>
                         </div>
                     </li>
                 {% endif %}
@@ -237,7 +242,8 @@
     </nav>
     {#<div id="hero"></div>#}
 {% else %}
-    <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-primary fixed">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed">
+        <input type="hidden" id="language_sess" value = "{{ app.session.get('language') }}">
         <a class="navbar-brand" href="{{ path('home') }}">{{ 'nav.home'|trans }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -264,6 +270,7 @@
             </ul>
         </div>
     </nav>
+
 {% endif %}
 
 
@@ -302,6 +309,7 @@
             });
         });
     </script>
+    {{ encore_entry_script_tags('nav') }}
 {% endblock %}
 </body>
 {% include('footer.html.twig') %}

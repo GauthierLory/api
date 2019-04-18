@@ -1,9 +1,12 @@
-$(window).on('scroll', function () {
-    var scrollTop     = $(window).scrollTop(),
-        elementOffset = $('#navogp').offset().top,
-        distance      = (elementOffset - scrollTop);
 
-    if(distance == 0){
-        //Fair eles changements CSS
+$(document).ready(function () {
+    $lang = ($("#language_sess").val());
+    switch($lang){
+        case 'en':
+            $("#nav_lang").attr("src", $("#flag_en").attr("src"));
+            break;
+        case 'fr':
+            $("#nav_lang").attr("src", $("#flag_fr").attr("src"));
+            break;
     }
 });
