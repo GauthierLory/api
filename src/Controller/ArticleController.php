@@ -10,12 +10,14 @@ use App\EventListener\DoctrineEvent;
 use App\Form\ArticlePictureType;
 use App\Form\ArticleType;
 use App\Form\CommentType;
+use App\Repository\ArticlePictureRepository;
 use App\Repository\ImageRepository;
 use App\Repository\ArticleLikeRepository;
 use App\Repository\ArticleRepository;
 use App\Service\HistoriqueHelper;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\DependencyInjection\Argument\ServiceLocator;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -84,12 +86,12 @@ class ArticleController extends AbstractController
 
         if ($formP->isSubmitted() && $formP->isValid()) {
             $picture->setArticle($article);
-//            $file = $picture->getPicture();
+//            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $formP->get('picture')->getData();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-            $file = $formP->get('file')->getData();
-            $path = $file;
-
-            $fileName = $file.'.'.$file->getClientOriginalName();
+//            $pictureDir = $this->container->getParameter('kernel.root_dir').'./public/uploads/pictures';
+//            $file->move($pictureDir, $fileName);
 
             try {
                 $file->move(
@@ -100,7 +102,26 @@ class ArticleController extends AbstractController
                 $this->addFlash( 'danger' , $e->getMessage());
             }
 
-            $picture->getPicture($fileName);
+            $picture->setPicture($fileName);
+
+
+//            $file = $formP->get('file')->getData();
+//
+////            $fileName = $file->getClientOriginalName();
+////            $fileMime = $file->g
+//
+//            try {
+//                $file->move(
+//                    $this->getParameter('pictures_directory'),
+//                    $fileName
+//                );
+//            } catch (FileException $e) {
+//                $this->addFlash( 'danger' , $e->getMessage());
+//            }
+//
+//            $picture->setPicture($fileName);
+
+//            $picture->setPath($file);
 //            $picture->setPath($file);
 //            $picture->setPath($file);
 
@@ -117,9 +138,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{slug}/{id}", name="article_show", methods={"GET","POST"})
      */
-    public function show($slug, ArticleRepository $repo, Request $request): Response
+    public function show($slug, ArticleRepository $repo, Request $request, ArticlePictureRepository $repository): Response
     {
         $article = $repo->findOneBySlug($slug);
+        $articlePictures = $repository->findAll();
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -135,10 +157,9 @@ class ArticleController extends AbstractController
 
         }
 
-
-
         return $this->render('article/show.html.twig', [
             'article' => $article,
+            'articlePictures' => $articlePictures,
             'articles' => $repo->findBy([],[],4),
             'form' => $form->createView(),
         ]);

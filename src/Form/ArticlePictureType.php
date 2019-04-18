@@ -14,8 +14,8 @@ class ArticlePictureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('picture')
-            ->add('file')
+        ->add('picture',FileType::class)
+//            ->add('file')
             ->add('save', SubmitType::class)
         ;
     }
