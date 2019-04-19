@@ -76,10 +76,10 @@
                     </div>
                     <div class="col-lg-6">
                         {% if is_granted('ROLE_USER') and app.user == article.getUser() %}
-                            <a class="btn btn-warning btn-sm" href="{{ path('article_edit', {'slug': article.slug,'id': article.id}) }}">edit</a>
+                            <a class="btn btn-warning btn-sm" href="{{ path('article_edit', {'slug': article.slug,'id': article.id}) }}">{{ 'btn.edit'|trans }}</a>
                         {% endif %}
-                        <h5><a class="btn btn-primary" href="{{ path('article_index') }}"><i class="fas fa-arrow-alt-circle-left"></i></a> Article n°{{ article.id | default ('id null')}}</h5>
-                        <span class="rating">Moyenne :  </span>
+                        <h5><a class="btn btn-primary" href="{{ path('home') }}"><i class="fas fa-arrow-alt-circle-left"></i></a>{{ article.title }}</h5>
+                        <span class="rating">{{ 'article.average'|trans }} :  </span>
                         {% if article.comments|length >0%}
                             {% if article.moyenne > 0 %}
                                 {% set rating = article.moyenne %}
@@ -96,7 +96,7 @@
                         <br>
                         <div class="row">
                             <label>Quantity : </label>
-                            <input min="1" type="number"><button type="button" class="btn btn-primary">Add to cart</button>
+                            <input min="1" type="number"><button type="button" class="btn btn-primary">{{ 'btn.add_cart'|trans }}</button>
                         </div>
                     </div>
                 </div>
@@ -104,19 +104,19 @@
         </div>
 
         <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'Description')" id="defaultOpen">Description</button>
-            <button class="tablinks" onclick="openCity(event, 'Attributes')">Attributes</button>
-            <button class="tablinks" onclick="openCity(event, 'Reviews')">Reviews</button>
+            <button class="tablinks" onclick="openCity(event, 'Description')" id="defaultOpen">{{ 'article.description'|trans }}</button>
+            <button class="tablinks" onclick="openCity(event, 'Attributes')">{{ 'article.attributes'|trans }}</button>
+            <button class="tablinks" onclick="openCity(event, 'Reviews')">{{ 'article.reviews'|trans }}</button>
         </div>
         <div id="Description" class="tabcontent">
             <hr>Description :{{ article.description | raw }}
         </div>
         <div id="Attributes" class="tabcontent">
             <p class="card-text">
-                User : {{ article.user.email }}
-            <hr>Title : {{ article.title }}
-            <hr>Tag : {{ article.tag.name }}
-            <hr>Le : {{ article.createdAt|date('d/m/Y') }}
+                {{ 'article.user'|trans }} : {{ article.user.email }}
+            <hr>{{ 'article.title'|trans }} : {{ article.title }}
+            <hr>{{ 'article.tag'|trans }} : {{ article.tag.name }}
+            <hr>{{ 'article.date'|trans }} : {{ article.createdAt|date('d/m/Y') }}
             </p>
         </div>
         <div id="Reviews" class="tabcontent">
@@ -132,7 +132,7 @@
                                     {% set rating = comment.rating %}
                                     {% include 'article/rating.html.twig' %}
                                 </div>
-                                <div style="color:black;font-size:12px;">le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</div>
+                                <div style="color:black;font-size:12px;">{{ 'article.date'|trans }} {{ comment.createdAt|date('d/m/Y') }}</div>
                             </button>
                     </div>
 
@@ -147,36 +147,13 @@
             </div>
             {% endfor %}
 
-           {# {% for comment in article.comments %}
-                <div class="row">
-                    <div class="">
-                        <div class="p-1 mb-2 bg-primary text-white">
-                            <div class="row">
-                                <div style="margin-left:15px;"><img src="{{ comment.author.avatarurl }}" style="width:50px;height:50px;"></div>
-                                <div style="margin-left:15px;">
-                                    <strong>{{ comment.author.username }}</strong><br>
-                                    {% set rating = comment.rating %}
-                                    {% include 'article/rating.html.twig' %}
-                                </div>
-                                <div style="color:black;font-size:12px;">le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="">
-                                <p>{{ comment.description|raw}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            {% endfor %}#}
             {% set comment = article.commentFromAuthor(app.user) %}
             {% if comment is not null %}
                 <div class="row">
                     <div class="col-md-3">
                         <div class="row"> <strong>Note : </strong>{% include 'article/rating.html.twig' with{'rating': comment.rating} %}</div>
-                        <div class="row" style="right:0;"><small>le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</small></div>
-                        <div class="row"><a class="btn btn-warning btn-sm" href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a></div>
+                        <div class="row" style="right:0;"><small>{{ 'article.date'|trans }} {{ comment.createdAt|date('d/m/Y') }}</small></div>
+                        <div class="row"><a class="btn btn-warning btn-sm" href="{{ path('comment_edit', {'id': comment.id}) }}">{{ 'btn.edit'|trans }}</a></div>
                     </div>
                     <div class="col-md-9">
                         <blockquote>
@@ -195,13 +172,12 @@
 
         <div class="d-flex mt-4 mb-4">
             <hr class="my-auto flex-grow-1">
-            <div class="px-4">Latest products</div>
+            <div class="px-4">{{ 'article.last_articles'|trans }}</div>
             <hr class="my-auto flex-grow-1">
         </div>
         <div class="row">
         {% for article in articles %}
             <div class="col-sm-3">
-                    {#<img src="https://via.placeholder.com/150" class="card-img-top" alt="...">#}
                     <div class="">
                         <h5 class="card-title">{{ article.title }}</h5>
                         <small>{{ article.createdAt|date('d/m/Y') }}</small>
@@ -210,7 +186,7 @@
                         <p class="fulltext">{{ article.secondpartdescription|raw }}</p>
                         <a id="readmore{{ article.id }}" class="readmore">Read more...</a>
                         {#<p class="card-text">{{ article.description }}</p>#}
-                        <a href="{{ path('article_show', {'slug': article.slug, 'id': article.id} ) }}" class="btn btn-primary">show</a>
+                        <a href="{{ path('article_show', {'slug': article.slug, 'id': article.id} ) }}" class="btn btn-primary">{{ 'btn.show'|trans }}</a>
                         <a href="{{ path('article_like', {'id': article.id} ) }}" class="btn js-like">
                             {%  if app.user and article.isLikedByUser(app.user) %}
                                 <i class="fas fa-thumbs-up"></i>
@@ -220,7 +196,6 @@
 
                             <span class="js-likes">{{ article.articleLikes | length }}</span>
                             <span class="js-label">#j'aime</span>
-                            {#<span class="js-label">#poceblo</span>#}
                         </a>
                     </div>
             </div>
@@ -247,58 +222,5 @@
             </script>
         {{ parent() }}
         {{ encore_entry_script_tags('article_show') }}
-            {#<hr>#}
-            {#<div class="row">#}
-                {#{% for comment in article.comments %}#}
-                {#<div class="row">#}
-                    {#<div class="col-lg-3 col-md-6 col-sm-12">#}
-                        {#<div class="card my-3">#}
-                            {#<div class="card-header p-3 mb-2 bg-primary text-white">#}
-                                {#<div class="row">#}
-                                    {#<div class="col-md-2">#}
-                                        {#<strong>{{ comment.author.username }}</strong>#}
-                                    {#</div>#}
-                                    {#<div class="col-md-2">#}
-                                        {#<strong>le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</strong>#}
-                                    {#</div>#}
-                                    {#<div class="col-md-2">#}
-                                        {#<strong>{{ comment.author.username }}</strong>#}
-                                        {#{% set rating = comment.rating %}#}
-                                        {#{% include 'article/rating.html.twig' %}#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                            {#<div class="col-md-8">#}
-                                {#<div class="card-body">#}
-                                    {#<p>{{ comment.description|raw}}</p>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<hr>#}
-                {#{% endfor %}#}
-            {#</div>#}
-
-            {#<div class="card-body mb-3">#}
-                {#{% set comment = article.commentFromAuthor(app.user) %}#}
-                {#{% if comment is not null %}#}
-                    {#<div class="row">#}
-                        {#<div class="col-md-3">#}
-                            {#<div class="row"><small>le {{ comment.createdAt|date('d/m/Y') }} à {{ comment.createdAt|date('H:m') }}</small></div>#}
-                            {#<div class="row"> <strong>Note : </strong>{% include 'article/rating.html.twig' with{'rating': comment.rating} %}</div>#}
-                            {#<div class="row"><a class="btn btn-warning btn-sm" href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a></div>#}
-                        {#</div>#}
-                        {#<div class="col-md-9">#}
-                            {#<blockquote>#}
-                                {#{{ comment.description | raw }}#}
-                            {#</blockquote>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#{% else %}#}
-                    {#<div class="card-body">#}
-                        {#{{ include('comment/_form.html.twig') }}#}
-                    {#</div>#}
-                {#{% endif %}#}
-            {#</div>#}
     </div>
 {% endblock %}

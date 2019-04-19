@@ -66,6 +66,75 @@
                 <target>Français</target>
             </trans-unit>
 
+
+            <!--|| ARTICLE ||-->
+            <trans-unit id="_article.last_articles">
+                <source>article.last_articles</source>
+                <target>Derniers produits</target>
+            </trans-unit>
+            <trans-unit id="_article.description">
+                <source>article.description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="_article.average">
+                <source>article.average</source>
+                <target>Moyenne</target>
+            </trans-unit>
+            <trans-unit id="_article.attributes">
+                <source>article.attributes</source>
+                <target>Particularités</target>
+            </trans-unit>
+            <trans-unit id="_article.reviews">
+                <source>article.reviews</source>
+                <target>Commentaire(s)</target>
+            </trans-unit>
+            <trans-unit id="_article.title">
+                <source>article.title</source>
+                <target>Titre</target>
+            </trans-unit>
+            <trans-unit id="_article.user">
+                <source>article.user</source>
+                <target>Utilisateur</target>
+            </trans-unit>
+            <trans-unit id="_article.tag">
+                <source>article.tag</source>
+                <target>Catégorie(s)</target>
+            </trans-unit>
+            <trans-unit id="_article.date">
+                <source>article.date</source>
+                <target>Créer le</target>
+            </trans-unit>
+
+            <!--|| BUTTON ||-->
+            <trans-unit id="_btn.like">
+                <source>btn.like</source>
+                <target>J'aime</target>
+            </trans-unit>
+            <trans-unit id="_btn.show">
+                <source>btn.show</source>
+                <target>Voir</target>
+            </trans-unit>
+            <trans-unit id="_btn.add">
+                <source>btn.add</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="_btn.create">
+                <source>btn.create</source>
+                <target>Créer</target>
+            </trans-unit>
+            <trans-unit id="_btn.edit">
+                <source>btn.edit</source>
+                <target>Modifier</target>
+            </trans-unit>
+            <trans-unit id="_btn.delete">
+                <source>btn.delete</source>
+                <target>Supprimer</target>
+            </trans-unit>
+            <trans-unit id="_btn.add_cart">
+                <source>btn.add_cart</source>
+                <target>Ajouter au panier</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

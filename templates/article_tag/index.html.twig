@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-header"><h1>ArticleTag index</h1></div>
         <div class="card-body">
-            <a class="btn btn-primary" href="{{ path('article_tag_new') }}">Create new</a>
+            <a class="btn btn-primary" href="{{ path('article_tag_new') }}">{{ 'btn.create'|trans }}</a>
             <table id="tableAdmin" class="table table-hover">
                 <thead>
                 <tr>
@@ -24,8 +24,8 @@
                         <td>{{ article_tag.name }}</td>
                         <td>{{ article_tag.description }}</td>
                         <td>
-                            <a class="btn btn-success" href="{{ path('article_tag_show', {'id': article_tag.id}) }}">show</a>
-                            <a class="btn btn-warning" href="{{ path('article_tag_edit', {'id': article_tag.id}) }}">edit</a>
+                            <a class="btn btn-success" href="{{ path('article_tag_show', {'id': article_tag.id}) }}">{{ 'btn.show'|trans }}</a>
+                            <a class="btn btn-warning" href="{{ path('article_tag_edit', {'id': article_tag.id}) }}">{{ 'btn.edit'|trans }}</a>
                         </td>
                     </tr>
                 {% else %}

@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="card">
-        <div class="card-header"><h1><a href="{{ path('article_tag_index') }}"><i class="fas fa-arrow-alt-circle-left"></i></a> Create new ArticleTag</h1></div>
+        <div class="card-header"><h1><a href="{{ path('article_tag_index') }}"><i class="fas fa-arrow-alt-circle-left"></i></a>{{ 'btn.create'|trans }}</h1></div>
         <div class="card-body">
             {{ include('article_tag/_form.html.twig') }}
         </div>

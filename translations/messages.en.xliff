@@ -67,6 +67,75 @@
                 <target>French</target>
             </trans-unit>
 
+
+            <!--|| ARTICLE ||-->
+            <trans-unit id="_article.last_articles">
+                <source>article.last_articles</source>
+                <target>Latest products</target>
+            </trans-unit>
+            <trans-unit id="_article.description">
+                <source>article.description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="_article.average">
+                <source>article.average</source>
+                <target>Average</target>
+            </trans-unit>
+            <trans-unit id="_article.attributes">
+                <source>article.attributes</source>
+                <target>Attributes</target>
+            </trans-unit>
+            <trans-unit id="_article.reviews">
+                <source>article.reviews</source>
+                <target>Review(s)</target>
+            </trans-unit>
+            <trans-unit id="_article.title">
+                <source>article.title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="_article.user">
+                <source>article.user</source>
+                <target>User</target>
+            </trans-unit>
+            <trans-unit id="_article.tag">
+                <source>article.tag</source>
+                <target>Tag(s)</target>
+            </trans-unit>
+            <trans-unit id="_article.date">
+                <source>article.date</source>
+                <target>Created</target>
+            </trans-unit>
+
+            <!--|| BUTTON ||-->
+            <trans-unit id="_btn.like">
+                <source>btn.like</source>
+                <target>I like</target>
+            </trans-unit>
+            <trans-unit id="_btn.show">
+                <source>btn.show</source>
+                <target>Show</target>
+            </trans-unit>
+            <trans-unit id="_btn.add">
+                <source>btn.add</source>
+                <target>Add</target>
+            </trans-unit>
+            <trans-unit id="_btn.create">
+                <source>btn.create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="_btn.edit">
+                <source>btn.edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="_btn.delete">
+                <source>btn.delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="_btn.add_cart">
+                <source>btn.add_cart</source>
+                <target>Add to cart</target>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
