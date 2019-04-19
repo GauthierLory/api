@@ -25,8 +25,6 @@ class SupportType extends AbstractType
                 )
             ))
             ->add('content')
-//            ->add('createdAt')
-//            ->add('user')
         ;
     }
 
