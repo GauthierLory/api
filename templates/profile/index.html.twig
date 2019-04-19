@@ -14,10 +14,10 @@
                         <div class="profile-content">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#home">Articles</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#home">{{ 'profile.article'|trans }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('profile_comment') }}">Comments</a>
+                                    <a class="nav-link" href="{{ path('profile_comment') }}">{{ 'profile.comment'|trans }}</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -37,8 +37,8 @@
                                                     <td>{{ article.tag.name }}</td>
                                                     <td>{{ article.description|raw }}</td>
                                                     <td>
-                                                        <a class="btn btn-success btn-sm" href="{{ path('article_show', {'slug': article.slug, 'id': article.id } ) }}">See</a>
-                                                        <a class="btn btn-warning btn-sm" href="{{ path('article_edit', {'slug': article.slug,'id': article.id}) }}">edit</a>
+                                                        <a class="btn btn-success btn-sm" href="{{ path('article_show', {'slug': article.slug, 'id': article.id } ) }}">{{ 'btn.show'|trans }}</a>
+                                                        <a class="btn btn-warning btn-sm" href="{{ path('article_edit', {'slug': article.slug,'id': article.id}) }}">{{ 'btn.edit'|trans }}</a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}

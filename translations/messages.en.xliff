@@ -106,10 +106,28 @@
                 <target>Created</target>
             </trans-unit>
 
+            <!--|| COMMENT ||-->
+            <trans-unit id="_comment.description">
+                <source>comment.description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="_comment.note_label">
+                <source>comment.note_label</source>
+                <target>Note on 5</target>
+            </trans-unit>
+            <trans-unit id="_comment.note_placeholder">
+                <source>comment.note_placeholder</source>
+                <target>input note between 0 to 5</target>
+            </trans-unit>
+
             <!--|| BUTTON ||-->
             <trans-unit id="_btn.like">
                 <source>btn.like</source>
                 <target>I like</target>
+            </trans-unit>
+            <trans-unit id="_btn.update">
+                <source>btn.update</source>
+                <target>Update</target>
             </trans-unit>
             <trans-unit id="_btn.show">
                 <source>btn.show</source>
@@ -134,6 +152,44 @@
             <trans-unit id="_btn.add_cart">
                 <source>btn.add_cart</source>
                 <target>Add to cart</target>
+            </trans-unit>
+
+            <!--|| PROFILE ||-->
+            <trans-unit id="_profile.overview">
+                <source>profile.overview</source>
+                <target>Overview</target>
+            </trans-unit>
+            <trans-unit id="_profile.account_settings">
+                <source>profile.account_settings</source>
+                <target>Account Settings</target>
+            </trans-unit>
+            <trans-unit id="_profile.password">
+                <source>profile.password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="_profile.data_user">
+                <source>profile.data_user</source>
+                <target>Informations</target>
+            </trans-unit>
+            <trans-unit id="_profile.article">
+                <source>profile.article</source>
+                <target>Article</target>
+            </trans-unit>
+            <trans-unit id="_profile.comment">
+                <source>profile.comment</source>
+                <target>Comment(s)</target>
+            </trans-unit>
+            <trans-unit id="_profile.old_password">
+                <source>profile.old_password</source>
+                <target>Old password</target>
+            </trans-unit>
+            <trans-unit id="_profile.new_password">
+                <source>profile.old_password</source>
+                <target>New password</target>
+            </trans-unit>
+            <trans-unit id="_profile.confirm_password">
+                <source>profile.old_password</source>
+                <target>Confirm new password</target>
             </trans-unit>
 
         </body>

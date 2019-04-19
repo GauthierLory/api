@@ -14,10 +14,10 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#info">Informations</a>
+                                <a class="nav-link active" href="#info">{{ 'profile.data_user'|trans }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('profile_password') }}">Password</a>
+                                <a class="nav-link" href="{{ path('profile_password') }}">{{ 'profile.password'|trans }}</a>
                             </li>
                         </ul>
 
@@ -27,6 +27,7 @@
                                 <div class="profile-content">
                                     {{ form_start(form) }}
                                     {{ form_widget(form) }}
+                                    <button type="submit" class="btn btn-primary">{{ 'btn.update'|trans }}</button>
                                     {{ form_end(form) }}
                                 </div>
                             </div>

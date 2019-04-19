@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-header"><h1>Comment index</h1></div>
         <div class="card-body">
-            <a class="btn btn-primary btn-sm" href="{{ path('comment_new') }}">Create new</a>
+            <a class="btn btn-primary btn-sm" href="{{ path('comment_new') }}">{{ 'btn.create'|trans }}</a>
             <table id="tableAdmin" class="table table-hover">
                 <thead>
                 <tr>
@@ -23,8 +23,8 @@
                         <td>{{ comment.description }}</td>
                         <td>{{ comment.rating }}</td>
                         <td>
-                            <a class="btn btn-success btn-sm"href="{{ path('comment_show', {'id': comment.id}) }}">show</a>
-                            <a class="btn btn-warning btn-sm"href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+                            <a class="btn btn-success btn-sm"href="{{ path('comment_show', {'id': comment.id}) }}">{{ 'btn.show'|trans }}</a>
+                            <a class="btn btn-warning btn-sm"href="{{ path('comment_edit', {'id': comment.id}) }}">{{ 'btn.edit'|trans }}</a>
                         </td>
                     </tr>
                 {% else %}
