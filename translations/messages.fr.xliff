@@ -170,30 +170,52 @@
                 <source>profile.data_user</source>
                 <target>Informations</target>
             </trans-unit>
+            <trans-unit id="_profile.data_user_name">
+                <source>profile.data_user_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="_profile.data_user_surname">
+                <source>profile.data_user_surname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="_profile.data_user_mail">
+                <source>profile.data_user_mail</source>
+                <target>E-mail</target>
+            </trans-unit>
             <trans-unit id="_profile.article">
                 <source>profile.article</source>
-                <target>Article</target>
+                <target>Article(s)</target>
             </trans-unit>
             <trans-unit id="_profile.comment">
                 <source>profile.comment</source>
                 <target>Commentaire(s)</target>
             </trans-unit>
+
             <trans-unit id="_profile.old_password">
                 <source>profile.old_password</source>
                 <target>Ancien mot de passe</target>
             </trans-unit>
             <trans-unit id="_profile.old_password_placeholder">
-                <source>profile.old_password</source>
+                <source>profile.old_password_placeholder</source>
                 <target>Donnez votre mot de passe actuel</target>
             </trans-unit>
             <trans-unit id="_profile.new_password">
-                <source>profile.old_password</source>
+                <source>profile.new_password</source>
                 <target>Nouveau mot de passe</target>
             </trans-unit>
-            <trans-unit id="_profile.confirm_password">
-                <source>profile.old_password</source>
-                <target>Confirmer votre nouveau mot de passe</target>
+            <trans-unit id="_profile.new_password_placeholder">
+                <source>profile.new_password_placeholder</source>
+                <target>Tapez votre nouveau mot de passe</target>
             </trans-unit>
+            <trans-unit id="_profile.confirm_password">
+                <source>profile.confirm_password</source>
+                <target>Confirmation du mot de passe</target>
+            </trans-unit>
+            <trans-unit id="_profile.confirm_password_placeholder">
+                <source>profile.confirm_password_placeholder</source>
+                <target>Confirmez votre nouveau mot de passe</target>
+            </trans-unit>
+
 
         </body>
     </file>

@@ -171,24 +171,50 @@
                 <source>profile.data_user</source>
                 <target>Informations</target>
             </trans-unit>
+            <trans-unit id="_profile.data_user_name">
+                <source>profile.data_user_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="_profile.data_user_surname">
+                <source>profile.data_user_surname</source>
+                <target>Surname</target>
+            </trans-unit>
+            <trans-unit id="_profile.data_user_mail">
+                <source>profile.data_user_mail</source>
+                <target>Mail</target>
+            </trans-unit>
             <trans-unit id="_profile.article">
                 <source>profile.article</source>
-                <target>Article</target>
+                <target>Article(s)</target>
             </trans-unit>
             <trans-unit id="_profile.comment">
                 <source>profile.comment</source>
                 <target>Comment(s)</target>
             </trans-unit>
+
             <trans-unit id="_profile.old_password">
                 <source>profile.old_password</source>
                 <target>Old password</target>
             </trans-unit>
+            <trans-unit id="_profile.old_password_placeholder">
+                <source>profile.old_password_placeholder</source>
+                <target>Give your actual password</target>
+            </trans-unit>
+
             <trans-unit id="_profile.new_password">
-                <source>profile.old_password</source>
+                <source>profile.new_password</source>
                 <target>New password</target>
             </trans-unit>
+            <trans-unit id="_profile.new_password_placeholder">
+                <source>profile.new_password_placeholder</source>
+                <target>Input your new password</target>
+            </trans-unit>
             <trans-unit id="_profile.confirm_password">
-                <source>profile.old_password</source>
+                <source>profile.confirm_password</source>
+                <target>Confirm new password</target>
+            </trans-unit>
+            <trans-unit id="_profile.confirm_password_placeholder">
+                <source>profile.confirm_password_placeholder</source>
                 <target>Confirm new password</target>
             </trans-unit>
 
