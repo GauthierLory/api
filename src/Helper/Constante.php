@@ -9,9 +9,6 @@ namespace App\Helper;
 
 class Constante
 {
-    // AFFICHAGE PHOTO //
-    const IP_ADDRESS = "192.168.1.20";
-
     // STATUT ARTICLE //
     const DRAFT = 1001;
     const PUBLISHED = 1002;

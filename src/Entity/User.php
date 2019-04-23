@@ -368,19 +368,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAvatarurl(): string{
-        $avatar = $this->avatar;
-        $icon_path ="http://".Constante::IP_ADDRESS."/api/assets/image/icons";
-        if(substr($avatar,0,42) == $icon_path){
-            $avatar_url = $avatar;
-            return (string) $avatar_url;
-        }else{
-            $avatar_url = "http://".Constante::IP_ADDRESS."/api/public/images/uploads/".$avatar;
-        }
-        return (string) $avatar_url;
-    }
-
-
     public function getAddressip()
     {
         return $this->addressip;

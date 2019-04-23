@@ -49,7 +49,7 @@ class RegistrationController extends AbstractController
             }
             else{
                 $alea = rand(0,23);
-                $user->setAvatar("http://192.168.0.16/api/assets/image/icons".$alea.".png");
+                $user->setAvatar("icons".$alea.".png");
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

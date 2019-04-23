@@ -29,7 +29,7 @@
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td><img src="{{ user.avatarurl }}" width="50px" height="50px"></td>
+                <td><img src="{{ asset('./images/uploads/' ~ user.avatar) }}" width="50px" height="50px"></td>
                 <td>
                     <a class="btn btn-success btn-sm" href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a class="btn btn-warning btn-sm" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
