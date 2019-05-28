@@ -59,7 +59,7 @@
                                 {% set i = 0 %}
                                 {% for picture in article.articlePictures %}
                                     <div class="carousel-item {% if i == 0 %}active{% endif %}">
-                                        <img class="d-block w-100" src="{{ asset('./uploads/pictures/' ~ picture.picture ) }}" alt="{{ picture.id }}">
+                                        <img class="d-block w-100" src="{{ asset('./uploads/pictures/' ~ picture.picture ) }}" alt="{{ picture.picture }}">
                                     </div>
                                     {% set i = i + 1 %}
                                 {% endfor %}

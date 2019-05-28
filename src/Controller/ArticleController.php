@@ -84,50 +84,29 @@ class ArticleController extends AbstractController
         $formP = $this->createForm(ArticlePictureType::class, $picture);
         $formP->handleRequest($request);
 
-        if ($formP->isSubmitted() && $formP->isValid()) {
+            if ($formP->isSubmitted() && $formP->isValid()) {
             $picture->setArticle($article);
 //            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $formP->get('picture')->getData();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-//            $pictureDir = $this->container->getParameter('kernel.root_dir').'./public/uploads/pictures';
-//            $file->move($pictureDir, $fileName);
-
-            try {
-                $file->move(
-                    $this->getParameter('pictures_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                $this->addFlash( 'danger' , $e->getMessage());
+            $files = $formP->get('picture')->getData();
+            foreach ( $files as $file)
+            {
+                $fileName = md5(uniqid()).'.'. $file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('pictures_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash( 'danger' , $e->getMessage());
+                    $this->addFlash( 'success' , $e->getMessage());
+                }
+                $picture->setPicture($fileName);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($picture);
+                $entityManager->flush();
             }
 
-            $picture->setPicture($fileName);
 
-
-//            $file = $formP->get('file')->getData();
-//
-////            $fileName = $file->getClientOriginalName();
-////            $fileMime = $file->g
-//
-//            try {
-//                $file->move(
-//                    $this->getParameter('pictures_directory'),
-//                    $fileName
-//                );
-//            } catch (FileException $e) {
-//                $this->addFlash( 'danger' , $e->getMessage());
-//            }
-//
-//            $picture->setPicture($fileName);
-
-//            $picture->setPath($file);
-//            $picture->setPath($file);
-//            $picture->setPath($file);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($picture);
-            $entityManager->flush();
         }
 
         return $this->render('article/picture.html.twig', array(
