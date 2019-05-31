@@ -91,6 +91,7 @@
             }
 
             .profile-usermenu ul li a {
+
                 color: #93a3b5;
                 font-size: 14px;
                 font-weight: 400;
@@ -232,7 +233,7 @@
                         {{ app.user.username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('profile_article') }}">{{ 'nav.profile'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('profile_page') }}">{{ 'nav.profile'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'app.logout'|trans }}</a>
                         <div class="dropdown-divider"></div>
                     </div>
@@ -278,7 +279,6 @@
 <div class="container">
     {% block body %}
     {% endblock %}
-    {{ knp_menu_render('breadcrumb', {'currentAsLink':false}) }}
 </div>
 
 {% block javascripts %}
@@ -289,7 +289,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready( function () {
-            $('#tableAdmin').DataTable();
+            $('tableAdmin').DataTable();
         } );
     </script>
     <script>

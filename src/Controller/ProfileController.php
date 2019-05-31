@@ -24,13 +24,49 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile/articles", name="profile_article")
+     * @Route("/profile", name="profile_page")
      */
-    public function index()
+    public function index(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
+        $user = $this->getUser();
+        $passwordUpdate = new  PasswordUpdate();
+        $formPassword = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+        $formPassword->handleRequest($request);
+
+        if ($formPassword->isSubmitted() && $formPassword->isValid()){
+            if (!password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
+//                echo 'no !';
+                $this->addFlash(
+                    'error',"No !"
+                );
+            }else{
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $encoder->encodePassword($user, $newPassword);
+
+                $user->setPassword($hash);
+                $manager->persist($user);
+                $manager->flush();
+                $this->addFlash(
+                    'success',"Votre mdp est été modifié"
+                );
+                return $this->redirectToRoute('profile_password');
+            }
+        }
+
+        $formProfile =$this->createForm(ProfileType::class, $user);
+        $formProfile->handleRequest($request);
+
+        if ($formProfile->isSubmitted() && $formProfile->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
         $user = $this->getUser();
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
+            'formPassword' => $formPassword->createView(),
+            'formProfile' => $formProfile->createView(),
             'user' => $user
         ]);
     }
@@ -53,10 +89,10 @@ class ProfileController extends AbstractController
     public function account(Request $request)
     {
         $user = $this->getUser();
-        $form =$this->createForm(ProfileType::class, $user);
-        $form->handleRequest($request);
+        $formProfile =$this->createForm(ProfileType::class, $user);
+        $formProfile->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($formProfile->isSubmitted() && $formProfile->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -65,7 +101,7 @@ class ProfileController extends AbstractController
         return $this->render('profile/account.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user,
-            'form' => $form->createView(),
+            'formProfile' => $formProfile->createView(),
         ]);
     }
 
