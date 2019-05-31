@@ -26,43 +26,40 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setIsActivate(false);
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $user->setPassword($passwordEncoder->encodePassword($user,$form->get('plainPassword')->getData()));
 
             // GET IP ADDRESS
-            $ipAddress = new CaptureIpTrait();
-            if($user->getAddressip()==null OR $user->getAddressip()==""){
-                $user->setAddressip($ipAddress->getClientIp());
-
-            }
+//            $ipAddress = new CaptureIpTrait();
+//            if($user->getAddressip()==null OR $user->getAddressip()==""){
+//                $user->setAddressip($ipAddress->getClientIp());
+//            }
             //Attach Avatar to User
-            if(!empty($user->getAvatar())){
-                $file = $user->getAvatar();
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->getParameter('photos_directory'), $fileName);
-                $user->setAvatar($fileName);
-            }
-            else{
-                $alea = rand(0,23);
-                $user->setAvatar("icons".$alea.".png");
-            }
+//            if(!empty($user->getAvatar())){
+//                $file = $user->getAvatar();
+//                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+//                $file->move($this->getParameter('photos_directory'), $fileName);
+//                $user->setAvatar($fileName);
+//            }
+//            else{
+//                $alea = rand(0,23);
+//                $user->setAvatar("icons".$alea.".png");
+//            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
             // do anything else you need here, like send an email
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+//            return $guardHandler->authenticateUserAndHandleSuccess(
+//                $user,
+//                $request,
+//                $authenticator,
+//                'main' // firewall name in security.yaml
+//            );
+            $this->addFlash('success', 'Réussi');
+        }
+        else{
+            $this->addFlash('danger', 'nop');
         }
 
         return $this->render('registration/register.html.twig', [

@@ -3,30 +3,45 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
-
-    <div class="row mt-5">
-        <div class="col-lg-4">
-            <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-account-list" data-toggle="list" href="#list-account" role="tab" aria-controls="account">Profile</a>
-                <a class="list-group-item list-group-item-action" id="list-password-list" data-toggle="list" href="#list-password" role="tab" aria-controls="password">Change password</a>
-                <a class="list-group-item list-group-item-action" id="list-article-list" data-toggle="list" href="#list-article" role="tab" aria-controls="article">{{ 'profile.article'|trans }}</a>
-                <a class="list-group-item list-group-item-action" id="list-comment-list" data-toggle="list" href="#list-comment" role="tab" aria-controls="comment">{{ 'profile.comment'|trans }}</a>
+        <div class="container row mt-3">
+            <div class="col-lg-4">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-account-list" data-toggle="list" href="#list-account" role="tab" aria-controls="account">Profile</a>
+                    <a class="list-group-item list-group-item-action" id="list-password-list" data-toggle="list" href="#list-password" role="tab" aria-controls="password">Change password</a>
+                    <a class="list-group-item list-group-item-action" id="list-article-list" data-toggle="list" href="#list-article" role="tab" aria-controls="article">{{ 'profile.article'|trans }}</a>
+                    <a class="list-group-item list-group-item-action" id="list-comment-list" data-toggle="list" href="#list-comment" role="tab" aria-controls="comment">{{ 'profile.comment'|trans }}</a>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="list-account" role="tabpanel" aria-labelledby="list-account-list">
-                    {{ include('profile/account.html.twig') }}
+            <div class="col">
+                {% for message in app.flashes('success') %}
+                    <div class="row mt-2">
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('danger') %}
+                    <div class="row">
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="list-account" role="tabpanel" aria-labelledby="list-account-list">
+                        {{ include('profile/account.html.twig') }}
+                    </div>
+                    <div class="tab-pane fade" id="list-password" role="tabpanel" aria-labelledby="list-password-list">
+                        {{ include('profile/passwordUpdate.html.twig') }}
+                    </div>
+                    <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-article-list">
+                        {{ include('profile/articles.html.twig') }}
+                    </div>
+                    <div class="tab-pane fade" id="list-comment" role="tabpanel" aria-labelledby="list-comment-list">
+                        {{ include('profile/comments.html.twig') }}</div>
                 </div>
-                <div class="tab-pane fade" id="list-password" role="tabpanel" aria-labelledby="list-password-list">
-                    {{ include('profile/passwordUpdate.html.twig') }}
-                </div>
-                <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-article-list">
-                    {{ include('profile/articles.html.twig') }}
-                </div>
-                <div class="tab-pane fade" id="list-comment" role="tabpanel" aria-labelledby="list-comment-list">
-                    {{ include('profile/comments.html.twig') }}</div>
             </div>
         </div>
     </div>
+
 {% endblock %}

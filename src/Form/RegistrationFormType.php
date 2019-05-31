@@ -21,10 +21,10 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('avatar', FileType::class, [
-                'label' => 'Avatar (png, jpeg)',
-                'attr' => array('placeholder' => 'Choisir avatar')
-            ])
+//            ->add('avatar', FileType::class, [
+//                'label' => 'Avatar (png, jpeg)',
+//                'attr' => array('placeholder' => 'Choisir avatar')
+//            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 // instead of being set onto the object directly,
@@ -44,7 +44,7 @@ class RegistrationFormType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Confirm Password'),
             ])
-            ->add('save', SubmitType::class)
+//            ->add('Save', SubmitType::class)
         ;
     }
 

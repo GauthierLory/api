@@ -37,7 +37,7 @@ class ProfileController extends AbstractController
             if (!password_verify($passwordUpdate->getOldPassword(), $user->getPassword())){
 //                echo 'no !';
                 $this->addFlash(
-                    'error',"No !"
+                    'danger',"Impossible de changer le mot de passe !"
                 );
             }else{
                 $newPassword = $passwordUpdate->getNewPassword();
@@ -49,7 +49,6 @@ class ProfileController extends AbstractController
                 $this->addFlash(
                     'success',"Votre mdp est été modifié"
                 );
-                return $this->redirectToRoute('profile_password');
             }
         }
 
