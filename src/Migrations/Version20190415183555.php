@@ -22,10 +22,10 @@ final class Version20190415183555 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE product_like');
-        $this->addSql('ALTER TABLE article_picture ADD article_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE article_picture ADD CONSTRAINT FK_FB090B3E7294869C FOREIGN KEY (article_id) REFERENCES article (id)');
-        $this->addSql('CREATE INDEX IDX_FB090B3E7294869C ON article_picture (article_id)');
+//        $this->addSql('DROP TABLE product_like');
+//        $this->addSql('ALTER TABLE article_picture ADD article_id INT DEFAULT NULL');
+//        $this->addSql('ALTER TABLE article_picture ADD CONSTRAINT FK_FB090B3E7294869C FOREIGN KEY (article_id) REFERENCES article (id)');
+//        $this->addSql('CREATE INDEX IDX_FB090B3E7294869C ON article_picture (article_id)');
     }
 
     public function down(Schema $schema) : void
