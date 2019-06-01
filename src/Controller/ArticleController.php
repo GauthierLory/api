@@ -11,7 +11,6 @@ use App\Form\ArticlePictureType;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\ArticlePictureRepository;
-use App\Repository\ImageRepository;
 use App\Repository\ArticleLikeRepository;
 use App\Repository\ArticleRepository;
 use App\Service\HistoriqueHelper;
@@ -45,7 +44,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ObjectManager $manager, ImageRepository $imageRepository): Response
+    public function new(Request $request, ObjectManager $manager): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -53,10 +52,6 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setCreatedAt(new \DateTime());
-//            foreach ($article->getImages() as $image){
-//                $image->setarticle($article);
-//                $manager->persist($image);
-//            }
             $article->setUser($this->getUser());
             $manager->persist($article);
             $manager->flush();
@@ -70,8 +65,6 @@ class ArticleController extends AbstractController
 
         return $this->render('article/new.html.twig', [
             'article' => $article,
-            'form' => $form->createView(),
-            'images' => $imageRepository->findAll()
         ]);
     }
 
@@ -84,12 +77,10 @@ class ArticleController extends AbstractController
         $formP = $this->createForm(ArticlePictureType::class, $picture);
         $formP->handleRequest($request);
 
-            if ($formP->isSubmitted() && $formP->isValid()) {
-            $picture->setArticle($article);
-//            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $files = $formP->get('picture')->getData();
-            foreach ( $files as $file)
-            {
+        if ($formP->isSubmitted() && $formP->isValid()) {
+        $files = $formP->get('picture')->getData();
+            foreach ( $files as $file) {
+                $picture->setArticle($article);
                 $fileName = md5(uniqid()).'.'. $file->guessExtension();
                 try {
                     $file->move(
@@ -98,15 +89,18 @@ class ArticleController extends AbstractController
                     );
                 } catch (FileException $e) {
                     $this->addFlash( 'danger' , $e->getMessage());
-                    $this->addFlash( 'success' , $e->getMessage());
                 }
                 $picture->setPicture($fileName);
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($picture);
                 $entityManager->flush();
+                dump($file);
             }
-
-
+            dump($files);
+            return $this->redirectToRoute('article_show', [
+                'slug' => $article->getSlug(),
+                'id' => $article->getId(),
+            ]);
         }
 
         return $this->render('article/picture.html.twig', array(
@@ -127,13 +121,12 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-                $comment->setAuthor($this->getUser());
-                $comment->setArticle($article);
+            $comment->setAuthor($this->getUser());
+            $comment->setArticle($article);
 //                dump($form);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($comment);
-                $entityManager->flush();
-
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
         }
 
         return $this->render('article/show.html.twig', [

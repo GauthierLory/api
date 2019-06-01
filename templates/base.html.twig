@@ -182,6 +182,22 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img id="nav_lang" width="25px" height="25px" src="{{ asset('./images/uploads/icone-kit.jpg') }}">
+                </a>
+                <div id="flag_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a id="en" class="dropdown-item" href="{{ path('switch_language_english') }}">
+                        <img id="flag_en" width="25px" height="25px" src="{{ asset('./images/uploads/icone-en.gif') }}">
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a id="fr" class="dropdown-item" href="{{ path('switch_language_french') }}">
+                        <img id="flag_fr"  width="25px" height="25px" src="{{ asset('./images/uploads/icone-fr.jpg') }}">
+                    </a>
+                </div>
+            </li>
+        </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 {% if is_granted('ROLE_ADMIN') %}
@@ -207,27 +223,10 @@
                             <a class="dropdown-item" href="{{ path('infoph') }}">{{ 'nav.settings_php'|trans }}</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img id="nav_lang" width="25px" height="25px" src="{{ asset('./images/uploads/icone-kit.jpg') }}">
-                        </a>
-                        <div id="flag_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a id="en" class="dropdown-item" href="{{ path('switch_language_english') }}">
-                                <img id="flag_en" width="25px" height="25px" src="{{ asset('./images/uploads/icone-en.gif') }}">
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a id="fr" class="dropdown-item" href="{{ path('switch_language_french') }}">
-                                <img id="flag_fr"  width="25px" height="25px" src="{{ asset('./images/uploads/icone-fr.jpg') }}">
-                            </a>
-                        </div>
-                    </li>
                 {% endif %}
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <img src="{{ asset('./images/uploads/' ~ app.user.avatar) }}" height="40px" width="40px">
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ app.user.username }}
@@ -235,8 +234,10 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ path('profile_page') }}">{{ 'nav.profile'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'app.logout'|trans }}</a>
-                        <div class="dropdown-divider"></div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <img src="{{ asset('./images/uploads/' ~ app.user.avatar) }}" height="40px" width="40px">
                 </li>
             </ul>
         </div>

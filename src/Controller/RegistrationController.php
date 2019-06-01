@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\RegistrationType;
 use App\Security\LoginFormAuthAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,16 +17,16 @@ use App\Traits\CaptureIpTrait;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register", name="app_register",  methods={"GET","POST"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthAuthenticator $authenticator): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form= $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setIsActivate(false);
+            $user->setIsActivate(true);
             $user->setPassword($passwordEncoder->encodePassword($user,$form->get('plainPassword')->getData()));
 
             // GET IP ADDRESS
@@ -33,37 +34,31 @@ class RegistrationController extends AbstractController
 //            if($user->getAddressip()==null OR $user->getAddressip()==""){
 //                $user->setAddressip($ipAddress->getClientIp());
 //            }
-            //Attach Avatar to User
-//            if(!empty($user->getAvatar())){
-//                $file = $user->getAvatar();
-//                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-//                $file->move($this->getParameter('photos_directory'), $fileName);
-//                $user->setAvatar($fileName);
-//            }
-//            else{
-//                $alea = rand(0,23);
-//                $user->setAvatar("icons".$alea.".png");
-//            }
+//            Attach Avatar to User
+            if(!empty($user->getAvatar())){
+                $file = $user->getAvatar();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('photos_directory'), $fileName);
+                $user->setAvatar($fileName);
+            }
+            else{
+                $alea = rand(0,23);
+                $user->setAvatar("icons".$alea.".png");
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-
-//            return $guardHandler->authenticateUserAndHandleSuccess(
-//                $user,
-//                $request,
-//                $authenticator,
-//                'main' // firewall name in security.yaml
-//            );
-            $this->addFlash('success', 'Réussi');
-        }
-        else{
-            $this->addFlash('danger', 'nop');
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }
