@@ -14,8 +14,12 @@
             </div>
         {% endfor %}
         <div class="card-header">
+
+            </div>
             {{ form_start(formP) }}
-            {{ form_widget(formP.picture) }}
+            {{ form_label(formP.picture) }}
+            {{ form_widget(formP.picture, {'attr' : {'' : ''}}) }}
+            {{ form_errors(formP.picture) }}
             {{ form_end(formP) }}
         </div>
     </div>

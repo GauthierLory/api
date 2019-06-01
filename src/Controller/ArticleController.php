@@ -76,10 +76,11 @@ class ArticleController extends AbstractController
         $picture = new ArticlePicture;
         $formP = $this->createForm(ArticlePictureType::class, $picture);
         $formP->handleRequest($request);
+        $pictures = $formP->get('picture')->getData();
 
         if ($formP->isSubmitted() && $formP->isValid()) {
-        $files = $formP->get('picture')->getData();
-            foreach ( $files as $file) {
+            foreach ( $pictures as $file) {
+                $picture = new ArticlePicture;
                 $picture->setArticle($article);
                 $fileName = md5(uniqid()).'.'. $file->guessExtension();
                 try {
@@ -89,14 +90,14 @@ class ArticleController extends AbstractController
                     );
                 } catch (FileException $e) {
                     $this->addFlash( 'danger' , $e->getMessage());
-                }
+                };
                 $picture->setPicture($fileName);
+
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($picture);
                 $entityManager->flush();
-                dump($file);
             }
-            dump($files);
+
             return $this->redirectToRoute('article_show', [
                 'slug' => $article->getSlug(),
                 'id' => $article->getId(),
