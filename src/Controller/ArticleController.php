@@ -65,6 +65,7 @@ class ArticleController extends AbstractController
 
         return $this->render('article/new.html.twig', [
             'article' => $article,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -92,6 +93,7 @@ class ArticleController extends AbstractController
                     $this->addFlash( 'danger' , $e->getMessage());
                 };
                 $picture->setPicture($fileName);
+                $picture->getAbsolutePath();
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($picture);

@@ -2,7 +2,7 @@
 
 {% block title %}Edit Article{% endblock %}
 {% block body %}
-    <div class="card">
+    <div class="">
         {% for message in app.flashes('success') %}
             <div class="alert alert-notice">
                 {{ message }}
@@ -13,9 +13,8 @@
                 {{ message }}
             </div>
         {% endfor %}
-        <div class="card-header">
 
-            </div>
+        <div class="">
             {{ form_start(formP) }}
             {{ form_label(formP.picture) }}
             {{ form_widget(formP.picture, {'attr' : {'' : ''}}) }}

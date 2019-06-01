@@ -3,7 +3,17 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
+    {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">#}
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>#}
     <style>
+        .show-cart li {
+            display: flex;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
         body {font-family: Arial;}
 
         /* Style the tab */
@@ -44,172 +54,169 @@
         }
     </style>
 
-    <div class="">
-        <div class="card my-3">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                {% set i = 0 %}
-                                {% for picture in article.articlePictures %}
-                                    <div class="carousel-item {% if i == 0 %}active{% endif %}">
-                                        <img class="d-block w-100" src="{{ asset('./uploads/pictures/' ~ picture.picture ) }}" alt="{{ picture.picture }}">
-                                    </div>
-                                    {% set i = i + 1 %}
-                                {% endfor %}
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        {% if is_granted('ROLE_USER') and app.user == article.getUser() %}
-                            <a class="btn btn-warning btn-sm" href="{{ path('article_edit', {'slug': article.slug,'id': article.id}) }}">{{ 'btn.edit'|trans }}</a>
-                        {% endif %}
-                        <h5><a class="btn btn-primary" href="{{ path('home') }}"><i class="fas fa-arrow-alt-circle-left"></i></a>{{ article.title }}</h5>
-                        <span class="rating">{{ 'article.average'|trans }} :  </span>
-                        {% if article.comments|length >0%}
-                            {% if article.moyenne > 0 %}
-                                {% set rating = article.moyenne %}
-                                {% include 'article/rating.html.twig' %}
-                                {{ article.comments | length }} notes
-                            {% endif %}
-                        {% else %}
-                            <p>pas de note</p>
-                        {% endif %}
-                        <hr>
-                        <div class="row">{{ article.content|raw }}</div>
-                        <br>
-                        <div class="row">{{ article.price }}€ </div>
-                        <br>
-                        <div class="row">
-                            <label>Quantity : </label>
-                            <input min="1" type="number"><button type="button" class="btn btn-primary">{{ 'btn.add_cart'|trans }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'Description')" id="defaultOpen">{{ 'article.description'|trans }}</button>
-            <button class="tablinks" onclick="openCity(event, 'Attributes')">{{ 'article.attributes'|trans }}</button>
-            <button class="tablinks" onclick="openCity(event, 'Reviews')">{{ 'article.reviews'|trans }}</button>
+    <!-- Main -->
+<div class="container">
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="row">
+                        <div class="col-lg-6">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    {% set i = 0 %}
+                                    {% for picture in article.articlePictures %}
+                                        <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                                            <img class="d-block w-100" src="{{ asset('./uploads/pictures/' ~ picture.picture ) }}" alt="{{ picture.picture }}">
+                                        </div>
+                                        {% set i = i + 1 %}
+                                    {% endfor %}
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card-block">
+                                {% if is_granted('ROLE_USER') and app.user == article.getUser() %}
+                                    <a class="btn btn-warning btn-sm" href="{{ path('article_edit', {'slug': article.slug,'id': article.id}) }}">{{ 'btn.edit'|trans }}</a>
+                                {% endif %}
+                                <h4 class="card-title"><a class="btn btn-primary" href="{{ path('home') }}"><i class="fas fa-arrow-alt-circle-left"></i></a>{{ article.title }}</h4>
+                                <span class="rating">{{ 'article.average'|trans }} :  </span>
+                                {% if article.comments|length >0%}
+                                    {% if article.moyenne > 0 %}
+                                        {% set rating = article.moyenne %}
+                                        {% include 'article/rating.html.twig' %}
+                                        {{ article.comments | length }} notes
+                                    {% endif %}
+                                {% else %}
+                                    <p>pas de note</p>
+                                {% endif %}
+                                <div class="card-content">{{ article.content|raw }}</div>
+                                <p class="card-text">Price: {{ article.price }}</p>
+                                <a href="#" data-name="{{ article.title }}" data-price="{{ article.price }}" class="add-to-cart btn btn-primary">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
         </div>
-        <div id="Description" class="tabcontent">
-            <hr>Description :{{ article.description | raw }}
-        </div>
-        <div id="Attributes" class="tabcontent">
-            <p class="card-text">
-                {{ 'article.user'|trans }} : {{ article.user.email }}
-            <hr>{{ 'article.title'|trans }} : {{ article.title }}
-            <hr>{{ 'article.tag'|trans }} : {{ article.tag.name }}
-            <hr>{{ 'article.date'|trans }} : {{ article.createdAt|date('d/m/Y') }}
-            </p>
-        </div>
-        <div id="Reviews" class="tabcontent">
-            {% for comment in article.comments %}
+    </div>
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Description')" id="defaultOpen">{{ 'article.description'|trans }}</button>
+        <button class="tablinks" onclick="openCity(event, 'Attributes')">{{ 'article.attributes'|trans }}</button>
+        <button class="tablinks" onclick="openCity(event, 'Reviews')">{{ 'article.reviews'|trans }}</button>
+    </div>
+    <div id="Description" class="tabcontent">
+        <hr>Description :{{ article.description | raw }}
+    </div>
+    <div id="Attributes" class="tabcontent">
+        <p class="card-text">
+            {{ 'article.user'|trans }} : {{ article.user.email }}
+        <hr>{{ 'article.title'|trans }} : {{ article.title }}
+        <hr>{{ 'article.tag'|trans }} : {{ article.tag.name }}
+        <hr>{{ 'article.date'|trans }} : {{ article.createdAt|date('d/m/Y') }}
+        </p>
+    </div>
+    <div id="Reviews" class="tabcontent">
+        {% for comment in article.comments %}
             <div id="accordion">
                 <div class="card">
                     <div class="card-header p-1 mb-2 bg-primary" style="text-decoration:none;" id="headingOne">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ comment.id }}" aria-expanded="true" aria-controls="collapseOne">
-                                <div style="float:left;margin-left:15px;"><img src="{{ asset('./images/uploads/' ~ comment.author.avatar ) }}" style="width:50px;height:50px;"></div>
-                                <div style="float:left;margin-left:15px;">
-                                    <strong style="color:white;">{{ comment.author.username }}</strong><br>
-                                    {#<strong>{{ comment.author.username }}</strong>#}
-                                    {% set rating = comment.rating %}
-                                    {% include 'article/rating.html.twig' %}
-                                </div>
-                                <div style="color:black;font-size:12px;">{{ 'article.date'|trans }} {{ comment.createdAt|date('d/m/Y') }}</div>
-                            </button>
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ comment.id }}" aria-expanded="true" aria-controls="collapseOne">
+                            <div style="float:left;margin-left:15px;"><img src="{{ asset('./images/uploads/' ~ comment.author.avatar ) }}" style="width:50px;height:50px;"></div>
+                            <div style="float:left;margin-left:15px;">
+                                <strong style="color:white;">{{ comment.author.username }}</strong><br>
+                                <strong>{{ comment.author.username }}</strong>
+                                {% set rating = comment.rating %}
+                                {% include 'article/rating.html.twig' %}
+                            </div>
+                            <div style="color:black;font-size:12px;">{{ 'article.date'|trans }} {{ comment.createdAt|date('d/m/Y') }}</div>
+                        </button>
                     </div>
 
                     <div id="collapse{{ comment.id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="col-md-8">
-                                <div class="">
-                                    <p>{{ comment.description|raw}}</p>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            {% set comment = article.commentFromAuthor(app.user) %}
-            {% if comment is not null %}
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="row"> <strong>Note : </strong>{% include 'article/rating.html.twig' with{'rating': comment.rating} %}</div>
-                                <div class="row" style="right:0;"><small>{{ 'article.date'|trans }} {{ comment.createdAt|date('d/m/Y') }}</small></div>
-                                <div class="row"><a class="btn btn-warning btn-sm" href="{{ path('comment_edit', {'id': comment.id}) }}">{{ 'btn.edit'|trans }}</a></div>
-                            </div>
-                            <div class="col-md-9">
-                                <blockquote>
-                                    {{ comment.description | raw }}
-                                </blockquote>
+                        <div class="col-md-8">
+                            <div class="">
+                                <p>{{ comment.description|raw}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% else %}
-                <div class="d-flex mt-4 mb-4">
-                <hr class="my-auto flex-grow-1">
-                    <div class="px-4">please comment if you have purchase ! </div>
-                <hr class="my-auto flex-grow-1">
-                </div>
-
-                <div class="card-body">
-                    {{ include('comment/_form.html.twig') }}
-                </div>
-            {% endif %}
-        </div>
-
-        <div class="d-flex mt-4 mb-4">
-            <hr class="my-auto flex-grow-1">
-            <div class="px-4">{{ 'article.last_articles'|trans }}</div>
-            <hr class="my-auto flex-grow-1">
-        </div>
-        <div class="row">
-        {% for article in articles %}
-            <div class="col-sm-3">
-                    <div class="">
-                        <h5 class="card-title">{{ article.title }}</h5>
-                        <small>{{ article.createdAt|date('d/m/Y') }}</small>
-                        <span class="badge badge-pill badge-success">{{ article.tag.name }}</span>
-                        <p>{{ article.firstpartdescription|raw }}</p>
-                        <p class="fulltext">{{ article.secondpartdescription|raw }}</p>
-                        <a id="readmore{{ article.id }}" class="readmore">Read more...</a>
-                        {#<p class="card-text">{{ article.description }}</p>#}
-                        <a href="{{ path('article_show', {'slug': article.slug, 'id': article.id} ) }}" class="btn btn-primary">{{ 'btn.show'|trans }}</a>
-                        <a href="{{ path('article_like', {'id': article.id} ) }}" class="btn js-like">
-                            {%  if app.user and article.isLikedByUser(app.user) %}
-                                <i class="fas fa-thumbs-up"></i>
-                            {% else %}
-                                <i class="far fa-thumbs-up"></i>
-                            {% endif %}
-
-                            <span class="js-likes">{{ article.articleLikes | length }}</span>
-                            <span class="js-label">#j'aime</span>
-                        </a>
-                    </div>
             </div>
         {% endfor %}
-        </div>
+        {% set comment = article.commentFromAuthor(app.user) %}
+        {% if comment is not null %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row"> <strong>Note : </strong>{% include 'article/rating.html.twig' with{'rating': comment.rating} %}</div>
+                            <div class="row" style="right:0;"><small>{{ 'article.date'|trans }} {{ comment.createdAt|date('d/m/Y') }}</small></div>
+                            <div class="row"><a class="btn btn-warning btn-sm" href="{{ path('comment_edit', {'id': comment.id}) }}">{{ 'btn.edit'|trans }}</a></div>
+                        </div>
+                        <div class="col-md-9">
+                            <blockquote>
+                                {{ comment.description | raw }}
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="d-flex mt-4 mb-4">
+                <hr class="my-auto flex-grow-1">
+                <div class="px-4">please comment if you have purchase ! </div>
+                <hr class="my-auto flex-grow-1">
+            </div>
 
-            <script>
+            <div class="card-body">
+                {{ include('comment/_form.html.twig') }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="d-flex mt-4 mb-4">
+        <hr class="my-auto flex-grow-1">
+        <div class="px-4">{{ 'article.last_articles'|trans }}</div>
+        <hr class="my-auto flex-grow-1">
+    </div>
+    <div class="row">
+        {% for article in articles %}
+            <div class="col-sm-3">
+                <div class="">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <small>{{ article.createdAt|date('d/m/Y') }}</small>
+                    <span class="badge badge-pill badge-success">{{ article.tag.name }}</span>
+                    <p>{{ article.firstpartdescription|raw }}</p>
+                    <p class="fulltext">{{ article.secondpartdescription|raw }}</p>
+                    <a id="readmore{{ article.id }}" class="readmore">Read more...</a>
+                    <p class="card-text">{{ article.description }}</p>
+                    <a href="{{ path('article_show', {'slug': article.slug, 'id': article.id} ) }}" class="btn btn-primary">{{ 'btn.show'|trans }}</a>
+                    <a href="{{ path('article_like', {'id': article.id} ) }}" class="btn js-like">
+                        {%  if app.user and article.isLikedByUser(app.user) %}
+                            <i class="fas fa-thumbs-up"></i>
+                        {% else %}
+                            <i class="far fa-thumbs-up"></i>
+                        {% endif %}
+
+                        <span class="js-likes">{{ article.articleLikes | length }}</span>
+                        <span class="js-label">#j'aime</span>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+        <script>
                 function openCity(evt, cityName) {
                     var i, tabcontent, tablinks;
                     tabcontent = document.getElementsByClassName("tabcontent");
