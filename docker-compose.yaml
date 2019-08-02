@@ -1,0 +1,48 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASS: root
+      MYSQL_DATABASE: apiphp
+    volumes:
+      - ./docker/mysql_data:/var/lib/mysql
+    networks:
+      - default
+  php:
+    build: ./docker/php-fpm
+    ports:
+      - "9000:9001"
+    volumes:
+      - ./:/var/www/symfony
+      - ./logs:/var/www/symfony/var/log
+    networks:
+      - default
+  nginx:
+    build: ./docker/nginx
+    ports:
+      - "80:80"
+    links:
+      - php
+    volumes:
+      - ./logs/nginx:/var/log/nginx:cached
+      - ./:/var/www/symfony
+    depends_on:
+      - mysql
+      - php
+    restart: always
+  node:
+    build: ./docker/node
+    volumes:
+      - ./:/var/www/symfony
+    command: "yarn run assets --watch"
+networks:
+  default:
+    driver: bridge
+
+  
+
+
