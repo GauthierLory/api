@@ -1,0 +1,9 @@
+index:
+  path:     /
+  controller: App\Action\Admin\IndexAction
+
+
+users:
+  resource: 'routes-admin-user.yml'
+  name_prefix: user::
+  prefix: /users

@@ -6,9 +6,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Helper\Constante;
 
 /**
  * @ApiResource()
@@ -17,11 +17,13 @@ use App\Helper\Constante;
 class User implements UserInterface
 {
     /**
+     * @var UuidInterface
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true, name="id")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
-    private $id;
+    private $uuid;
 
     /**
      * @ORM\Column(type="string", length=180)
@@ -110,11 +112,13 @@ class User implements UserInterface
         $this->articleLikes = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    /**
+     * @return UuidInterface
+     */
+    public function getUuid(): UuidInterface
     {
-        return $this->id;
+        return $this->uuid;
     }
-
 
     /**
      * @return mixed

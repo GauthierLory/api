@@ -1,0 +1,69 @@
+<div id="sidebar-container" class="d-none d-md-block sidebar-expanded">
+</div>
+<nav id="nav" class="navbar navbar-expand-md navbar-dark bg-primary fixed">
+    <input type="hidden" id="language_sess" value = "{{ app.session.get('language') }}">
+    <a data-toggle="sidebar-colapse" class="navbar-brand" href="{{ path('bo::index') }}">{{ 'nav.admin'|trans }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img id="nav_lang" width="25px" height="25px" src="{{ asset('./images/uploads/icone-kit.jpg') }}">
+            </a>
+            <div id="flag_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a id="en" class="dropdown-item" href="{{ path('switch_language_english') }}">
+                    <img id="flag_en" width="25px" height="25px" src="{{ asset('./images/uploads/icone-en.gif') }}">
+                </a>
+                <div class="dropdown-divider"></div>
+                <a id="fr" class="dropdown-item" href="{{ path('switch_language_french') }}">
+                    <img id="flag_fr"  width="25px" height="25px" src="{{ asset('./images/uploads/icone-fr.jpg') }}">
+                </a>
+            </div>
+        </li>
+    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'nav.admin'|trans }}</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('article_index') }}">{{ 'nav.article'|trans }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('comment_index') }}">{{ 'nav.comment'|trans }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('user_index') }}">{{ 'nav.user'|trans }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('article_tag_index') }}">{{ 'nav.tag'|trans }}</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cog"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('adminsettings') }}">{{ 'nav.settings_all'|trans }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('infoph') }}">{{ 'nav.settings_php'|trans }}</a>
+                    </div>
+                </li>
+            {% endif %}
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li><a class="btn btn-primary" data-toggle="modal" data-target="#cart"><i class="fa fa-shopping-cart"></i>(<span class="total-count"></span>)</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ app.user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('profile_page') }}">{{ 'nav.profile'|trans }}</a>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'app.logout'|trans }}</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <img src="{{ asset('./images/uploads/' ~ app.user.avatar) }}" height="40px" width="40px">
+            </li>
+        </ul>
+    </div>
+</nav>

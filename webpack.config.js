@@ -25,6 +25,10 @@ Encore
     .addEntry('tabs', './assets/js/tabs.js')
     .addEntry('accueil', './assets/js/accueil.js')
     .addEntry('article_show', './assets/js/article_show.js')
+
+    .addEntry('app-front', './assets/js/app-front.js')
+    .addEntry('app-admin', './assets/js/app-admin.js')
+
     //.addEntry('page2', './assets/js/page2.js')
     //.addEntry('page3', './assets/js/page3.js')
     //.addEntry('page4', './assets/js/page4.js')

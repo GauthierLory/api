@@ -39,6 +39,24 @@
         "/build/article_show.js"
       ]
     },
+    "app-front": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app-front.js"
+      ],
+      "css": [
+        "/build/app-front.css"
+      ]
+    },
+    "app-admin": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app-admin.js"
+      ],
+      "css": [
+        "/build/app-admin.css"
+      ]
+    },
     "admin": {
       "js": [
         "/build/runtime.js",

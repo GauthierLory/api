@@ -1,0 +1,7 @@
+list:
+  path:     /
+  controller: App\Action\Admin\User\ListAction
+
+edit:
+  path:     /edit/{user}
+  controller: {App\Action\Admin\User\ListAction, user: null}

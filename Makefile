@@ -6,3 +6,6 @@ stop:
 
 shell:
 	@docker-compose exec php sh
+
+asset:
+	@docker-compose run node yarn encore dev
