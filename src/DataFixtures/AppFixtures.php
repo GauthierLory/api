@@ -25,8 +25,8 @@ class AppFixtures extends Fixture
         $faker = \Faker\Factory::create('fr_FR');
 
         $admin = new User();
-        $admin->setPrenom("admin");
-        $admin->setNom("admin");
+        $admin->setFirstName("admin");
+        $admin->setLastName("admin");
         $admin->setEmail("admin@admin.com");
         $admin->setIsActivate(true);
         $admin->setAvatar("icons1.png");
@@ -39,10 +39,10 @@ class AppFixtures extends Fixture
             $user = new User();
             $nb = mt_rand(0,23);
             $user->setEmail($faker->email);
-            $user->setPrenom($faker->name);
+            $user->setFirstName($faker->name);
             $user->setIsActivate(true);
             $user->setAvatar("icons".$nb.".png");
-            $user->setNom($faker->lastName);
+            $user->setLastName($faker->lastName);
             $user->setPassword($this->encoder->encodePassword($user, 'password'));
 
             $manager->persist($user);

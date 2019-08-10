@@ -1,7 +1,58 @@
 {% extends 'bo/layout/base.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
+<div class="card">
+    <div class="card-header">
+        <h1>User index</h1>
+    </div>
+    <div class="card-body">
+        <a class="btn btn-primary btn-sm" href="{{ path('user_new') }}">Create new</a>
+        <div id="usersDatatable">Loading...</div>
+{#        <table id="tableAdmin" class="table table-hover">#}
+{#            <thead>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <th>Nom</th>#}
+{#                <th>Prenom</th>#}
+{#                <th>Email</th>#}
+{#                <th>Roles</th>#}
+{#                <th>Avatar</th>#}
+{#                <th>actions</th>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#            {% for user in users %}#}
+{#                <tr>#}
+{#                    <td>{{ user.id }}</td>#}
+{#                    <td>{{ user.nom }}</td>#}
+{#                    <td>{{ user.prenom }}</td>#}
+{#                    <td>{{ user.email }}</td>#}
+{#                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
+{#                    <td><img src="{{ asset('./images/uploads/' ~ user.avatar) }}" width="50px" height="50px"></td>#}
+{#                    <td>#}
+{#                        <a class="btn btn-success btn-sm" href="{{ path('user_show', {'id': user.id}) }}">show</a>#}
+{#                        <a class="btn btn-warning btn-sm" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
+{#                    </td>#}
+{#                </tr>#}
+{#            {% else %}#}
+{#                <tr>#}
+{#                    <td colspan="8">no records found</td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+    </div>
+</div>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            $('#usersDatatable').initDataTables({{ datatable_settings(datatable) }});
+        });
+    </script>
 {% endblock %}

@@ -7,12 +7,15 @@ namespace App\Action\Admin\User;
 use App\Action\Action;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Security\Utils\AdminAccess;
 use App\Service\User\UserService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EditAction extends Action
 {
+    use AdminAccess;
+
     /** @var UserService  */
     private $userService;
 
@@ -32,6 +35,7 @@ class EditAction extends Action
      */
     public function __invoke(Request $request, User $user = null): Response
     {
+        $this->hasAccess();
         if (!$user) {
             $user = new User();
         }
@@ -39,8 +43,10 @@ class EditAction extends Action
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userService->editOrCreate($user);
-            return $this->redirectToRoute('users::list');
+            return $this->redirectToRoute('bo::user::list');
         }
-        return $this->render('bo/pages/user/edit.twig');
+        return $this->render('bo/pages/user/edit.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

@@ -7,3 +7,8 @@ users:
   resource: 'routes-admin-user.yml'
   name_prefix: user::
   prefix: /users
+
+products:
+  resource: 'routes-admin-product.yml'
+  name_prefix: product::
+  prefix: /products

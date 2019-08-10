@@ -1,37 +1,18 @@
+'use strict';
 var $ = require('jquery');
-window.$ = $;
-window.jQuery = $;
+$.noConflict();
+global.$ = $;
+global.jQuery = $;
 require('jquery-ui');
 require('bootstrap');
 require('popper.js');
-require('../css/app-front.css');
+require('@fortawesome/fontawesome-free');
 require('./nav.js');
+require('./admin/menu.js');
+require( 'datatables.net-bs4' );
+require('./modules/datatables');
 
-// Hide submenus
-$('#body-row .collapse').collapse('hide');
+import('../css/app-admin.css');
+import('bootstrap/dist/css/bootstrap.min.css');
+import('@fortawesome/fontawesome-free/css/all.min.css');
 
-// Collapse/Expand icon
-$('#collapse-icon').addClass('fa-angle-double-left');
-
-// Collapse click
-$('[data-toggle=sidebar-colapse]').click(function() {
-    SidebarCollapse();
-});
-
-function SidebarCollapse () {
-    $('.menu-collapsed').toggleClass('d-none');
-    $('.sidebar-submenu').toggleClass('d-none');
-    $('.submenu-icon').toggleClass('d-none');
-    $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
-
-    // Treating d-flex/d-none on separators with title
-    var SeparatorTitle = $('.sidebar-separator-title');
-    if ( SeparatorTitle.hasClass('d-flex') ) {
-        SeparatorTitle.removeClass('d-flex');
-    } else {
-        SeparatorTitle.addClass('d-flex');
-    }
-
-    // Collapse/Expand icon
-    $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
-}

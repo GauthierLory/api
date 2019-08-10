@@ -28,12 +28,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180)
      */
-    private $nom;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=180)
      */
-    private $prenom;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -43,7 +43,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    protected $roles = [];
 
     /**
      * @var string The hashed password
@@ -105,7 +105,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->artiles = new ArrayCollection();
+        $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->supports = new ArrayCollection();
         $this->historiques = new ArrayCollection();
@@ -115,6 +115,11 @@ class User implements UserInterface
     /**
      * @return UuidInterface
      */
+    public function getId(): UuidInterface
+    {
+        return $this->uuid;
+    }
+
     public function getUuid(): UuidInterface
     {
         return $this->uuid;
@@ -123,30 +128,30 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getNom()
+    public function getLastName()
     {
-        return $this->nom;
+        return $this->lastName;
     }
 
 
 
-    public function setNom($nom): self
+    public function setLastName($lastName): self
     {
-        $this->nom = $nom;
+        $this->lastName = $lastName;
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getPrenom()
+    public function getFirstName()
     {
-        return $this->prenom;
+        return $this->firstName;
     }
 
-    public function setPrenom($prenom): self
+    public function setFirstName($firstName): self
     {
-        $this->prenom = $prenom;
+        $this->firstName = $firstName;
         return $this;
     }
 
@@ -169,8 +174,8 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        $nom=$this->nom;
-        $prenom=$this->prenom;
+        $nom=$this->lastName;
+        $prenom=$this->firstName;
         $username=substr($prenom,0,1).".".strtoupper($nom);
         return (string) $username;
         //return (string) $this->email;

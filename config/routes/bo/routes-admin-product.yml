@@ -1,0 +1,12 @@
+list:
+  path:     /
+  controller: App\Action\Admin\Product\ListAction
+
+edit:
+  path:     /edit/{product}
+  controller: App\Action\Admin\Product\EditAction
+  defaults: {product: null}
+
+delete:
+  path:     /{product}
+  controller: App\Action\Admin\Product\DeleteAction

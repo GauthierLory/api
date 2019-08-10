@@ -19,13 +19,17 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{DependencyInjection,Controller,Action,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\Action\:
+      resource: '../src/Action'
+      tags: ['controller.service_arguments']
 
     App\Service\HistoriqueHelper:
         arguments: ["@doctrine.orm.default_entity_manager"]
@@ -44,12 +48,19 @@ services:
         tags:
             - { name: knp_menu.menu, method: createBreadcrumbMenu, alias: breadcrumb }
     #END BREADCRUMB
+    app.tools.breadscrumb:
+        class: App\Action\Admin\Tools\BreadcrumbAction
 
     app.locale_listener:
         class: App\EventListener\LocaleListener
         arguments: ["%kernel.default_locale%"]
         tags:
             - { name: kernel.event_subscriber }
+
+    app.security.voter.admin:
+        class: App\Security\Admin\AdminVoter
+        tags:
+            - { name: security.voter}
 
     #LISTENER DOCTRINE#
     #app.listener.doctrineevent:

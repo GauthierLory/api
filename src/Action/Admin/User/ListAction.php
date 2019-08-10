@@ -5,29 +5,39 @@ namespace App\Action\Admin\User;
 
 
 use App\Action\Action;
-use App\Service\User\UserService;
-use Symfony\Component\HttpFoundation\Response;
+use App\Security\Utils\AdminAccess;
+use App\Table\Admin\UserDatatable;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation;
 
 class ListAction extends Action
 {
-    /** @var UserService  */
-    private $userService;
+    use AdminAccess;
+
+    /** @var UserDatatable  */
+    private $userDatatable;
 
     /**
-     * @param UserService $userService*
+     * @param UserDatatable $userDatatable
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserDatatable $userDatatable)
     {
-        $this->userService = $userService;
+        $this->userDatatable = $userDatatable;
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return HttpFoundation\JsonResponse|HttpFoundation\Response
      */
-    public function __invoke(): Response
+    public function __invoke(Request $request)
     {
-        return $this->render('bo/pages/user/list.twig', [
-            'users' => $this->userService->findAll()
-        ]);
+        $this->hasAccess();
+        $this->userDatatable->handleRequest($request);
+        if ($this->userDatatable->isCallback()) {
+            return $this->userDatatable->response();
+        }
+        return $this->render('bo/pages/user/list.twig',
+            ['datatable' => $this->userDatatable->render()]
+        );
     }
 }

@@ -1,27 +1,8 @@
-<div id="sidebar-container" class="d-none d-md-block sidebar-expanded">
-</div>
 <nav id="nav" class="navbar navbar-expand-md navbar-dark bg-primary fixed">
-    <input type="hidden" id="language_sess" value = "{{ app.session.get('language') }}">
-    <a data-toggle="sidebar-colapse" class="navbar-brand" href="{{ path('bo::index') }}">{{ 'nav.admin'|trans }}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img id="nav_lang" width="25px" height="25px" src="{{ asset('./images/uploads/icone-kit.jpg') }}">
-            </a>
-            <div id="flag_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a id="en" class="dropdown-item" href="{{ path('switch_language_english') }}">
-                    <img id="flag_en" width="25px" height="25px" src="{{ asset('./images/uploads/icone-en.gif') }}">
-                </a>
-                <div class="dropdown-divider"></div>
-                <a id="fr" class="dropdown-item" href="{{ path('switch_language_french') }}">
-                    <img id="flag_fr"  width="25px" height="25px" src="{{ asset('./images/uploads/icone-fr.jpg') }}">
-                </a>
-            </div>
-        </li>
-    </ul>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a data-toggle="sidebar-colapse"  class="navbar-brand">{{ 'nav.admin'|trans }}</a></li>
+    </ol>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if is_granted('ROLE_ADMIN') %}
@@ -50,8 +31,26 @@
             {% endif %}
         </ul>
 
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
         <ul class="navbar-nav ml-auto">
             <li><a class="btn btn-primary" data-toggle="modal" data-target="#cart"><i class="fa fa-shopping-cart"></i>(<span class="total-count"></span>)</a></li>
+            <li><input type="hidden" id="language_sess" value = "{{ app.session.get('language') }}"></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img id="nav_lang" width="25px" height="25px" src="{{ asset('./images/uploads/icone-kit.jpg') }}">
+                </a>
+                <div id="flag_dropdown" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a id="en" class="dropdown-item" href="{{ path('switch_language_english') }}">
+                        <img id="flag_en" width="25px" height="25px" src="{{ asset('./images/uploads/icone-en.gif') }}">
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a id="fr" class="dropdown-item" href="{{ path('switch_language_french') }}">
+                        <img id="flag_fr"  width="25px" height="25px" src="{{ asset('./images/uploads/icone-fr.jpg') }}">
+                    </a>
+                </div>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ app.user.username }}
@@ -65,5 +64,4 @@
                 <img src="{{ asset('./images/uploads/' ~ app.user.avatar) }}" height="40px" width="40px">
             </li>
         </ul>
-    </div>
 </nav>

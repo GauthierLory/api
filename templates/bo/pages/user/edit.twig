@@ -1,7 +1,22 @@
 {% extends 'bo/layout/base.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-
+    {{ form_start(form, {attr: {class: 'text-center border border-light p-5'} }) }}
+    <div class="form-row mb-4">
+        <div class="col">
+            {{ form_widget(form.lastName) }}
+        </div>
+        <div class="col">
+            {{ form_widget(form.firstName) }}
+        </div>
+    </div>
+    {{ form_widget(form.email) }}
+    <div class="form-row mb-4">
+        <div class="float-md-left">
+            {{ form_widget(form.roles) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

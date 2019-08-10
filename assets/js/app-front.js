@@ -1,6 +1,10 @@
 var $ = require('jquery');
 window.$ = $;
 window.jQuery = $;
+require('jquery-ui');
+require('bootstrap/dist/js/bootstrap.bundle.min');
+require('popper.js');
 require('./nav.js');
 
-require('../css/app-front.css');
+import('../css/app-front.css');
+import('bootstrap/dist/css/bootstrap.min.css');

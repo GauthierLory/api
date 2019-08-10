@@ -4,4 +4,9 @@ list:
 
 edit:
   path:     /edit/{user}
-  controller: {App\Action\Admin\User\ListAction, user: null}
+  controller: App\Action\Admin\User\EditAction
+  defaults: {user: null}
+
+delete:
+  path:     /{user}
+  controller: App\Action\Admin\User\DeleteAction

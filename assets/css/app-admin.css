@@ -1,0 +1,9 @@
+@import "app-front.css";
+@import "admin/sidebar.css";
+
+.navbar .breadcrumb-item + .breadcrumb-item::before {
+    color: #bdbdbd; }
+.navbar .breadcrumb-item.active {
+    color: #bdbdbd; }
+.navbar.no-content .breadcrumb-item + .breadcrumb-item::before {
+    content: none; }
