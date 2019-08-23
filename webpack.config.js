@@ -18,6 +18,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
+<<<<<<< Updated upstream
     // .addEntry('app', './assets/js/app.js')
     .addEntry('app', './assets/css/app.css')
     .addEntry('comment', './assets/js/comment.js')
@@ -28,6 +29,11 @@ Encore
     //.addEntry('page2', './assets/js/page2.js')
     //.addEntry('page3', './assets/js/page3.js')
     //.addEntry('page4', './assets/js/page4.js')
+=======
+    .addEntry('app', './assets/css/body.css')
+    .addEntry('profileNav', './assets/css/ProfileNav.css')
+    .addEntry('navar', './assets/css/navar.css')
+>>>>>>> Stashed changes
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -57,7 +63,6 @@ Encore
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     .enableReactPreset()
-    .addEntry('admin', './assets/js/admin.js')
 ;
 
 module.exports = Encore.getWebpackConfig();

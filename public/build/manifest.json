@@ -1,11 +1,9 @@
 {
-  "build/accueil.js": "/build/accueil.js",
-  "build/admin.js": "/build/admin.js",
   "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
-  "build/article_show.js": "/build/article_show.js",
-  "build/comment.js": "/build/comment.js",
-  "build/nav.js": "/build/nav.js",
-  "build/runtime.js": "/build/runtime.js",
-  "build/tabs.js": "/build/tabs.js"
+  "build/navar.css": "/build/navar.css",
+  "build/navar.js": "/build/navar.js",
+  "build/profileNav.css": "/build/profileNav.css",
+  "build/profileNav.js": "/build/profileNav.js",
+  "build/runtime.js": "/build/runtime.js"
 }

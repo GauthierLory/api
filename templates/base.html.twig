@@ -21,6 +21,7 @@
                 padding: 0;
                 margin: 0;
             }
+<<<<<<< Updated upstream
             /* Profile container */
             .profile {
                 margin: 20px 0;
@@ -124,6 +125,8 @@
                 background: #fff;
                 min-height: 460px;
             }
+=======
+>>>>>>> Stashed changes
 
             .nav>li {
                 position: relative;
@@ -163,6 +166,9 @@
 
         </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <link rel="stylesheet" href="../assets/css/ProfileNav.css">
+        <link rel="stylesheet" href="/build/css/ProfileNav.css">
+        <link rel="stylesheet" href="{{ asset('assets/css/ProfileNav.css') }}">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -549,7 +555,8 @@
             });
         });
     </script>
-    {{ encore_entry_script_tags('nav') }}
+    {{ encore_entry_script_tags('navar') }}
+    {{ encore_entry_script_tags('profileNav') }}
 {% endblock %}
 </body>
 {% include('footer.html.twig') %}

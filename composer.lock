@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "15d173ab134b7e16792023c09b7fdbe9",
+    "content-hash": "5e5b434e2f2ff64a76bb3e623fb646c6",
     "packages": [
         {
             "name": "api-platform/admin-pack",
@@ -6453,6 +6453,7 @@
         },
         {
             "name": "twig/twig",
+<<<<<<< Updated upstream
             "version": "v2.11.0",
             "source": {
                 "type": "git",
@@ -6463,6 +6464,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/c344879ae57dc1487b1df3e3d8325936125ba2cc",
                 "reference": "c344879ae57dc1487b1df3e3d8325936125ba2cc",
+=======
+            "version": "v2.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5240e21982885b76629552d83b4ebb6d41ccde6b",
+                "reference": "5240e21982885b76629552d83b4ebb6d41ccde6b",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -6478,7 +6491,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< Updated upstream
                     "dev-master": "2.11-dev"
+=======
+                    "dev-master": "2.10-dev"
+>>>>>>> Stashed changes
                 }
             },
             "autoload": {
@@ -6516,7 +6533,11 @@
             "keywords": [
                 "templating"
             ],
+<<<<<<< Updated upstream
             "time": "2019-05-31T06:21:42+00:00"
+=======
+            "time": "2019-05-14T12:03:52+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "vich/uploader-bundle",
